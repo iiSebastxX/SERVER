@@ -16,7 +16,7 @@ function funcionReactor()
   gg.toast("📥 Descargando script de Reactor...")
 
   -- 🔗 Aquí va el RAW del Script de Reactor
-  local scriptURL = "https://raw.githubusercontent.com/iiSebastxX/cuerpo/refs/heads/main/reactor2025"
+  local scriptURL99 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/reactor"
   
   local scriptRes = gg.makeRequest(scriptURL99)
 
@@ -49,7 +49,7 @@ function funcionAutoHibridar()
     gg.toast("📥 Descargando script Mutantes en orden de salida...")
 
     -- 🔗 Aquí va el RAW del Script para Mutantes en orden de salida
-    local scriptURL1 = "https://raw.githubusercontent.com/iiSebastxX/cuerpo/refs/heads/main/527"
+    local scriptURL98 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/527"
     
     local scriptRes1 = gg.makeRequest(scriptURL98)
 
@@ -72,11 +72,12 @@ function funcionAutoHibridar()
         gg.toast("✅ Script Mutantes en orden de salida ejecutado")
       end
     end
+
   elseif eleccionAutoHibridar == 2 then
     gg.toast("📥 Descargando script Mutantes Mono_Gen...")
 
     -- 🔗 Aquí va el RAW del Script para Mutantes Mono_Gen
-    local scriptURL2 = "https://raw.githubusercontent.com/iiSebastxX/ScriptMggVip/refs/heads/main/1gen"
+    local scriptURL97 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/monogen"
     
     local scriptRes2 = gg.makeRequest(scriptURL97)
 
@@ -99,6 +100,7 @@ function funcionAutoHibridar()
         gg.toast("✅ Script Mutantes Mono_Gen ejecutado")
       end
     end
+
   elseif eleccionAutoHibridar == 3 or eleccionAutoHibridar == nil then
     gg.toast("Volviendo al menú principal...")
   end
