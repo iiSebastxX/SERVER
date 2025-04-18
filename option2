@@ -15,10 +15,8 @@ end
 function funcionReactor()
   gg.toast("📥 Descargando script de Reactor...")
 
-  -- 🔗 Aquí va el RAW del Script de Reactor
-  local scriptURL99 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/reactor"
-  
-  local scriptRes = gg.makeRequest(scriptURL99)
+  local scriptURL = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/reactor"
+  local scriptRes = gg.makeRequest(scriptURL)
 
   if scriptRes.code ~= 200 then
     gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes.code)
@@ -48,20 +46,18 @@ function funcionAutoHibridar()
   if eleccionAutoHibridar == 1 then
     gg.toast("📥 Descargando script Mutantes en orden de salida...")
 
-    -- 🔗 Aquí va el RAW del Script para Mutantes en orden de salida
-    local scriptURL98 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/527"
-    
-    local scriptRes1 = gg.makeRequest(scriptURL98)
+    local scriptURL = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/527"
+    local scriptRes = gg.makeRequest(scriptURL)
 
-    if scriptRes1.code ~= 200 then
-      gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes1.code)
+    if scriptRes.code ~= 200 then
+      gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes.code)
     else
-      local tempFile1 = "/sdcard/temp_script1.lua"
-      local file1 = io.open(tempFile1, "w")
-      file1:write(scriptRes1.content)
-      file1:close()
+      local tempFile = "/sdcard/temp_script_orden.lua"
+      local file = io.open(tempFile, "w")
+      file:write(scriptRes.content)
+      file:close()
 
-      local status, err = pcall(loadfile(tempFile1))
+      local status, err = pcall(loadfile(tempFile))
       if not status then
         if tostring(err):find("called os.exit") then
           gg.toast("👋 Script cerrado correctamente")
@@ -76,20 +72,18 @@ function funcionAutoHibridar()
   elseif eleccionAutoHibridar == 2 then
     gg.toast("📥 Descargando script Mutantes Mono_Gen...")
 
-    -- 🔗 Aquí va el RAW del Script para Mutantes Mono_Gen
-    local scriptURL97 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/monogen"
-    
-    local scriptRes2 = gg.makeRequest(scriptURL97)
+    local scriptURL = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/monogen"
+    local scriptRes = gg.makeRequest(scriptURL)
 
-    if scriptRes2.code ~= 200 then
-      gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes2.code)
+    if scriptRes.code ~= 200 then
+      gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes.code)
     else
-      local tempFile2 = "/sdcard/temp_script2.lua"
-      local file2 = io.open(tempFile2, "w")
-      file2:write(scriptRes2.content)
-      file2:close()
+      local tempFile = "/sdcard/temp_script_monogen.lua"
+      local file = io.open(tempFile, "w")
+      file:write(scriptRes.content)
+      file:close()
 
-      local status, err = pcall(loadfile(tempFile2))
+      local status, err = pcall(loadfile(tempFile))
       if not status then
         if tostring(err):find("called os.exit") then
           gg.toast("👋 Script cerrado correctamente")
@@ -97,7 +91,7 @@ function funcionAutoHibridar()
           gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
         end
       else
-        gg.toast("✅ Script Mutantes Mono_Gen ejecutado")
+        gg.toast("✅ Script Mono_Gen ejecutado")
       end
     end
 
