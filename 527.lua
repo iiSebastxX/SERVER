@@ -620,11 +620,6 @@ local pages = {
     "???",
   },
 
-  -- (y podrías añadir una página 7 con los restantes si tuvieras)
--- 2) Códigos por página (deben tener el mismo orden que los nombres)
-	
-	
-	
 local codes = {
   [1] = {
 "AA_01",
