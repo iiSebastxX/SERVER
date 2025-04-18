@@ -65,6 +65,7 @@ end
 
 -- Menú principal
 function mostrarMenu()
+gg.alert("🔐 Bienvenido al Script VIP v" .. version .. "\nOpcion de "AutoHibridar" Implementada.🔨")
   while true do
     local hora = os.date("%H:%M:%S")
     local titulo = 
