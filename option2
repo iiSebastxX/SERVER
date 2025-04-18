@@ -18,24 +18,33 @@ function funcionReactor()
   local scriptURL = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/reactor"
   local scriptRes = gg.makeRequest(scriptURL)
 
+  -- Verificar el código de respuesta HTTP
   if scriptRes.code ~= 200 then
     gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes.code)
-  else
-    local tempFile = "/sdcard/temp_script_reactor.lua"
-    local file = io.open(tempFile, "w")
-    file:write(scriptRes.content)
-    file:close()
+    return
+  end
 
-    local status, err = pcall(loadfile(tempFile))
-    if not status then
-      if tostring(err):find("called os.exit") then
-        gg.toast("👋 Script cerrado correctamente")
-      else
-        gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
-      end
+  -- Verificar si el contenido descargado no está vacío
+  if not scriptRes.content or scriptRes.content == "" then
+    gg.alert("❌ El contenido del script está vacío.")
+    return
+  end
+
+  local tempFile = "/sdcard/temp_script_reactor.lua"
+  local file = io.open(tempFile, "w")
+  file:write(scriptRes.content)
+  file:close()
+
+  -- Intentar cargar el script descargado
+  local status, err = pcall(loadfile(tempFile))
+  if not status then
+    if tostring(err):find("called os.exit") then
+      gg.toast("👋 Script cerrado correctamente")
     else
-      gg.toast("✅ Script Reactor ejecutado")
+      gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
     end
+  else
+    gg.toast("✅ Script Reactor ejecutado correctamente")
   end
 end
 
@@ -49,24 +58,33 @@ function funcionAutoHibridar()
     local scriptURL = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/527"
     local scriptRes = gg.makeRequest(scriptURL)
 
+    -- Verificar el código de respuesta HTTP
     if scriptRes.code ~= 200 then
       gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes.code)
-    else
-      local tempFile = "/sdcard/temp_script_orden.lua"
-      local file = io.open(tempFile, "w")
-      file:write(scriptRes.content)
-      file:close()
+      return
+    end
 
-      local status, err = pcall(loadfile(tempFile))
-      if not status then
-        if tostring(err):find("called os.exit") then
-          gg.toast("👋 Script cerrado correctamente")
-        else
-          gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
-        end
+    -- Verificar si el contenido descargado no está vacío
+    if not scriptRes.content or scriptRes.content == "" then
+      gg.alert("❌ El contenido del script está vacío.")
+      return
+    end
+
+    local tempFile = "/sdcard/temp_script_orden.lua"
+    local file = io.open(tempFile, "w")
+    file:write(scriptRes.content)
+    file:close()
+
+    -- Intentar cargar el script descargado
+    local status, err = pcall(loadfile(tempFile))
+    if not status then
+      if tostring(err):find("called os.exit") then
+        gg.toast("👋 Script cerrado correctamente")
       else
-        gg.toast("✅ Script Mutantes en orden de salida ejecutado")
+        gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
       end
+    else
+      gg.toast("✅ Script Mutantes en orden de salida ejecutado correctamente")
     end
 
   elseif eleccionAutoHibridar == 2 then
@@ -75,26 +93,34 @@ function funcionAutoHibridar()
     local scriptURL = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/monogen"
     local scriptRes = gg.makeRequest(scriptURL)
 
+    -- Verificar el código de respuesta HTTP
     if scriptRes.code ~= 200 then
       gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes.code)
-    else
-      local tempFile = "/sdcard/temp_script_monogen.lua"
-      local file = io.open(tempFile, "w")
-      file:write(scriptRes.content)
-      file:close()
-
-      local status, err = pcall(loadfile(tempFile))
-      if not status then
-        if tostring(err):find("called os.exit") then
-          gg.toast("👋 Script cerrado correctamente")
-        else
-          gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
-        end
-      else
-        gg.toast("✅ Script Mono_Gen ejecutado")
-      end
+      return
     end
 
+    -- Verificar si el contenido descargado no está vacío
+    if not scriptRes.content or scriptRes.content == "" then
+      gg.alert("❌ El contenido del script está vacío.")
+      return
+    end
+
+    local tempFile = "/sdcard/temp_script_monogen.lua"
+    local file = io.open(tempFile, "w")
+    file:write(scriptRes.content)
+    file:close()
+
+    -- Intentar cargar el script descargado
+    local status, err = pcall(loadfile(tempFile))
+    if not status then
+      if tostring(err):find("called os.exit") then
+        gg.toast("👋 Script cerrado correctamente")
+      else
+        gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
+      end
+    else
+      gg.toast("✅ Script Mono_Gen ejecutado correctamente")
+    end
   elseif eleccionAutoHibridar == 3 or eleccionAutoHibridar == nil then
     gg.toast("Volviendo al menú principal...")
   end
