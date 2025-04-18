@@ -67,8 +67,7 @@ local mutantesOriginales = {
   "FD_02",
   "FE_01",
   "FF_01",
-  "FF_03"
-},
+  "FF_03",
 }
 -- 1) Lista de nombres por página (solo muestro 2 páginas de ejemplo)
 local pages = {
