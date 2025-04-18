@@ -78,8 +78,8 @@ function mostrarMenu()
       "╚════════════════════════════╝"
 
     local opciones = {
-      "🚀 Ejecutar funciones del Menú (1)",
-      "🚀 Ejecutar funciones del Menú (2)",
+      "🚀 Opciones(1)",
+      "🚀 Opciones(2)",
       "📄 Información",
       "🔄 Actualizar"
     }
