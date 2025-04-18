@@ -1,4 +1,6 @@
 local mutantesOriginales = {
+
+  "AA_01",
   "AA_03",
   "AB_01",
   "AB_03",
