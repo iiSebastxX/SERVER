@@ -88,7 +88,7 @@ function mostrarMenu()
 
     if eleccion == 1 then
       gg.toast("📥 Descargando script VIP (1)...")
-      local scriptURL = "https://raw.githubusercontent.com/iiSebastxX/ScriptMggVip/refs/heads/main/MENU1"
+      local scriptURL = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/script.lua"
       local scriptRes = gg.makeRequest(scriptURL)
 
       if scriptRes.code ~= 200 then
