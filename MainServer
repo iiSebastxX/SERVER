@@ -1,4 +1,4 @@
-local version = "1.1.2" -- Puedes cambiar esto fácilmente cuando actualices
+local version = "1.1.1" -- Puedes cambiar esto fácilmente cuando actualices
 
 gg.alert("🔐 Bienvenido al Script VIP v" .. version .. "\nEste script está protegido con acceso limitado por IP. En caso tal de querer ser compartido sin autorización, este será sancionado.⚠️")
 
