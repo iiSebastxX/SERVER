@@ -3,32 +3,6 @@ activa = 1
 -- Variable global para guardar los valores originales
 
 local savedValues = nil
-
-function ejecutarScriptDesdeURL(url)
-  local res = gg.makeRequest(url)
-
-  if res.code ~= 200 then
-    gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. res.code)
-  else
-    local rutaTemp = "/sdcard/temp_script_sub.lua"
-    local file = io.open(rutaTemp, "w")
-    file:write(res.content)
-    file:close()
-
-    local status, err = pcall(loadfile(rutaTemp))
-    if not status then
-      if tostring(err):find("called os.exit") then
-        gg.toast("👋 Script cerrado correctamente")
-      else
-        gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
-      end
-    else
-      gg.toast("✅ Script ejecutado correctamente")
-    end
-  end
-end
-
-
 -- Guardar los valores originales
 function saveOriginalValues()
     savedValues = {}
