@@ -2076,6 +2076,7 @@ if eleccion == 1 then
     gg.toast("📥 Menu minimizado")
 		
 gg.setVisible(false)
+mainMenu() -- Ejecuta directamente el menú principal definido en el script
 local mutantesOriginales = {
 
   -- CIBERS
