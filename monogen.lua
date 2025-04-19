@@ -185,11 +185,11 @@ function NECROS()
 
     local opciones = {
         '[ 🧟‍♂️ ] Zombi',
-        '[ 🎃 ] Jack O Lantern',
-        '[ 🪶 ] Cuervo',
-        '[ ⚰️ ] Drudge Zombi',
-        '[ 🦴 ] Huesamblaje',
-        '[ 👑 ] Gar Zombi Soberano',
+        '[ 🧟‍♂️ ] Jack O Lantern',
+        '[ 🧟‍♂️ ] Cuervo',
+        '[ 🧟‍♂️ ] Drudge Zombi',
+        '[ 🧟‍♂️ ] Huesamblaje',
+        '[ 🧟‍♂️ ] Gar Zombi Soberano',
         '⬅️ Regresar al menú principal'
     }
 
