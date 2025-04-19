@@ -2072,14 +2072,9 @@ function SubOpcion2_2()
 
   local eleccion = gg.choice(subOpciones, nil, "📂 𝕋𝕆𝔻𝕆𝕊 𝕃𝕆𝕊 𝕄𝕌𝕋𝔸ℕ𝕋𝔼𝕊")
 
-  if eleccion == 1 then MUTOPEDIA()end
-	
-  elseif eleccion == 2 then
-    gg.toast("📥 Descargando MUTANTES MONO-GEN...")
-    local url2 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/monogen.lua"
-    ejecutarScriptDesdeURL(url2)
+  if eleccion == 1 then MUTOPEDIA()
 
-function MUTOPEDIA()
+
 local mutantesOriginales = {
 
   -- CIBERS
@@ -3885,9 +3880,15 @@ while true do
 
   gg.sleep(100) -- 💤 Evita consumir CPU en exceso
 
-end
+end		
 
+		
 end
+	
+  elseif eleccion == 2 then
+    gg.toast("📥 Descargando MUTANTES MONO-GEN...")
+    local url2 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/monogen.lua"
+    ejecutarScriptDesdeURL(url2)
 
   else
     gg.toast("🔙 Regresando al menú...")
