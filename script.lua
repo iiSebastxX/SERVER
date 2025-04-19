@@ -2075,7 +2075,7 @@ function SubOpcion2_2()
 if eleccion == 1 then
     gg.toast("📥 Menu minimizado")
 		
-ejecutarOrdenDeSalida527() -- ⬅️ esta función es donde tienes tu código de +1000 líneas
+function ejecutarOrdenDeSalida527() -- ⬅️ esta función es donde tienes tu código de +1000 líneas
 gg.setVisible(false)
 local mutantesOriginales = {
 
