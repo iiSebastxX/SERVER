@@ -2075,7 +2075,6 @@ function SubOpcion2_2()
 if eleccion == 1 then
     gg.toast("📥 Menu minimizado")
 		
-function ejecutarOrdenDeSalida527() -- ⬅️ esta función es donde tienes tu código de +1000 líneas
 gg.setVisible(false)
 local mutantesOriginales = {
 
@@ -3835,7 +3834,7 @@ function mainMenu()
       "🔴Salir",
     }
 
-    local choice = gg.choice(menu, nil, "Selecciona opción")
+    local choice = gg.choice(menu, nil, "🔵𝕋𝕆𝔻𝕆𝕊 𝕃𝕆𝕊 𝕄𝕌𝕋𝔸ℕ𝕋𝔼𝕊🔴")
 
     if choice == nil then
       -- No hacer nada si el usuario toca fuera
@@ -3854,14 +3853,6 @@ function mainMenu()
   end
 end
 
--- Este ciclo mantiene el script activo y lanza el menú solo cuando gg se hace visible
-while true do
-  if gg.isVisible(true) then
-    gg.setVisible(false)
-    mainMenu()
-  end
-  gg.sleep(100)
-end
 
 
 
