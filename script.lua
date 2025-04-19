@@ -2072,8 +2072,20 @@ function SubOpcion2_2()
 
   local eleccion = gg.choice(subOpciones, nil, "📂 𝕋𝕆𝔻𝕆𝕊 𝕃𝕆𝕊 𝕄𝕌𝕋𝔸ℕ𝕋𝔼𝕊")
 
-if eleccion == 1 then
-    gg.toast("📥 Menu minimizado")
+  if eleccion == 1 then
+    gg.toast("📥 Descargando MUTANTES EN ORDEN DE SALIDA...")
+    local url1 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/527.lua"
+    ejecutarScriptDesdeURL(url1)
+
+  elseif eleccion == 2 then
+    gg.toast("📥 Descargando MUTANTES MONO-GEN...")
+    local url2 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/monogen.lua"
+    ejecutarScriptDesdeURL(url2)
+
+  else
+    gg.toast("🔙 Regresando al menú...")
+  end
+end
 
 -- Función principal para configurar el Speed Hack
 function SpeedHack()
