@@ -179,91 +179,66 @@ end
 
 
 
+-- NECROS
+
 function NECROS()
 
-    local subMenu1 = gg.choice({
-
+    local opciones = {
         '[ 🧟‍♂️ ] Zombi',
-
-        '[ 🧟‍♂️ ] Jack O Lantern',
-
-        '[ 🧟‍♂️ ] Cuervo',
-
-        '[ 🧟‍♂️ ] Drudge Zombi',
-
-        '[ 🧟‍♂️ ] Huesamblaje',
-
-        '[ 🧟‍♂️ ] Gar Zombi Soberano',
-
+        '[ 🎃 ] Jack O Lantern',
+        '[ 🪶 ] Cuervo',
+        '[ ⚰️ ] Drudge Zombi',
+        '[ 🦴 ] Huesamblaje',
+        '[ 👑 ] Gar Zombi Soberano',
         '⬅️ Regresar al menú principal'
+    }
 
-    }, nil, '🧟‍♂️NECROS')
+    local eleccion = gg.choice(opciones, nil, '🧟‍♂️ NECROS')
 
+    if eleccion == nil then return end
 
+    local mutantes = {
+        [1] = {nombre = "Zombi", codigo = ":B_01", reemplazar = {":B_05", ":B_12", ":B_13"}},
+        [2] = {nombre = "Jack O Lantern", codigo = ":B_03", reemplazar = {":B_01", ":B_05", ":B_12", ":B_13"}},
+        [3] = {nombre = "Cuervo", codigo = ":B_04", reemplazar = {":B_01", ":B_05", ":B_12", ":B_13"}},
+        [4] = {nombre = "Drudge Zombi", codigo = ":B_05", reemplazar = {":B_01", ":B_12", ":B_13"}},
+        [5] = {nombre = "Huesamblaje", codigo = ":B_012", reemplazar = {":B_01", ":B_05", ":B_13"}},
+        [6] = {nombre = "Gar Zombi Soberano", codigo = ":B_13", reemplazar = {":B_01", ":B_05", ":B_12"}}
+    }
 
-    if subMenu1 == 1 then SubOpcion2_1() end
+    gg.clearResults()
+    gg.setVisible(false)
 
-    if subMenu1 == 2 then SubOpcion2_2() end
-
-    if subMenu1 == 3 then SubOpcion2_3() end
-
-    if subMenu1 == 4 then SubOpcion2_4() end
-
-    if subMenu1 == 5 then SubOpcion2_5() end
-
-    if subMenu1 == 6 then SubOpcion2_6() end
-
-    if subMenu1 == 7 then MENU() end
+    if eleccion >= 1 and eleccion <= 6 then
+        aplicarNecro(mutantes[eleccion].codigo, mutantes[eleccion].nombre, mutantes[eleccion].reemplazar)
+    elseif eleccion == 7 then
+        MENU()
+    end
 
 end
 
-
-
-function SubOpcion2_1() modificarValores({":B_05", ":B_12", ":B_13"}, ":B_01") end -- Zombi
-
-function SubOpcion2_2() modificarValores({":B_01", ":B_05", ":B_12", ":B_13"}, ":B_03") end -- Jack
-
-function SubOpcion2_3() modificarValores({":B_01", ":B_05", ":B_12", ":B_13"}, ":B_04") end -- Cuervo
-
-function SubOpcion2_4() modificarValores({":B_01", ":B_12", ":B_13"}, ":B_05") end -- Drudge Zombi
-
-function SubOpcion2_5() modificarValores({":B_01", ":B_05", ":B_13"}, ":B_07") end -- Huesamblaje
-
-function SubOpcion2_6() modificarValores({":B_01", ":B_05", ":B_12", ":B_13"}, ":B_10") end -- Gar Zombi Soberano
-
-
-
-gg.clearResults()
-gg.setVisible(false)
-
-function modificarValores(buscarCodigos, reemplazo)
+function aplicarNecro(codigoNuevo, nombre, codigosAReemplazar)
 
     local originalValues = {}
 
-    for _, searchValue in ipairs(buscarCodigos) do
-
+    local function buscarYEditar(valorOriginal, nuevoValor)
         gg.clearResults()
-
-        gg.searchNumber(searchValue, gg.TYPE_BYTE, false, gg.SIGN_EQUAL, 0, -1)
-
-        local results = gg.getResults(100000)
-
-        for i,v in ipairs(results) do
-
+        gg.searchNumber(valorOriginal, gg.TYPE_BYTE, false, gg.SIGN_EQUAL, 0, -1)
+        local resultados = gg.getResults(100000)
+        for i,v in ipairs(resultados) do
             table.insert(originalValues, v)
-
         end
-
-        gg.editAll(reemplazo, gg.TYPE_BYTE)
-
+        gg.editAll(nuevoValor, gg.TYPE_BYTE)
     end
 
-    gg.alert("‼️ Presiona a cambiar con ORO‼️")
+    for _, codigo in ipairs(codigosAReemplazar) do
+        buscarYEditar(codigo, codigoNuevo)
+    end
 
+    gg.alert("‼️ Presiona a cambiar con ORO‼️\nAhora eres: " .. nombre)
     gg.sleep(5000)
 
     gg.setValues(originalValues)
-
     gg.clearResults()
 
 end
