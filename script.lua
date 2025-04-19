@@ -2074,7 +2074,7 @@ function SubOpcion2_2()
 
 if eleccion == 1 then
     gg.toast("📥 Menu minimizado")
-  gg.setVisible(false)
+gg.setVisible(false)
 local mutantesOriginales = {
 
   -- CIBERS
@@ -3894,8 +3894,22 @@ while true do
       pageMenu(choice)
 
     end
+
   end
   end
+while true do
+
+  if gg.isVisible(true) then
+
+    gg.setVisible(false)
+
+    mainMenu()  -- 👈 Esto lanza el menú
+
+  end
+
+  gg.sleep(100)
+
+end
 
 	
   elseif eleccion == 2 then
