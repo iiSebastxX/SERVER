@@ -219,17 +219,17 @@ end
 
 
 
-function SubOpcion9_1() modificarValores({":B_05", ":B_12", ":B_13"}, ":B_01") end -- Zombi
+function SubOpcion2_1() modificarValores({":B_05", ":B_12", ":B_13"}, ":B_01") end -- Zombi
 
-function SubOpcion9_2() modificarValores({":B_01", ":B_05", ":B_12", ":B_13"}, ":B_03") end -- Jack
+function SubOpcion2_2() modificarValores({":B_01", ":B_05", ":B_12", ":B_13"}, ":B_03") end -- Jack
 
-function SubOpcion9_3() modificarValores({":B_01", ":B_05", ":B_12", ":B_13"}, ":B_04") end -- Cuervo
+function SubOpcion2_3() modificarValores({":B_01", ":B_05", ":B_12", ":B_13"}, ":B_04") end -- Cuervo
 
-function SubOpcion9_4() modificarValores({":B_01", ":B_12", ":B_13"}, ":B_05") end -- Drudge Zombi
+function SubOpcion2_4() modificarValores({":B_01", ":B_12", ":B_13"}, ":B_05") end -- Drudge Zombi
 
-function SubOpcion9_5() modificarValores({":B_01", ":B_05", ":B_13"}, ":B_07") end -- Huesamblaje
+function SubOpcion2_5() modificarValores({":B_01", ":B_05", ":B_13"}, ":B_07") end -- Huesamblaje
 
-function SubOpcion9_6() modificarValores({":B_01", ":B_05", ":B_12", ":B_13"}, ":B_10") end -- Gar Zombi Soberano
+function SubOpcion2_6() modificarValores({":B_01", ":B_05", ":B_12", ":B_13"}, ":B_10") end -- Gar Zombi Soberano
 
 
 
