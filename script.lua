@@ -2080,7 +2080,8 @@ function SubOpcion2_2()
     local url2 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/monogen.lua"
     ejecutarScriptDesdeURL(url2)
 
-if eleccion = 3 Mutantes() end
+ elseif eleccion == 3 then
+    Mutantes()  -- Llama al menú anterior
 
   end
 end
