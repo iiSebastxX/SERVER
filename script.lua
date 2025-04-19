@@ -2076,31 +2076,79 @@ function SubOpcion2_2()
     gg.toast("📥 Descargando MUTANTES EN ORDEN DE SALIDA...")
 gg.setVisible(false)
 local mutantesOriginales = {
+"AA_01",
+"AA_03",
+"AB_01",
+"AB_03",
+"AC_01",
+"AC_03",
+"AD_01",
+"AD_02",
+"AE_01",
+"AE_03",
+"AF_01",
+"AF_04",
 
-  -- CIBERS
+"BA_01",
+"BA_02",
+"BA_03",
+"BB_01",
+"BB_03",
+"BC_01",
+"BC_02",
+"BD_01",
+"BE_01",
+"BE_04",
+"BF_01",
+"BF_02",
 
-  "AA_01", "AA_03", "AB_01", "AB_03", "AC_01", "AC_03", "AD_01", "AD_02", "AE_01", "AE_03", "AF_01", "AF_04",
+"CA_01",
+"CA_02",
+"CB_01",
+"CB_02",
+"CC_01",
+"CC_02",
+"CD_01",
+"CD_03",
+"CE_01",
+"CE_03",
+"CF_01",
+"CF_02",
 
-  -- NECROS
+"DA_01",
+"DA_03",
+"DB_01",
+"DB_03",
+"DC_01",
+"DD_01",
+"DE_01",
+"DE_02",
+"DF_01",
+"DF_03",
 
-  "BA_01", "BA_02", "BA_03", "BB_01", "BB_03", "BC_01", "BC_02", "BD_01", "BE_01", "BE_04", "BF_01", "BF_02",
+"EA_01",
+"EA_02",
+"EB_01",
+"EB_02",
+"EB_03",
+"EC_01",
+"EC_03",
+"ED_01",
+"ED_03",
+"EE_01",
+"EE_02",
+"EF_01",
+"EF_02",
 
-  -- SABLES
-
-  "CA_01", "CA_02", "CB_01", "CB_02", "CC_01", "CC_02", "CD_01", "CD_03", "CE_01", "CE_03", "CF_01", "CF_02",
-
-  -- ZOOMORFOS
-
-  "DA_01", "DA_03", "DB_01", "DB_03", "DC_01", "DD_01", "DE_01", "DE_02", "DF_01", "DF_03",
-
-  -- GALACTICOS
-
-  "EA_01", "EA_02", "EB_01", "EB_02", "EB_03", "EC_01", "EC_03", "ED_01", "ED_03", "EE_01", "EE_02", "EF_01", "EF_02",
-
-  -- MITICOS
-
-  "FA_01", "FB_01", "FB_03", "FC_01", "FD_01", "FD_02", "FE_01", "FF_01", "FF_03"
-
+"FA_01",
+"FB_01",
+"FB_03",
+"FC_01",
+"FD_01",
+"FD_02",
+"FE_01",
+"FF_01",
+"FF_03",
 }
 
 
@@ -3855,8 +3903,6 @@ while true do
 
       "♻️Restablecer valores♻️",
 
-      "📥 Minimizar 📥",
-
       "❌ Salir ❌"
 
     }
@@ -3871,17 +3917,11 @@ while true do
 
       -- No hacer nada si el usuario toca fuera
 
-    elseif choice == 9 then
+    elseif choice == 8 then
 
       gg.toast("Saliendo")
 
       os.exit()
-
-    elseif choice == 8 then
-
-      gg.toast("Script minimizado")
-
-      -- Volver al ciclo y no mostrar el menú nuevamente
 
     elseif choice == 7 then
 
@@ -3893,8 +3933,7 @@ while true do
 
       pageMenu(choice)
 
-    end
-
+ end
   end
   end
 
