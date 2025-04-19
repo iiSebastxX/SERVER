@@ -2074,7 +2074,8 @@ function SubOpcion2_2()
 
   if eleccion == 1 then
     gg.toast("📥 Descargando MUTANTES EN ORDEN DE SALIDA...")
-
+	end
+	
   elseif eleccion == 2 then
     gg.toast("📥 Descargando MUTANTES MONO-GEN...")
     local url2 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/monogen.lua"
