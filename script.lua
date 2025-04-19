@@ -2073,8 +2073,8 @@ function SubOpcion2_2()
   local eleccion = gg.choice(subOpciones, nil, "📂 𝕋𝕆𝔻𝕆𝕊 𝕃𝕆𝕊 𝕄𝕌𝕋𝔸ℕ𝕋𝔼𝕊")
 
 if eleccion == 1 then
-    gg.toast("📥 Mostrando MUTANTES EN ORDEN DE SALIDA (527)...")
-
+    gg.toast("📥 Menu minimizado")
+  gg.setVisible(false)
 local mutantesOriginales = {
 
   -- CIBERS
@@ -3893,13 +3893,10 @@ while true do
 
       pageMenu(choice)
 
-while true do
-  if gg.isVisible(true) then
-    gg.setVisible(false)
-    mainMenu()  -- 👈 Esto lanza el menú
+    end
   end
-  gg.sleep(100)
-end
+  end
+
 	
   elseif eleccion == 2 then
     gg.toast("📥 Descargando MUTANTES MONO-GEN...")
