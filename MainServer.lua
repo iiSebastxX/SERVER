@@ -137,20 +137,20 @@ function mostrarMenu()
         end
       end
 
-      elseif eleccion == 3 then
+    elseif eleccion == 3 then
       gg.toast("📥 Descargando datos (3)...")
       local scriptURL3 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/evocalculator.lua"
       local scriptRes3 = gg.makeRequest(scriptURL3)
 
-      if scriptRes2.code ~= 200 then
-        gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes2.code)
+      if scriptRes3.code ~= 200 then
+        gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes3.code)
       else
-        local tempFile2 = "/sdcard/temp_script2.lua"
-        local file2 = io.open(tempFile2, "w")
-        file2:write(scriptRes3.content)
-        file2:close()
+        local tempFile3 = "/sdcard/temp_evocalculator.lua"
+        local file3 = io.open(tempFile3, "w")
+        file3:write(scriptRes3.content)
+        file3:close()
 
-        local status, err = pcall(loadfile(tempFile2))
+        local status, err = pcall(loadfile(tempFile3))
         if not status then
           if tostring(err):find("called os.exit") then
             gg.toast("👋 Script cerrado correctamente")
