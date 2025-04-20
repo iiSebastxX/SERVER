@@ -84,11 +84,11 @@ function Shop()
     
     if subMenu1 == 6 then SubOpcion1_6() end  --  Orbes CHETADOS
 
-    if subMenu1 == 7 then SubOpcion1_7() end  -- 
+    if subMenu1 == 7 then SubOpcion1_7() end  -- Ofertas infinitas
     
     if subMenu1 == 8 then SubOpcion1_8() end  --
     
-    if subMenu1 == 9 then SubOpcion1_9() end  -- Ofertas infinitas
+    if subMenu1 == 9 then SubOpcion1_9() end  -- 
 
     if subMenu1 == 10 then MENU() end          -- Regresa al menú principal
 
@@ -1478,67 +1478,24 @@ gg.alert("‼️Puedes proseguir a comprar‼️")
     
 end
 
-function SubOpcion1_8()
-end
-    gg.sleep(100)
-
-
-function SubOpcion1_9()
-
+function SubOpcion1_7()
 gg.alert("🛠️Espera, trabajando.🛠️")
--- Script generado por 🥇SEBASTEAM🥇 para Mutants Genetic Gladiators
-    -- Lua help: http://gameguardian.net/help/
-
--- options
-local scriptName = [=====[Script for Mutants 76.646.169933]=====]
-local scriptVersion = '3.0.0'
-local scriptAuthor = 'SEBASTEAM👺🚬'
-local startToast = ''
--- 0 - no check; 1 - check package only, 2 - check package and build
-local checkTarget = 0
-
-local targetName = [=====[Mutants]=====]
-local targetPkg = 'com.kobojo.mutants'
-local targetVersion = [=====[76.646.169933]=====]
-local targetBuild = 15169934
-
--- functions
-
--- init
-gg.require('101.1', 16142)
-
-if startToast ~= '' then startToast = '\n'..startToast end
-gg.toast(scriptName..' v'..scriptVersion..' by '..scriptAuthor..startToast)
-
-if checkTarget ~= 0 then
-	local info = gg.getTargetInfo()
-	local check = false
-	local current = false
-	if checkTarget >= 1 then
-		check = targetPkg
-		current = info.packageName
-	end
-	if checkTarget >= 2 then
-		check = check..' '..targetVersion..' ('..targetBuild..')'
-		current = current..' '..info.versionName..' ('..info.versionCode..')'
-	end
-	if check ~= current then
-		gg.alert('This script for "'..targetName..'" ['..check..'].\nYou select "'..info.label..'" ['..current..'].\nNow script exit.')
-		os.exit()
-	end
-end
-local revert = nil
-
--- main code
 gg.searchNumber(":Allowed", gg.TYPE_BYTE, false, gg.SIGN_EQUAL, 0, -1, 0)
 revert = gg.getResults(100000, nil, nil, nil, nil, nil, nil, nil, nil)
 gg.editAll("0", gg.TYPE_BYTE)
 gg.processResume()
 gg.clearResults()
 gg.alert("‼️⚡Compra las ofertas que quieres, y cuantas veces quieras.⚡‼️")
+end
+    gg.sleep(100)
 
+
+function SubOpcion1_8()
 end
 
+function SubOpcion1_9()
+end
+	
 -- 1) Primero, al principio de tu archivo:
 local function ejecutarScriptDesdeURL(url)
   local response = gg.makeRequest(url)
