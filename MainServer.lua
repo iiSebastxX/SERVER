@@ -80,6 +80,7 @@ function mostrarMenu()
     local opciones = {
       "🚀 Opciones(1)",
       "🚀 Opciones(2)",
+      "🚀 Calculadora de Evo(3)",
       "📄 Información",
       "🔄 Actualizar"
     }
@@ -136,11 +137,36 @@ function mostrarMenu()
         end
       end
 
-    elseif eleccion == 3 then
+      elseif eleccion == 3 then
+      gg.toast("📥 Descargando datos (3)...")
+      local scriptURL3 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/evocalculator.lua"
+      local scriptRes3 = gg.makeRequest(scriptURL3)
+
+      if scriptRes2.code ~= 200 then
+        gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes2.code)
+      else
+        local tempFile2 = "/sdcard/temp_script2.lua"
+        local file2 = io.open(tempFile2, "w")
+        file2:write(scriptRes3.content)
+        file2:close()
+
+        local status, err = pcall(loadfile(tempFile2))
+        if not status then
+          if tostring(err):find("called os.exit") then
+            gg.toast("👋 Script cerrado correctamente")
+          else
+            gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
+          end
+        else
+          gg.toast("✅ EvoCalculator (3) ejecutado")
+        end
+      end
+
+    elseif eleccion == 4 then
       local firma = "\n\n━━━━━━━━━━━━━━━━━━━━\n🎉 Creado por: Andrew FC\n📲 Contacto: +57 3006975005\n🔧 Script en Línea...\n━━━━━━━━━━━━━━━━━━━━\n"
       gg.alert("🔎 Info:\n\n- Usuario: " .. usuario .. "\n- IP: " .. ip .. "\n- Versión: " .. version .. firma)
 
-    elseif eleccion == 4 then
+    elseif eleccion == 5 then
       gg.toast("🔄 Verifica si hay una nueva versión en GitHub.")
     elseif eleccion == nil then
       gg.toast("👋 Cerrando script...")
