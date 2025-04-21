@@ -1,3 +1,4 @@
+gg.alert("⚠️Asegurate de solo usar el ROBOT y el ZOMBIE en este tipo de hibridaciones.⚠️")
 local mutantesOriginales = {
 
   -- CIBERS
