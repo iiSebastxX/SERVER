@@ -1320,15 +1320,85 @@ end
     end
     
     function SubOpcion96_1()
-    gg.clearResults()
-gg.searchNumber(":Allowed", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("0",gg.TYPE_BYTE)
+gg.setVisible(false)
+
+
+
 gg.clearResults()
 
-gg.searchNumber("h00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 26 41 6E 6E 69 76 65 72 73 61 72 79", gg.TYPE_BYTE)
+gg.searchNumber(":Allowed", gg.TYPE_BYTE)
+
 r = gg.getResults(100000)
-gg.editAll("h01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 26 41 6E 6E 69 76 65 72 73 61 72 79",gg.TYPE_BYTE)
+
+gg.editAll("0", gg.TYPE_BYTE)
+
+gg.clearResults()
+
+
+
+gg.searchNumber(":(bundle_orbs_basic_06", gg.TYPE_BYTE, false, gg.SIGN_EQUAL, 0, -1, 0)
+
+gg.processResume()
+
+
+
+local t = gg.getResults(1, nil, nil, nil, nil, nil, nil, nil, nil)
+
+gg.addListItems(t)
+
+t = nil
+
+
+
+gg.clearResults()
+
+
+
+local copy = false
+
+local t = gg.getListItems()
+
+if not copy then gg.removeListItems(t) end
+
+for i, v in ipairs(t) do
+
+    v.address = v.address + 0xffffffffffffffc8
+
+    if copy then v.name = v.name..' #2' end
+
+end
+
+gg.addListItems(t)
+
+t = nil
+
+copy = nil
+
+
+
+revert = gg.getListItems()
+
+local t = gg.getListItems()
+
+for i, v in ipairs(t) do
+
+    if v.flags == gg.TYPE_BYTE then
+
+        -- Cambiar el valor a "1" y congelarlo
+
+        v.value = "1"
+
+        v.freeze = true  -- Congelar el valor en "1"
+
+        v.freezeType = gg.FREEZE_NORMAL
+
+    end
+
+end
+
+gg.addListItems(t)
+
+t = nil
 gg.alert("‼️Dirigete al apartado de Especiales.‼️")
     end
     
