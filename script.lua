@@ -1322,6 +1322,7 @@ end
     end
     
     function SubOpcion96_1()
+gg.alert("🔴Debes estar fuera de la tienda para que funcione correctamente.")	
 gg.setVisible(false)
 
 
@@ -1402,10 +1403,10 @@ gg.addListItems(t)
 
 t = nil
 gg.alert("‼️Dirigete al apartado de Especiales.‼️")
-gg.timeJump("5:0")
     end
 
 function SubOpcion96_2()
+gg.alert("🔴Debes estar fuera de la tienda para que funcione correctamente.")	
 gg.setVisible(false)
 
 gg.clearResults()
@@ -1446,8 +1447,7 @@ for i, v in ipairs(t) do
 end
 gg.addListItems(t)
 t = nil
-gg.alert("‼️Dirigete al apartado de Especiales.‼️")
-gg.timeJump("5:0")	
+gg.alert("‼️Dirigete al apartado de Especiales.‼️")	
 end
 
 
