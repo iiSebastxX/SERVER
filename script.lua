@@ -1309,14 +1309,16 @@ end
 
     local subMenu96 = gg.choice({
 'Pack de Orbes LVL 6 (Habilidades)                💲950',
+'Pack de Orbes LVL 5 (Habilidades)                💲900',
 'Pack de Orbes LVL 6 (VIDA, ATAQUE)            💲500',
 'Orbe de Experiencia LVL 6                          💲100.000',
 '【⬅️ Regresar】', }, nil, '⚡Orbes Basicos                                                         💰PRECIO💰')
     
     if subMenu96 == 1 then SubOpcion96_1() end -- Orbs LVL6
-    if subMenu96 == 2 then SubOpcion96_2() end -- VIDA, ATAQUE, CRITICO (Y OTROS)
-    if subMenu96 == 3 then SubOpcion96_3() end -- Experiencia
-    if subMenu96 == 4 then SubOpcion1_6() end          -- Regresar
+    if subMenu96 == 2 then SubOpcion96_2() end -- Orbs LVL5
+    if subMenu96 == 3 then SubOpcion96_3() end -- VIDA, ATAQUE, CRITICO (Y OTROS)
+    if subMenu96 == 4 then SubOpcion96_4() end -- Experiencia
+    if subMenu96 == 5 then SubOpcion1_6() end          -- Regresar
     end
     
     function SubOpcion96_1()
@@ -1400,9 +1402,56 @@ gg.addListItems(t)
 
 t = nil
 gg.alert("‼️Dirigete al apartado de Especiales.‼️")
+gg.timeJump("5:0")
     end
-    
-    function SubOpcion96_2() -- Ataque, Vida y CRITICO
+
+function SubOpcion96_2()
+gg.setVisible(false)
+
+gg.clearResults()
+gg.searchNumber(":Allowed", gg.TYPE_BYTE)
+r = gg.getResults(100000)
+gg.editAll("0", gg.TYPE_BYTE)
+gg.clearResults()
+
+gg.searchNumber(":(bundle_orbs_basic_05", gg.TYPE_BYTE, false, gg.SIGN_EQUAL, 0, -1, 0)
+gg.processResume()
+
+local t = gg.getResults(1, nil, nil, nil, nil, nil, nil, nil, nil)
+gg.addListItems(t)
+t = nil
+
+gg.clearResults()
+
+local copy = false
+local t = gg.getListItems()
+if not copy then gg.removeListItems(t) end
+for i, v in ipairs(t) do
+    v.address = v.address + 0xffffffffffffffc8
+    if copy then v.name = v.name..' #2' end
+end
+gg.addListItems(t)
+t = nil
+copy = nil
+
+revert = gg.getListItems()
+local t = gg.getListItems()
+for i, v in ipairs(t) do
+    if v.flags == gg.TYPE_BYTE then
+        -- Cambiar el valor a "1" y congelarlo
+        v.value = "1"
+        v.freeze = true  -- Congelar el valor en "1"
+        v.freezeType = gg.FREEZE_NORMAL
+    end
+end
+gg.addListItems(t)
+t = nil
+gg.alert("‼️Dirigete al apartado de Especiales.‼️")
+gg.timeJump("5:0")	
+end
+
+
+    function SubOpcion96_3() -- Ataque, Vida y CRITICO
     gg.clearResults()
 gg.searchNumber(":Allowed", gg.TYPE_BYTE)
 r = gg.getResults(100000)
@@ -1493,7 +1542,7 @@ gg.editAll("h01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 2a 62 75 6e 64 6c 6
 gg.clearResults()
     end
     
-    function SubOpcion96_3() -- Experiencia
+    function SubOpcion96_4() -- Experiencia
     
     local scriptName = [=====[Script para Mutants 76.646.169933]=====]
 local scriptVersion = '1.0.0'
