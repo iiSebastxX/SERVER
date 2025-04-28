@@ -1326,9 +1326,9 @@ r = gg.getResults(100000)
 gg.editAll("0",gg.TYPE_BYTE)
 gg.clearResults()
 
-gg.searchNumber("h00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2c 62 75 6e 64 6c 65", gg.TYPE_BYTE)
+gg.searchNumber("h00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 26 41 6E 6E 69 76 65 72 73 61 72 79", gg.TYPE_BYTE)
 r = gg.getResults(100000)
-gg.editAll("h01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 2c 62 75 6e 64 6c 65",gg.TYPE_BYTE)
+gg.editAll("h01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 26 41 6E 6E 69 76 65 72 73 61 72 79",gg.TYPE_BYTE)
 gg.alert("‼️Dirigete al apartado de Especiales.‼️")
     end
     
