@@ -1724,27 +1724,47 @@ gg.clearResults()
 end
 
 function Hero() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
+    gg.setVisible(false)
+    if savedValues == nil then saveOriginalValues() end
 
-gg.clearResults()
-gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll("h0C6865726F65730000000000000000000000000000000000020000003A0700002267616368615F7061636B5F6865726F6573000000000000", gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_BB_02", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_FC_02", gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_DC_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_AE_01", gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_AF_01", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_BB_01", gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_DE_09", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CA_01", gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_CA_06", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_FA_01", gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_DF_12", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_EF_02", gg.TYPE_BYTE)
-gg.clearResults()
+    gg.clearResults()
+    gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
+    r = gg.getResults(100000)  
+    gg.editAll("h0C6865726F65730000000000000000000000000000000000020000003A0700002267616368615F7061636B5F6865726F6573000000000000", gg.TYPE_BYTE)
+    gg.clearResults()
+
+    -- Valores de búsqueda reemplazados
+    gg.searchNumber(":Specimen_AA_03", gg.TYPE_BYTE)  
+    r = gg.getResults(100000)  
+    gg.editAll(":Specimen_FC_02", gg.TYPE_BYTE)
+    gg.clearResults()
+
+    gg.searchNumber(":Specimen_BF_06", gg.TYPE_BYTE)  
+    r = gg.getResults(100000)  
+    gg.editAll(":Specimen_AE_01", gg.TYPE_BYTE)
+    gg.clearResults()
+
+    gg.searchNumber(":Specimen_EE_04", gg.TYPE_BYTE)  
+    r = gg.getResults(100000)  
+    gg.editAll(":Specimen_BB_01", gg.TYPE_BYTE)
+    gg.clearResults()
+
+    gg.searchNumber(":Specimen_FB_05", gg.TYPE_BYTE)  
+    r = gg.getResults(100000)  
+    gg.editAll(":Specimen_CA_01", gg.TYPE_BYTE)
+    gg.clearResults()
+
+    gg.searchNumber(":Specimen_DA_09", gg.TYPE_BYTE)  
+    r = gg.getResults(100000)  
+    gg.editAll(":Specimen_FA_01", gg.TYPE_BYTE)
+    gg.clearResults()
+
+    gg.searchNumber(":Specimen_DE_05", gg.TYPE_BYTE)  
+    r = gg.getResults(100000)  
+    gg.editAll(":Specimen_EF_02", gg.TYPE_BYTE)
+    gg.clearResults()
 end
+
 
 function Gothic() 
 gg.setVisible(false)
@@ -1755,7 +1775,7 @@ gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900
 r = gg.getResults(100000)  
 gg.editAll("h0C676F746869630000000000000000000000000000000000010000007E0400002267616368615F7061636B5F676F74686963000000000000", gg.TYPE_BYTE)
 gg.clearResults()
-gg.searchNumber(":Specimen_BB_02", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CE_01", gg.TYPE_BYTE)
+gg.searchNumber(":Specimen_AA_03", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CE_01", gg.TYPE_BYTE)
 gg.clearResults()
 gg.searchNumber(":Specimen_DC_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_BF_01", gg.TYPE_BYTE)
 gg.clearResults()
