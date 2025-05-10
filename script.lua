@@ -1646,6 +1646,48 @@ if subMenu2 == 1 then SubOpcion2_1() end  -- Reactores
 
 end
 
+-- Guardar los valores específicos que deseas restaurar más tarde
+function saveOriginalValues()
+    -- Estos son los valores que deseas guardar
+    savedValues = {}
+    -- Guardamos los valores de búsqueda específicos
+    gg.searchNumber(":Specimen_AA_03", gg.TYPE_BYTE)
+    table.insert(savedValues, gg.getResults(100000))
+
+    gg.searchNumber(":Specimen_BF_06", gg.TYPE_BYTE)
+    table.insert(savedValues, gg.getResults(100000))
+
+    gg.searchNumber(":Specimen_EE_04", gg.TYPE_BYTE)
+    table.insert(savedValues, gg.getResults(100000))
+
+    gg.searchNumber(":Specimen_FB_05", gg.TYPE_BYTE)
+    table.insert(savedValues, gg.getResults(100000))
+
+    gg.searchNumber(":Specimen_DA_05", gg.TYPE_BYTE)
+    table.insert(savedValues, gg.getResults(100000))
+
+    gg.searchNumber(":Specimen_DE_09", gg.TYPE_BYTE)
+    table.insert(savedValues, gg.getResults(100000))
+
+    gg.toast("Valores guardados correctamente.")
+end
+
+-- Función para restaurar los valores guardados
+function Restaurar()
+    if savedValues == nil then
+        gg.alert("⚠️ No se pudo restaurar, falta de datos. Por favor, reinicia el juego.")
+        return
+    end
+
+    for i, result in ipairs(savedValues) do
+        gg.setValues(result)
+        gg.clearResults()
+    end
+
+    gg.toast("Valores restaurados.")
+end
+
+
 function SubOpcion2_1() -- REACTORES
 
 
