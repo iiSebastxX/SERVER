@@ -1452,6 +1452,7 @@ end
 
 
     function SubOpcion96_3() -- Ataque, Vida y CRITICO
+gg.alert("🔴Debes estar fuera de la tienda para que funcione correctamente.")	
 gg.setVisible(false)
 
 gg.clearResults()
