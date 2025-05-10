@@ -1648,8 +1648,9 @@ end
 
 -- Variable para almacenar los valores
 savedValues = {}
+
 function SubOpcion2_1() -- REACTORES
-gg.alert("Bienvenido")
+gg.alert("Bienvenido...")
 mainmenu = gg.choice({'                              ♻️RESTAURACIÓN♻️                                 ','[🎙] ➣️Music','[👩] ➣Girl Power','[🌩] ➣️Mutants Super-Heroes','[🗡️] ➣Gothic','[🎌] ➣Japan','[🚀] ➣Space War','[⚠️] ➣Mutants-Super-Villains','[💀] ➣Big Boss','[💪] ➣Movies','[🌩️] ➣God Of The Arena','[😈] ➣Elements Squad','[🧟] ➣Time Soldiers','[💪] ➣Lucha Libre','[🌑] ➣Dark Fantasy','[🌱] ➣Photosynthesis','[🧟‍♂️] ➣Western','[☀️] ➣Tropical','[🤖] ➣The Steampunk','[🕺] ➣Bloody Games','⬅️ Regresar'},   nill, 'SCRIPT VIP🌟')
 
 if mainmenu== 1 then Restaurar() end
@@ -1679,22 +1680,22 @@ end
 function saveOriginalValues()
     -- Guardar los valores en 'savedValues'
     gg.searchNumber(":Specimen_AA_03", gg.TYPE_BYTE)
-    savedValues[":Specimen_AA_03"] = gg.getResults(100000)
+    savedValues["Specimen_AA_03"] = gg.getResults(100000)
     
     gg.searchNumber(":Specimen_BF_06", gg.TYPE_BYTE)
-    savedValues[":Specimen_BF_06"] = gg.getResults(100000)
+    savedValues["Specimen_BF_06"] = gg.getResults(100000)
     
     gg.searchNumber(":Specimen_EE_04", gg.TYPE_BYTE)
-    savedValues[":Specimen_EE_04"] = gg.getResults(100000)
+    savedValues["Specimen_EE_04"] = gg.getResults(100000)
     
     gg.searchNumber(":Specimen_FB_05", gg.TYPE_BYTE)
-    savedValues[":Specimen_FB_05"] = gg.getResults(100000)
+    savedValues["Specimen_FB_05"] = gg.getResults(100000)
     
     gg.searchNumber(":Specimen_DE_05", gg.TYPE_BYTE)
-    savedValues[":Specimen_DE_05"] = gg.getResults(100000)
+    savedValues["Specimen_DE_05"] = gg.getResults(100000)
     
     gg.searchNumber(":Specimen_DA_09", gg.TYPE_BYTE)
-    savedValues[":Specimen_DA_09"] = gg.getResults(100000)
+    savedValues["Specimen_DA_09"] = gg.getResults(100000)
 
     gg.toast("Valores guardados correctamente.")
 end
