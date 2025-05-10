@@ -1452,94 +1452,47 @@ end
 
 
     function SubOpcion96_3() -- Ataque, Vida y CRITICO
-    gg.clearResults()
-gg.searchNumber(":Allowed", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("0",gg.TYPE_BYTE)
-gg.clearResults()
-
-
-
-                 
-
-
-
--- This script was created by: SebasTeam
--- Script Programmer to Help: https://www.facebook.com/alberto.gonzales.fum/
-
-
-
-
-gg.searchNumber("h00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 61 6e 6e 69 76 65 72 73 61 72 79", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 61 6e 6e 69 76 65 72 73 61 72 79",gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber("h00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 26 61 6e 6e 69 76 65 72 73 61 72 79", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 26 61 6e 6e 69 76 65 72 73 61 72 79",gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber("h00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2c 61 6e 6e 69 76 65 72 73 61 72 79", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 2c 61 6e 6e 69 76 65 72 73 61 72 79",gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber("h00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 22 61 6e 6e 69 76 65 72 73 61 72 79", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 22 61 6e 6e 69 76 65 72 73 61 72 79",gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber("h00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2a 61 6e 6e 69 76 65 72 73 61 72 79", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 2a 61 6e 6e 69 76 65 72 73 61 72 79",gg.TYPE_BYTE)
-gg.clearResults()
-
-
-gg.clearResults()
-gg.searchNumber("1;10,000;0;0;0;0;0;0;2;5::165", gg.TYPE_DWORD)
-r = gg.getResults(100000)
-gg.editAll("6;3;1,651,666,728;1,701,868,383;1,818,323,299;1,701,868,383;811,557,989;53;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;2;1500",gg.TYPE_DWORD)
-gg.refineNumber("6",gg.TYPE_DWORD)
-r = gg.getResults(100000)
-gg.addListItems(r)
-gg.clearResults()
-gg.sleep(1000)
-gg.searchNumber("h1873635F7061636B6167655F3100000000000000000000000", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h 2a 62 75 6e 64 6c 65 5f 6f 72 62 73 5f 73 70 65 65 64 5f 35 5f 31",gg.TYPE_BYTE)
-gg.clearResults()
-
-
-
-
--- This script was created by: SebasTeam
--- Script Programmer to Help: https://www.facebook.com/alberto.gonzales.fum/
-
-
-
-
-
-
-
+gg.setVisible(false)
 
 gg.clearResults()
 gg.searchNumber(":Allowed", gg.TYPE_BYTE)
 r = gg.getResults(100000)
 gg.editAll("0",gg.TYPE_BYTE)
 gg.clearResults()
+gg.searchNumber(":&bundle_orbs_core_06", gg.TYPE_BYTE, false, gg.SIGN_EQUAL, 0, -1, 0)
+gg.processResume()
+
+local t = gg.getResults(1, nil, nil, nil, nil, nil, nil, nil, nil)
+gg.addListItems(t)
+t = nil
 
 
 gg.clearResults()
-gg.searchNumber("h00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 26 62 75 6e 64 6c 65", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 26 62 75 6e 64 6c 65",gg.TYPE_BYTE)
-gg.clearResults()
 
-gg.searchNumber("h00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 2a 62 75 6e 64 6c 65", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 2a 62 75 6e 64 6c 65",gg.TYPE_BYTE)
-gg.clearResults()
+local copy = false
+local t = gg.getListItems()
+if not copy then gg.removeListItems(t) end
+for i, v in ipairs(t) do
+	v.address = v.address + 0xffffffffffffffc8
+	if copy then v.name = v.name..' #2' end
+end
+gg.addListItems(t)
+t = nil
+copy = nil
+
+
+revert = gg.getListItems()
+local t = gg.getListItems()
+for i, v in ipairs(t) do
+	if v.flags == gg.TYPE_BYTE then
+		v.value = "1"
+		v.freeze = true
+		v.freezeType = gg.FREEZE_NORMAL
+	end
+end
+gg.addListItems(t)
+t = nil
+gg.alert("‼️Dirigete al apartado de Especiales.‼️")
     end
     
     function SubOpcion96_4() -- Experiencia
