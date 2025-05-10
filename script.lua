@@ -1646,49 +1646,9 @@ if subMenu2 == 1 then SubOpcion2_1() end  -- Reactores
 
 end
 
+-- Variable para almacenar los valores
+savedValues = {}
 function SubOpcion2_1() -- REACTORES
--- Guardar los valores específicos que deseas restaurar más tarde
-function saveOriginalValues()
-    -- Estos son los valores que deseas guardar
-    savedValues = {}
-    -- Guardamos los valores de búsqueda específicos
-    gg.searchNumber(":Specimen_AA_03", gg.TYPE_BYTE)
-    table.insert(savedValues, gg.getResults(100000))
-
-    gg.searchNumber(":Specimen_BF_06", gg.TYPE_BYTE)
-    table.insert(savedValues, gg.getResults(100000))
-
-    gg.searchNumber(":Specimen_EE_04", gg.TYPE_BYTE)
-    table.insert(savedValues, gg.getResults(100000))
-
-    gg.searchNumber(":Specimen_FB_05", gg.TYPE_BYTE)
-    table.insert(savedValues, gg.getResults(100000))
-
-    gg.searchNumber(":Specimen_DA_05", gg.TYPE_BYTE)
-    table.insert(savedValues, gg.getResults(100000))
-
-    gg.searchNumber(":Specimen_DE_09", gg.TYPE_BYTE)
-    table.insert(savedValues, gg.getResults(100000))
-
-    gg.toast("Valores guardados correctamente.")
-end
-
--- Función para restaurar los valores guardados
-function Restaurar()
-    if savedValues == nil then
-        gg.alert("⚠️ No se pudo restaurar, falta de datos. Por favor, reinicia el juego.")
-        return
-    end
-
-    for i, result in ipairs(savedValues) do
-        gg.setValues(result)
-        gg.clearResults()
-    end
-
-    gg.toast("Valores restaurados.")
-end
-
-
 mainmenu = gg.choice({'                              ♻️RESTAURACIÓN♻️                                 ','[🎙] ➣️Music','[👩] ➣Girl Power','[🌩] ➣️Mutants Super-Heroes','[🗡️] ➣Gothic','[🎌] ➣Japan','[🚀] ➣Space War','[⚠️] ➣Mutants-Super-Villains','[💀] ➣Big Boss','[💪] ➣Movies','[🌩️] ➣God Of The Arena','[😈] ➣Elements Squad','[🧟] ➣Time Soldiers','[💪] ➣Lucha Libre','[🌑] ➣Dark Fantasy','[🌱] ➣Photosynthesis','[🧟‍♂️] ➣Western','[☀️] ➣Tropical','[🤖] ➣The Steampunk','[🕺] ➣Bloody Games','⬅️ Regresar'},   nill, 'SCRIPT VIP🌟')
 
 if mainmenu== 1 then Restaurar() end
@@ -1714,32 +1674,45 @@ if mainmenu== 20 then Break() end
 if mainmenu == 21 then Mutantes() end          -- Regresa
 end
 
-function Restaurar()
+-- Función para guardar los valores
+function saveOriginalValues()
+    -- Guardar los valores en 'savedValues'
+    gg.searchNumber(":Specimen_AA_03", gg.TYPE_BYTE)
+    savedValues["Specimen_AA_03"] = gg.getResults(100000)
+    
+    gg.searchNumber(":Specimen_BF_06", gg.TYPE_BYTE)
+    savedValues["Specimen_BF_06"] = gg.getResults(100000)
+    
+    gg.searchNumber(":Specimen_EE_04", gg.TYPE_BYTE)
+    savedValues["Specimen_EE_04"] = gg.getResults(100000)
+    
+    gg.searchNumber(":Specimen_FB_05", gg.TYPE_BYTE)
+    savedValues["Specimen_FB_05"] = gg.getResults(100000)
+    
+    gg.searchNumber(":Specimen_DE_05", gg.TYPE_BYTE)
+    savedValues["Specimen_DE_05"] = gg.getResults(100000)
+    
+    gg.searchNumber(":Specimen_DA_09", gg.TYPE_BYTE)
+    savedValues["Specimen_DA_09"] = gg.getResults(100000)
 
-    if savedValues == nil then
-
-        gg.alert("⚠️No se pudo restaurar, falta de datos, por favor reinicia el juego.")
-
-        return
-
-    end
-
-
-
-    for i, result in ipairs(savedValues) do
-
-        gg.setValues(result)
-
-        gg.clearResults()
-
-    end
-
-
-
-    gg.toast("Restaurados.")
-
+    gg.toast("Valores guardados correctamente.")
 end
 
+-- Función para restaurar los valores
+function Restaurar()
+    if savedValues == nil or next(savedValues) == nil then
+        gg.alert("⚠️ No se pudo restaurar, falta de datos. Por favor, reinicia el juego.")
+        return
+    end
+
+    -- Restaurar los valores
+    for key, result in pairs(savedValues) do
+        gg.setValues(result)
+        gg.clearResults()
+    end
+
+    gg.toast("Valores restaurados correctamente.")
+end
 function Music()
 end
 
