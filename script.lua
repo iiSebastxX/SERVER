@@ -1674,7 +1674,6 @@ if mainmenu == 21 then Mutantes() end          -- Regresa
 end
 
 function Restaurar() 
-saveOriginalValues()
 if savedValues == nil then
 gg.alert("⚠️No se pudo restaurar, falta de datos, por favor reinicia el juego.")
 return
