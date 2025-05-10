@@ -1646,8 +1646,6 @@ if subMenu2 == 1 then SubOpcion2_1() end  -- Reactores
 
 end
 
-savedValues = {} -- Inicializar la tabla para almacenar los valores guardados
-
 function SubOpcion2_1() -- REACTORES
 gg.alert("Bienvenido.....")
 mainmenu = gg.choice({'                              ♻️RESTAURACIÓN♻️                                 ','[🎙] ➣️Music','[👩] ➣Girl Power','[🌩] ➣️Mutants Super-Heroes','[🗡️] ➣Gothic','[🎌] ➣Japan','[🚀] ➣Space War','[⚠️] ➣Mutants-Super-Villains','[💀] ➣Big Boss','[💪] ➣Movies','[🌩️] ➣God Of The Arena','[😈] ➣Elements Squad','[🧟] ➣Time Soldiers','[💪] ➣Lucha Libre','[🌑] ➣Dark Fantasy','[🌱] ➣Photosynthesis','[🧟‍♂️] ➣Western','[☀️] ➣Tropical','[🤖] ➣The Steampunk','[🕺] ➣Bloody Games','⬅️ Regresar'},   nill, 'SCRIPT VIP🌟')
@@ -1675,7 +1673,8 @@ if mainmenu== 20 then Break() end
 if mainmenu == 21 then Mutantes() end          -- Regresa
 end
 
-function saveOriginalValues()
+function Restaurar() 
+saveOriginalValues()
 if savedValues == nil then
 gg.alert("⚠️No se pudo restaurar, falta de datos, por favor reinicia el juego.")
 return
@@ -1692,7 +1691,7 @@ end
 
 function Girl() 
 gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
+if savedValues == nil then Restaurar() end
 gg.clearResults()
 gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll("h086769726C0000000000000000000000000000000000000001000000650400001E67616368615F7061636B5F6769726C0000000000000000",gg.TYPE_BYTE)
 gg.clearResults()
@@ -1712,7 +1711,7 @@ end
 
 function Hero() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
 
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
@@ -1755,7 +1754,7 @@ end
 
 function Gothic() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
     r = gg.getResults(100000)  
@@ -1795,7 +1794,7 @@ function Gothic()
 end
 
 function Japan() 
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
     gg.setVisible(false)
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)
@@ -1837,7 +1836,7 @@ end
 
 function War() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)
     r = gg.getResults(100000)
@@ -1878,7 +1877,7 @@ end
 
 function Villains() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)
     r = gg.getResults(100000)
@@ -1919,7 +1918,7 @@ end
 
 function BigBoss() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)
     r = gg.getResults(100000)
@@ -1960,7 +1959,7 @@ end
 
 function Movies() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
 
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
@@ -2002,7 +2001,7 @@ end
 
 function Area() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
 
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
@@ -2044,7 +2043,7 @@ end
 
 function Elements() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
 
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
@@ -2086,7 +2085,7 @@ end
 
 function Time() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
 
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
@@ -2128,7 +2127,7 @@ end
 
 function Lucha() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
 
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
@@ -2170,7 +2169,7 @@ end
 
 function Dark() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
 
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
@@ -2212,7 +2211,7 @@ end
 
 function West() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
 
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
@@ -2254,6 +2253,7 @@ end
 
 function Photo()
     gg.setVisible(false)
+    if savedValues == nil then Restaurar() end
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
     r = gg.getResults(100000)  
@@ -2294,7 +2294,7 @@ end
 
 function Beach() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
 
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
@@ -2376,7 +2376,7 @@ end
 
 function Break() 
     gg.setVisible(false)
-    if savedValues == nil then saveOriginalValues() end
+    if savedValues == nil then Restaurar() end
 
     gg.clearResults()
     gg.searchNumber("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000", gg.TYPE_BYTE)  
