@@ -1678,26 +1678,21 @@ end
 
 -- Función para guardar los valores
 function saveOriginalValues()
-    -- Guardar los valores en 'savedValues'
+    -- Guardar los valores de búsqueda en 'savedValues'
     gg.searchNumber(":Specimen_AA_03", gg.TYPE_BYTE)
-    savedValues["Specimen_AA_03"] = gg.getResults(100000)
-    
+    savedValues["Specimen_AA_03"] = gg.getResults(100000)  -- Guardar resultado
     gg.searchNumber(":Specimen_BF_06", gg.TYPE_BYTE)
-    savedValues["Specimen_BF_06"] = gg.getResults(100000)
-    
+    savedValues["Specimen_BF_06"] = gg.getResults(100000)  -- Guardar resultado
     gg.searchNumber(":Specimen_EE_04", gg.TYPE_BYTE)
-    savedValues["Specimen_EE_04"] = gg.getResults(100000)
-    
+    savedValues["Specimen_EE_04"] = gg.getResults(100000)  -- Guardar resultado
     gg.searchNumber(":Specimen_FB_05", gg.TYPE_BYTE)
-    savedValues["Specimen_FB_05"] = gg.getResults(100000)
-    
+    savedValues["Specimen_FB_05"] = gg.getResults(100000)  -- Guardar resultado
     gg.searchNumber(":Specimen_DE_05", gg.TYPE_BYTE)
-    savedValues["Specimen_DE_05"] = gg.getResults(100000)
-    
+    savedValues["Specimen_DE_05"] = gg.getResults(100000)  -- Guardar resultado
     gg.searchNumber(":Specimen_DA_09", gg.TYPE_BYTE)
-    savedValues["Specimen_DA_09"] = gg.getResults(100000)
+    savedValues["Specimen_DA_09"] = gg.getResults(100000)  -- Guardar resultado
 
-    gg.toast("Valores guardados correctamente.")
+    gg.alert("Valores guardados correctamente.")  -- Notificación
 end
 
 -- Función para restaurar los valores
@@ -1715,6 +1710,9 @@ function Restaurar()
 
     gg.toast("Valores restaurados correctamente.")
 end
+
+-- Resto de las funciones (Music(), Girl(), Hero(), etc.) siguen igual...
+
 function Music()
 end
 
