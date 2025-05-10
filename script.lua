@@ -1646,6 +1646,7 @@ if subMenu2 == 1 then SubOpcion2_1() end  -- Reactores
 
 end
 
+function SubOpcion2_1() -- REACTORES
 -- Guardar los valores específicos que deseas restaurar más tarde
 function saveOriginalValues()
     -- Estos son los valores que deseas guardar
@@ -1686,9 +1687,6 @@ function Restaurar()
 
     gg.toast("Valores restaurados.")
 end
-
-
-function SubOpcion2_1() -- REACTORES
 
 
 mainmenu = gg.choice({'                              ♻️RESTAURACIÓN♻️                                 ','[🎙] ➣️Music','[👩] ➣Girl Power','[🌩] ➣️Mutants Super-Heroes','[🗡️] ➣Gothic','[🎌] ➣Japan','[🚀] ➣Space War','[⚠️] ➣Mutants-Super-Villains','[💀] ➣Big Boss','[💪] ➣Movies','[🌩️] ➣God Of The Arena','[😈] ➣Elements Squad','[🧟] ➣Time Soldiers','[💪] ➣Lucha Libre','[🌑] ➣Dark Fantasy','[🌱] ➣Photosynthesis','[🧟‍♂️] ➣Western','[☀️] ➣Tropical','[🤖] ➣The Steampunk','[🕺] ➣Bloody Games','⬅️ Regresar'},   nill, 'SCRIPT VIP🌟')
