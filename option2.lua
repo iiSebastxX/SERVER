@@ -561,7 +561,8 @@ local pages = {
     "El Arquitecto",
     "Medinosaurio",
     "Lapin Zombie",
-    "???",
+    "B.U.N Genio",
+    "Gladiador",
   },
 
   -- (y podrías añadir una página 7 con los restantes si tuvieras)
@@ -1629,6 +1630,8 @@ local pages = {
 "BD_14",
 
 "DA_14",
+
+"C_14",
   },
 }
 
