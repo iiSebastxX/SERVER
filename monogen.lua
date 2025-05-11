@@ -248,6 +248,10 @@ function SABLES()
     local opciones = {
         '[ ⚔️ ] Guerrero',
         '[ ⚔️ ] Frostmass',
+        '[ ⚔️ ] Bárbaro',function SABLES()
+    local opciones = {
+        '[ ⚔️ ] Guerrero',
+        '[ ⚔️ ] Frostmass',
         '[ ⚔️ ] Bárbaro',
         '[ ⚔️ ] D Arathomis',
         '[ ⚔️ ] Gladiador',
@@ -272,13 +276,13 @@ function SABLES()
 
     -- Aplicar el sable seleccionado
     if eleccion >= 1 and eleccion <= 5 then
-        aplicarSable(mutantes[eleccion].codigo, mutantes[eleccion].nombre)
+        aplicarSable(mutantes[eleccion].codigo, mutantes[eleccion].nombre, eleccion)
     elseif eleccion == 6 then
         MENU()  -- Regresar al menú principal
     end
 end
 
-function aplicarSable(codigoNuevo, nombre)
+function aplicarSable(codigoNuevo, nombre, elegido)
     local originalValues = {}
 
     local function buscarYEditar(valorOriginal, nuevoValor)
@@ -294,12 +298,12 @@ function aplicarSable(codigoNuevo, nombre)
         gg.editAll(nuevoValor, gg.TYPE_BYTE)
     end
 
-    -- Modificar todos los SABLES al mutante seleccionado
-    buscarYEditar(":C_01", codigoNuevo)
-    buscarYEditar(":C_03", codigoNuevo)
-    buscarYEditar(":C_05", codigoNuevo)
-    buscarYEditar(":C_13", codigoNuevo)
-    buscarYEditar(":C_14", codigoNuevo)
+    -- Modificar todos los SABLES excepto el seleccionado
+    for i = 1, 5 do
+        if i ~= elegido then  -- No modificar el código elegido
+            buscarYEditar(mutantes[i].codigo, codigoNuevo)
+        end
+    end
 
     gg.alert("‼️ Presiona a cambiar con ORO‼️")
     gg.sleep(5000)
@@ -308,7 +312,6 @@ function aplicarSable(codigoNuevo, nombre)
     gg.setValues(originalValues)
     gg.clearResults()
 end
-
 
 function ZOOMORFOS()
 
