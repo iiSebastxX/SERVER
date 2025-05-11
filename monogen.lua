@@ -256,6 +256,8 @@ function SABLES()
 
         '[ ⚔️ ] D Arathomis',
 
+        '[ ⚔️ ] Gladiador',
+
         '⬅️ Regresar al menú principal'
 
     }
@@ -276,6 +278,8 @@ function SABLES()
 
         [4] = {nombre = "D Arathomis", codigo = ":C_13"}
 
+        [5] = {nombre = "Gladiador", codigo = ":C_14"}
+
     }
 
 
@@ -283,7 +287,7 @@ function SABLES()
 gg.clearResults()
 gg.setVisible(false)
 
-    if eleccion >= 1 and eleccion <= 4 then
+    if eleccion >= 1 and eleccion <= 5 then
 
         aplicarSable(mutantes[eleccion].codigo, mutantes[eleccion].nombre)
 
@@ -332,6 +336,8 @@ function aplicarSable(codigoNuevo, nombre)
     buscarYEditar(":C_05", codigoNuevo)
 
     buscarYEditar(":C_13", codigoNuevo)
+
+    buscarYEditar(":C_14", codigoNuevo)
 
 
 
