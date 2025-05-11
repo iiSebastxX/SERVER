@@ -291,7 +291,7 @@ gg.setVisible(false)
 
         aplicarSable(mutantes[eleccion].codigo, mutantes[eleccion].nombre)
 
-    elseif eleccion == 5 then
+    elseif eleccion == 6 then
 
         MENU()
 
