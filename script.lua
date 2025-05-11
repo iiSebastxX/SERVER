@@ -1601,49 +1601,6 @@ if subMenu2 == 1 then SubOpcion2_1() end  -- Reactores
 end
 
 function SubOpcion2_1() -- REACTORES
-
-    -- Archivo persistente para almacenar el tiempo objetivo
-    local filePath = "/sdcard/target_time.txt"
-
-    -- Verificar si el archivo existe y leer el tiempo objetivo
-    local targetTime
-    local file = io.open(filePath, "r")
-    if file then
-        -- Leer el tiempo desde el archivo
-        targetTime = tonumber(file:read("*line"))
-        file:close()
-    end
-
-    -- Si no existe el archivo, establecer el tiempo objetivo (29 días, 21 horas, 1 minuto y 10 segundos desde ahora)
-    if not targetTime then
-        targetTime = os.time() + (29 * 24 * 60 * 60) + (21 * 60 * 60) + (1 * 60) + 10
-        -- Guardar el tiempo objetivo en el archivo
-        file = io.open(filePath, "w")
-        file:write(targetTime)
-        file:close()
-    end
-
-    while true do
-        -- Calcular el tiempo restante
-        local currentTime = os.time()
-        local timeRemaining = targetTime - currentTime
-
-        -- Si el tiempo se ha agotado, salir del bucle
-        if timeRemaining <= 0 then
-            gg.alert("¡El tiempo ha expirado!")
-            break
-        end
-
-        -- Calcular días, horas, minutos y segundos
-        local days = math.floor(timeRemaining / (60 * 60 * 24))
-        local hours = math.floor((timeRemaining % (60 * 60 * 24)) / (60 * 60))
-        local minutes = math.floor((timeRemaining % (60 * 60)) / 60)
-        local seconds = timeRemaining % 60
-
-        -- Formatear la cuenta regresiva
-        local countdown = string.format("🔴Cambio de los reactores: %d días, %d horas, %d minutos, %d segundos", days, hours, minutes, seconds)
-
-	
 mainmenu = gg.choice({'                              ♻️RESTAURACIÓN♻️                                 ','[🎙] ➣️Music','[👩] ➣Girl Power','[🌩] ➣️Mutants Super-Heroes','[🗡️] ➣Gothic','[🎌] ➣Japan','[🚀] ➣Space War','[⚠️] ➣Mutants-Super-Villains','[💀] ➣Big Boss','[💪] ➣Movies','[🌩️] ➣God Of The Arena','[😈] ➣Elements Squad','[🧟] ➣Time Soldiers','[💪] ➣Lucha Libre','[🌑] ➣Dark Fantasy','[🌱] ➣Photosynthesis','[🧟‍♂️] ➣Western','[☀️] ➣Tropical','[🤖] ➣The Steampunk','[🕺] ➣Bloody Games','⬅️ Regresar'},   nill, 'SCRIPT VIP🌟')
 
 if mainmenu== 1 then Restaurar() end
@@ -1669,9 +1626,6 @@ if mainmenu== 20 then Break() end
 if mainmenu == 21 then Mutantes() end          -- Regresa
 end
 
-  -- Esperar un segundo antes de actualizar la cuenta regresiva
- os.execute("sleep 1")
-	
 function Restaurar() 
 if savedValues == nil then
 gg.alert("⚠️No se pudo restaurar, falta de datos, por favor reinicia el juego.")
