@@ -276,7 +276,7 @@ function SABLES()
 
         [3] = {nombre = "Bárbaro", codigo = ":C_05"},
 
-        [4] = {nombre = "D Arathomis", codigo = ":C_13"}
+        [4] = {nombre = "D Arathomis", codigo = ":C_13"},
 
         [5] = {nombre = "Gladiador", codigo = ":C_14"}
 
