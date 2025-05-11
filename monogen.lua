@@ -245,112 +245,67 @@ end
 
 
 function SABLES()
-
     local opciones = {
-
         '[ ⚔️ ] Guerrero',
-
         '[ ⚔️ ] Frostmass',
-
         '[ ⚔️ ] Bárbaro',
-
         '[ ⚔️ ] D Arathomis',
-
         '[ ⚔️ ] Gladiador',
-
         '⬅️ Regresar al menú principal'
-
     }
 
     local eleccion = gg.choice(opciones, nil, '⚔️ SABLES')
 
-    if eleccion == nil then return end
+    if eleccion == nil then return end  -- Salir si no se selecciona ninguna opción
 
-
-
+    -- Definir los códigos de los mutantes
     local mutantes = {
-
         [1] = {nombre = "Guerrero", codigo = ":C_01"},
-
         [2] = {nombre = "Frostmass", codigo = ":C_03"},
-
         [3] = {nombre = "Bárbaro", codigo = ":C_05"},
-
         [4] = {nombre = "D Arathomis", codigo = ":C_13"},
-
         [5] = {nombre = "Gladiador", codigo = ":C_14"}
-
     }
 
+    gg.clearResults()
+    gg.setVisible(false)
 
-
-gg.clearResults()
-gg.setVisible(false)
-
+    -- Aplicar el sable seleccionado
     if eleccion >= 1 and eleccion <= 5 then
-
         aplicarSable(mutantes[eleccion].codigo, mutantes[eleccion].nombre)
-
     elseif eleccion == 6 then
-
-        MENU()
-
+        MENU()  -- Regresar al menú principal
     end
-
 end
 
-
-
 function aplicarSable(codigoNuevo, nombre)
-
     local originalValues = {}
 
-
-
     local function buscarYEditar(valorOriginal, nuevoValor)
-
         gg.clearResults()
-
         gg.searchNumber(valorOriginal, gg.TYPE_BYTE, false, gg.SIGN_EQUAL, 0, -1)
-
         local resultados = gg.getResults(100000)
 
-        for i,v in ipairs(resultados) do
-
+        -- Guardar los valores originales para restaurar después
+        for i, v in ipairs(resultados) do
             table.insert(originalValues, v)
-
         end
 
         gg.editAll(nuevoValor, gg.TYPE_BYTE)
-
     end
 
-
-
-    -- modificar todos los SABLES al mutante seleccionado
-
+    -- Modificar todos los SABLES al mutante seleccionado
     buscarYEditar(":C_01", codigoNuevo)
-
     buscarYEditar(":C_03", codigoNuevo)
-
     buscarYEditar(":C_05", codigoNuevo)
-
     buscarYEditar(":C_13", codigoNuevo)
-
     buscarYEditar(":C_14", codigoNuevo)
 
-
-
     gg.alert("‼️ Presiona a cambiar con ORO‼️")
-
     gg.sleep(5000)
 
-
-
-    -- restaurar valores originales
-
+    -- Restaurar valores originales
     gg.setValues(originalValues)
-
     gg.clearResults()
 end
 
