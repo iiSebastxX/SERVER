@@ -248,10 +248,6 @@ function SABLES()
     local opciones = {
         '[ ⚔️ ] Guerrero',
         '[ ⚔️ ] Frostmass',
-        '[ ⚔️ ] Bárbaro',function SABLES()
-    local opciones = {
-        '[ ⚔️ ] Guerrero',
-        '[ ⚔️ ] Frostmass',
         '[ ⚔️ ] Bárbaro',
         '[ ⚔️ ] D Arathomis',
         '[ ⚔️ ] Gladiador',
