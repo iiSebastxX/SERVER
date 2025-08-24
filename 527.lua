@@ -617,7 +617,13 @@ local pages = {
     "El Arquitecto",
     "Medinosaurio",
     "Lapin Zombie",
-    "???",
+    "B.U.N Genio",
+	"Gladiador",
+   "Hidrira",
+   "Infinito Supérmasivo",
+    "Nexo Orbital",
+	"Máscara Emocional",
+	"???",
   },
 
 
