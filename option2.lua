@@ -563,6 +563,11 @@ local pages = {
     "Lapin Zombie",
     "B.U.N Genio",
     "Gladiador",
+   "Hidrira",
+   "Infinito Supérmasivo",
+    "Nexo Orbital",
+	"Máscara Emocional",
+	"???",
   },
 
   -- (y podrías añadir una página 7 con los restantes si tuvieras)
