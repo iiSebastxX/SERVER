@@ -567,7 +567,7 @@ local pages = {
    "Infinito Supérmasivo",
     "Nexo Orbital",
 	"Máscara Emocional",
-	"???",
+	"Profeta del Crepúsculo",
   },
 
   -- (y podrías añadir una página 7 con los restantes si tuvieras)
