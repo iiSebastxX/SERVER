@@ -56,7 +56,12 @@ local ip = ipRes.content
 
 -- URL de tu Apps Script
 local url = "https://script.google.com/macros/s/AKfycbz7O55BhynJw6UHA8lvZTKjw-1rV0B25fSuRpQbCrYMpl6pgXhND9ipfoUD6KPN8hxo/exec"
-url = url .. "?usuario=" .. usuario .. "&clave=" .. clave .. "&ip=" .. ip
+url = url
+  .. "?usuario=" .. usuario
+  .. "&clave=" .. clave
+  .. "&ip=" .. ip
+  .. "&dispositivo=" .. deviceID
+
 
 -- Hacer solicitud
 local res = gg.makeRequest(url)
