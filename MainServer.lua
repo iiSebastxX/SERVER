@@ -58,6 +58,11 @@ elseif respuesta:lower():find("bloqueado") then
 elseif respuesta:lower():find("sistema") then
   gg.alert("⚙️ " .. respuesta)
   os.exit()
+
+elseif respuesta == "dispositivo_no_autorizado" then
+  gg.alert("🚫 Acceso denegado\nEste usuario ya está vinculado a otro dispositivo.")
+  os.exit()
+  
 else
   gg.alert("🚫 " .. respuesta)
   os.exit()
@@ -167,7 +172,7 @@ function mostrarMenu()
       gg.alert("🔎 Info:\n\n- Usuario: " .. usuario .. "\n- IP: " .. ip .. "\n- Versión: " .. version .. firma)
 
     elseif eleccion == 5 then
-      gg.toast("🔄 Verifica si hay una nueva versión en GitHub.")
+      gg.toast("🔄 Verifica si hay una nueva versión.")
     elseif eleccion == nil then
       gg.toast("👋 Cerrando script...")
       break
