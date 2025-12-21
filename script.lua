@@ -1653,6 +1653,9 @@ function Restaurar()
 
 end
 
+function Beach()
+end
+
 function Girl() 
 gg.setVisible(false)
 if savedValues == nil then saveOriginalValues() end
