@@ -31,7 +31,7 @@ function saveOriginalValues()
     savedValues[7] = gg.getResults(100000)
     gg.clearResults()
 end
-
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function MENU()
     local tienda = gg.choice({
