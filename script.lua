@@ -1603,7 +1603,7 @@ end
 function SubOpcion2_1() -- REACTORES
 
 
-mainmenu = gg.choice({'                              ♻️RESTAURACIÓN♻️                                 ','[☀️] ➣Tropical','[👩] ➣Girl Power','[🌩] ➣️Mutants Super-Heroes','[🗡️] ➣Gothic','[🎌] ➣Japan','[🚀] ➣Space War','[⚠️] ➣Mutants-Super-Villains','[💀] ➣Big Boss','[🌱] ➣Photosynthesis','[🌩️] ➣God Of The Arena','[😈] ➣Elements Squad','[🧟] ➣Time Soldiers','[💪] ➣Lucha Libre','[🌑] ➣Dark Fantasy','[🎙] ➣️Music','[🧟‍♂️] ➣Western','[💪] ➣Movies','[🤖] ➣The Steampunk','[🕺] ➣Bloody Games','⬅️ Regresar'},   nil, 'SCRIPT VIP🌟')
+mainmenu = gg.choice({'                              ♻️RESTAURACIÓN♻️                                 ','[☀️] ➣Tropical','[👩] ➣Girl Power','[🌩] ➣️Mutants Super-Heroes','[🗡️] ➣Gothic','[🎌] ➣Japan','[🚀] ➣Space War','[⚠️] ➣Mutants-Super-Villains','[💀] ➣Big Boss','[🌱] ➣Photosynthesis','[🌩️] ➣God Of The Arena','[😈] ➣Elements Squad','[🧟] ➣Time Soldiers','[💪] ➣Lucha Libre','[🌑] ➣Dark Fantasy','[🎙] ➣️Music','[🧟‍♂️] ➣Western','[💪] ➣Movies','[🤖] ➣The Steampunk','[🕺] ➣Bloody Games','⬅️ Regresar'},   nill, 'SCRIPT VIP🌟')
 
 if mainmenu== 1 then Restaurar() end
 if mainmenu== 2 then Beach() end
@@ -1743,7 +1743,6 @@ gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)
 r = gg.getResults(100000)  
 gg.editAll(":Specimen_DC_03", gg.TYPE_BYTE)
 gg.clearResults()
-
 end
 
 function Japan() 
