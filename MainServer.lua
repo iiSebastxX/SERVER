@@ -55,7 +55,7 @@ end
 local ip = ipRes.content
 
 -- URL de tu Apps Script
-local url = "https://script.google.com/macros/s/AKfycbz7O55BhynJw6UHA8lvZTKjw-1rV0B25fSuRpQbCrYMpl6pgXhND9ipfoUD6KPN8hxo/exec"
+local url = "https://script.google.com/macros/s/AKfycbzDA3v8FeSpbU4N2_5hQAGhXR0onaaEyI842jhkZTv_JUCxdjP8d2gRYvkYNoYa-rvIKA/exec"
 url = url
   .. "?usuario=" .. usuario
   .. "&clave=" .. clave
