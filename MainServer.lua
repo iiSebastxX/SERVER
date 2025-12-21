@@ -9,6 +9,14 @@ local credenciales = gg.prompt(
   {"text", "text"}
 )
 
+if not credenciales then
+  gg.alert("❌ Cancelado")
+  os.exit()
+end
+
+local usuario = credenciales[1]
+local clave = credenciales[2]
+
 -- 📱 Generar / obtener DeviceID único
 local deviceFile = "/sdcard/.gg_device_id"
 
@@ -36,15 +44,6 @@ local function obtenerDeviceID()
 end
 
 local deviceID = obtenerDeviceID()
-
-
-if not credenciales then
-  gg.alert("❌ Cancelado")
-  os.exit()
-end
-
-local usuario = credenciales[1]
-local clave = credenciales[2]
 
 -- Obtener IP pública
 local ipRes = gg.makeRequest("https://api.ipify.org")
