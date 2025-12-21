@@ -9,6 +9,35 @@ local credenciales = gg.prompt(
   {"text", "text"}
 )
 
+-- 📱 Generar / obtener DeviceID único
+local deviceFile = "/sdcard/.gg_device_id"
+
+local function obtenerDeviceID()
+  local f = io.open(deviceFile, "r")
+  if f then
+    local id = f:read("*l")
+    f:close()
+    return id
+  end
+
+  math.randomseed(os.time())
+  local chars = "abcdefghijklmnopqrstuvwxyz0123456789"
+  local id = ""
+  for i = 1, 32 do
+    local r = math.random(#chars)
+    id = id .. chars:sub(r, r)
+  end
+
+  f = io.open(deviceFile, "w")
+  f:write(id)
+  f:close()
+
+  return id
+end
+
+local deviceID = obtenerDeviceID()
+
+
 if not credenciales then
   gg.alert("❌ Cancelado")
   os.exit()
