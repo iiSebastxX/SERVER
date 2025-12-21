@@ -1626,7 +1626,7 @@ if mainmenu== 18 then Movies() end
 if mainmenu== 19 then Punk() end
 if mainmenu== 20 then Break() end
 if mainmenu == 21 then Mutantes() end    -- Regresa
-	
+end
 function Restaurar()
 
     if savedValues == nil then
