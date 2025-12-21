@@ -563,6 +563,11 @@ local pages = {
     "Lapin Zombie",
     "B.U.N Genio",
     "Gladiador",
+   "Hidrira",
+   "Infinito Supérmasivo",
+    "Nexo Orbital",
+	"Máscara Emocional",
+	"Profeta del Crepúsculo",
   },
 
   -- (y podrías añadir una página 7 con los restantes si tuvieras)
@@ -1632,6 +1637,11 @@ local pages = {
 "DA_14",
 
 "C_14",
+"ED_14",
+"DE_14",
+"EE_13",
+"FF_99",
+"FF_14",
   },
 }
 

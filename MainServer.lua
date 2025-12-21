@@ -27,7 +27,7 @@ end
 local ip = ipRes.content
 
 -- URL de tu Apps Script
-local url = "https://script.google.com/macros/s/AKfycbxiG9D9ig3GXQhEm3GJ1uKOWG_fLBWhZVRkPcRCqgJMYh79KrD-S4ux3aJoMGEBlJ2S7g/exec"
+local url = "https://script.google.com/macros/s/AKfycbz7O55BhynJw6UHA8lvZTKjw-1rV0B25fSuRpQbCrYMpl6pgXhND9ipfoUD6KPN8hxo/exec"
 url = url .. "?usuario=" .. usuario .. "&clave=" .. clave .. "&ip=" .. ip
 
 -- Hacer solicitud
@@ -58,6 +58,11 @@ elseif respuesta:lower():find("bloqueado") then
 elseif respuesta:lower():find("sistema") then
   gg.alert("⚙️ " .. respuesta)
   os.exit()
+
+elseif respuesta == "dispositivo_no_autorizado" then
+  gg.alert("🚫 Acceso denegado\nEste usuario ya está vinculado a otro dispositivo.")
+  os.exit()
+  
 else
   gg.alert("🚫 " .. respuesta)
   os.exit()
@@ -167,7 +172,7 @@ function mostrarMenu()
       gg.alert("🔎 Info:\n\n- Usuario: " .. usuario .. "\n- IP: " .. ip .. "\n- Versión: " .. version .. firma)
 
     elseif eleccion == 5 then
-      gg.toast("🔄 Verifica si hay una nueva versión en GitHub.")
+      gg.toast("🔄 Verifica si hay una nueva versión.")
     elseif eleccion == nil then
       gg.toast("👋 Cerrando script...")
       break
