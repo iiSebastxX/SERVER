@@ -43,7 +43,7 @@ local ip = ipRes.content
 -- =========================
 -- 🌐 BACKEND
 -- =========================
-local BASE_URL = "https://script.google.com/macros/s/TU_WEBAPP/exec"
+local BASE_URL = "https://script.google.com/macros/s/AKfycbz8wCxSMpdWfCkNv4XKaRwKYURYLLJMK7AXYYTOAX73PMdrq1XaZM72VWvbH0wIa9lXKQ/exec"
 
 local function esc(v)
   return gg.urlEncode(v)
