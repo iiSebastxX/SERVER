@@ -1835,32 +1835,32 @@ gg.editAll("h1076696C6C61696E7300000000000000000000000000000003000000FC080000266
 gg.clearResults()
 gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)
 r = gg.getResults(100000)
-gg.editAll(":Specimen_FC_01", gg.TYPE_BYTE)
+gg.editAll(":Specimen_DA_01", gg.TYPE_BYTE)
 gg.clearResults()
 
 gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)
 r = gg.getResults(100000)
-gg.editAll(":Specimen_DA_02", gg.TYPE_BYTE)
+gg.editAll(":Specimen_DA_01", gg.TYPE_BYTE)
 gg.clearResults()
 
 gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)
 r = gg.getResults(100000)
-gg.editAll(":Specimen_CB_04", gg.TYPE_BYTE)
+gg.editAll(":Specimen_AB_02", gg.TYPE_BYTE)
 gg.clearResults()
 
 gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)
 r = gg.getResults(100000)
-gg.editAll(":Specimen_FB_03", gg.TYPE_BYTE)
+gg.editAll(":Specimen_EC_03", gg.TYPE_BYTE)
 gg.clearResults()
 
 gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)
 r = gg.getResults(100000)
-gg.editAll(":Specimen_CC_02", gg.TYPE_BYTE)
+gg.editAll(":Specimen_BA_03", gg.TYPE_BYTE)
 gg.clearResults()
 
 gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)
 r = gg.getResults(100000)
-gg.editAll(":Specimen_DC_02", gg.TYPE_BYTE)
+gg.editAll(":Specimen_CE_05", gg.TYPE_BYTE)
 gg.clearResults()
 end
 
