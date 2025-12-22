@@ -1676,10 +1676,9 @@ gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.
 gg.clearResults()
 end
 
-function Hero() 
+function Hero()
 gg.setVisible(false)
 if savedValues == nil then saveOriginalValues() end
-
 gg.clearResults()
 gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  
 r = gg.getResults(100000)  
@@ -1840,7 +1839,7 @@ gg.clearResults()
 
 gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)
 r = gg.getResults(100000)
-gg.editAll(":Specimen_DA_01", gg.TYPE_BYTE)
+gg.editAll(":Specimen_B_01", gg.TYPE_BYTE)
 gg.clearResults()
 
 gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)
