@@ -1603,7 +1603,7 @@ end
 function SubOpcion2_1() -- REACTORES
 
 
-mainmenu = gg.choice({'                              ♻️RESTAURACIÓN♻️                                 ','[☀️] ➣Tropical','[👩] ➣Girl Power','[🌩] ➣️Mutants Super-Heroes','[🗡️] ➣Gothic','[🎌] ➣Japan','[🚀] ➣Space War','[⚠️] ➣Mutants-Super-Villains','[💀] ➣Big Boss','[🌱] ➣Photosynthesis','[🌩️] ➣God Of The Arena','[😈] ➣Elements Squad','[🧟] ➣Time Soldiers','[💪] ➣Lucha Libre','[🌑] ➣Dark Fantasy','[🎙] ➣️Music','[🧟‍♂️] ➣Western','[💪] ➣Movies','[🤖] ➣The Steampunk','[🕺] ➣Bloody Games','⬅️ Regresar'},   nil, 'SCRIPT VIP🌟')
+mainmenu = gg.choice({'                              ♻️RESTAURACIÓN♻️                                 ','[☀️] ➣Tropical','[👩] ➣Girl Power','[🌩] ➣️Mutants Super-Heroes','[🗡️] ➣Gothic','[🎌] ➣Japan','[🚀] ➣Space War','[⚠️] ➣Mutants-Super-Villains','[💀] ➣Big Boss','[🌱] ➣Photosynthesis','[🌩️] ➣God Of The Arena','[😈] ➣Elements Squad','[🧟] ➣Time Soldiers','[💪] ➣Lucha Libre','[🌑] ➣Dark Fantasy','[🎙] ➣️Music','[🧟‍♂️] ➣Western','[💪] ➣Movies','[🤖] ➣The Steampunk','[🕺] ➣Bloody Games','[👑] ➣CheckMate','⬅️ Regresar'},   nil, 'SCRIPT VIP🌟')
 
 if mainmenu== 1 then Restaurar() end
 if mainmenu== 2 then Beach() end
@@ -1625,7 +1625,8 @@ if mainmenu== 17 then West() end
 if mainmenu== 18 then Movies() end
 if mainmenu== 19 then Punk() end
 if mainmenu== 20 then Break() end
-if mainmenu == 21 then Mutantes() end    -- Regresa
+if mainmenu== 21 then Checkmate() end
+if mainmenu == 22 then Mutantes() end    -- Regresa
 end
 function Restaurar()
 
@@ -2317,8 +2318,32 @@ gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)
 r = gg.getResults(100000)  
 gg.editAll(":Specimen_CA_14", gg.TYPE_BYTE)
 gg.clearResults()
-
 end
+
+function Checkmate() 
+gg.setVisible(false)
+if savedValues == nil then saveOriginalValues() end
+gg.clearResults()
+gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll("h086769726C0000000000000000000000000000000000000001000000650400001E67616368615F7061636B5F6769726C0000000000000000",gg.TYPE_BYTE)
+gg.clearResults()
+gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CF_04",gg.TYPE_BYTE)
+gg.clearResults()
+gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_FE_06",gg.TYPE_BYTE)
+gg.clearResults()
+gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE) r = gg.getResults(100000)  gg.editAll(":Specimen_BA_06",gg.TYPE_BYTE)
+gg.clearResults()
+gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_AC_04",gg.TYPE_BYTE)
+gg.clearResults()
+gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_E_03",gg.TYPE_BYTE)
+gg.clearResults()
+gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CC_13",gg.TYPE_BYTE)
+gg.clearResults()
+end
+
+
+
+
+
 
 function SubOpcion2_2()
   local subOpciones = {
