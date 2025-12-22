@@ -1,23 +1,65 @@
-local version = "1.1.2" -- Puedes cambiar esto fácilmente cuando actualices
+local version = "1.1.2"
 
-gg.alert("🔐 Bienvenido al Script VIP v" .. version .. "\nEste script está protegido con acceso limitado por IP. En caso tal de querer ser compartido sin autorización, este será sancionado.⚠️")
-
--- Ingreso de usuario y contraseña
-local credenciales = gg.prompt(
-  {"👤 Usuario:", "🔑 Contraseña:"},
-  nil,
-  {"text", "text"}
+gg.alert(
+  "🔐 Bienvenido al Script VIP v" .. version ..
+  "\n\nEste script está protegido.\n1 cuenta por dispositivo.\nUso no autorizado será sancionado ⚠️"
 )
 
-if not credenciales then
-  gg.alert("❌ Cancelado")
+-- 🎮 MENÚ DE BIENVENIDA
+local opcion = gg.choice(
+  {
+    "🆕 Registrarse",
+    "🔐 Iniciar sesión",
+    "❌ Salir"
+  },
+  nil,
+  "🎮 SCRIPT VIP\n\nSelecciona una opción:"
+)
+
+if opcion == nil or opcion == 3 then
+  gg.toast("👋 Hasta luego")
   os.exit()
 end
 
-local usuario = credenciales[1]
-local clave = credenciales[2]
+local usuario, clave, accion
 
--- 📱 Generar / obtener DeviceID único
+-- 🆕 REGISTRO
+if opcion == 1 then
+  accion = "registro"
+  gg.alert(
+    "🆕 Registro\n\n" ..
+    "• 1 cuenta por dispositivo\n" ..
+    "• No se permiten duplicados\n" ..
+    "• Guarda tus datos\n"
+  )
+
+  local cred = gg.prompt(
+    {"👤 Elige un usuario:", "🔑 Elige una contraseña:"},
+    nil,
+    {"text", "text"}
+  )
+
+  if not cred then os.exit() end
+  usuario = cred[1]
+  clave = cred[2]
+end
+
+-- 🔐 LOGIN
+if opcion == 2 then
+  accion = "login"
+
+  local cred = gg.prompt(
+    {"👤 Usuario:", "🔑 Contraseña:"},
+    nil,
+    {"text", "text"}
+  )
+
+  if not cred then os.exit() end
+  usuario = cred[1]
+  clave = cred[2]
+end
+
+-- 📱 DEVICE ID (NO SE TOCA)
 local deviceFile = "/sdcard/.gg_device_id"
 
 local function obtenerDeviceID()
@@ -45,7 +87,7 @@ end
 
 local deviceID = obtenerDeviceID()
 
--- Obtener IP pública
+-- 🌐 IP
 local ipRes = gg.makeRequest("https://api.ipify.org")
 if ipRes.code ~= 200 then
   gg.alert("❌ No se pudo obtener la IP pública")
@@ -54,165 +96,83 @@ end
 
 local ip = ipRes.content
 
--- URL de tu Apps Script
+-- 🌐 URL BACKEND
 local url = "https://script.google.com/macros/s/AKfycbza4vFZPAdlBw0FnfB2kl_THfP73cKYsugk3K_J9K0VLgpo2Wmp0QBL1HzKk-RWAPfE5A/exec"
 url = url
-  .. "?usuario=" .. usuario
+  .. "?accion=" .. accion
+  .. "&usuario=" .. usuario
   .. "&clave=" .. clave
   .. "&ip=" .. ip
   .. "&dispositivo=" .. deviceID
 
-
--- Hacer solicitud
+-- 🚀 REQUEST
 local res = gg.makeRequest(url)
 
 if res.code ~= 200 then
-  gg.alert("❌ Error al conectar con el servidor\n\nVERIFICA TU CONEXIÓN A INTERNET.")
+  gg.alert("❌ Error al conectar con el servidor")
   os.exit()
 end
 
 local respuesta = res.content
 
--- Validar respuesta
+-- 🧠 RESPUESTAS
 if respuesta == "autorizado" then
   gg.toast("✅ Acceso concedido")
+
+elseif respuesta == "registrado" then
+  gg.alert("✅ Registro exitoso\nAhora inicia sesión")
+  os.exit()
+
 elseif respuesta == "ip_diferente" then
-  gg.alert("⚠️ Acceso restringido\nEsta cuenta no puede iniciar sesión desde este entorno.")
-  os.exit()
-elseif respuesta == "denegado" then
-  gg.alert("❌ Usuario o contraseña incorrectos")
-  os.exit()
-elseif respuesta == "falta_datos" then
-  gg.alert("❌ Faltan datos. Intenta de nuevo.")
-  os.exit()
-elseif respuesta:lower():find("bloqueado") then
-  gg.alert("⚠️ " .. respuesta)
-  os.exit()
-elseif respuesta:lower():find("sistema") then
-  gg.alert("⚙️ " .. respuesta)
+  gg.alert("⚠️ Acceso restringido\nEntorno no autorizado")
   os.exit()
 
 elseif respuesta == "dispositivo_no_autorizado" then
-  gg.alert("🚫 Acceso denegado\nEste usuario ya está vinculado a otro dispositivo.")
+  gg.alert("🚫 Este dispositivo ya tiene una cuenta")
   os.exit()
-  
+
+elseif respuesta == "denegado" then
+  gg.alert("❌ Usuario o contraseña incorrectos")
+  os.exit()
+
+elseif respuesta:lower():find("bloqueado") then
+  gg.alert("🚫 " .. respuesta)
+  os.exit()
+
 else
   gg.alert("🚫 " .. respuesta)
   os.exit()
 end
 
--- Menú principal
+-- 📋 MENÚ PRINCIPAL
 function mostrarMenu()
   while true do
     local hora = os.date("%H:%M:%S")
-    local titulo = 
+    local titulo =
       "╔════════════════════════════╗\n" ..
       "║     🎮  SCRIPT VIP MGG     ║\n" ..
       "╠════════════════════════════╣\n" ..
       "║ 👤 Usuario: " .. usuario .. "\n" ..
       "║ 🕒 Hora: " .. hora .. "\n" ..
-      "║ 🔰 Estado: En línea...\n" ..
       "║ 📦 Versión: " .. version .. "\n" ..
       "╚════════════════════════════╝"
 
-    local opciones = {
-      "🚀 Opciones(1)",
-      "🚀 Opciones(2)",
-      "🚀 Calculadora de Evo(3)",
-      "📄 Información",
-      "🔄 Actualizar"
-    }
+    local op = gg.choice(
+      {
+        "🚀 Opciones (1)",
+        "🚀 Opciones (2)",
+        "🚀 Calculadora Evo",
+        "📄 Información",
+        "❌ Salir"
+      },
+      nil,
+      titulo
+    )
 
-    local eleccion = gg.choice(opciones, nil, titulo)
-
-    if eleccion == 1 then
-      gg.toast("📥 Descargando script VIP (1)...")
-      local scriptURL = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/script.lua"
-      local scriptRes = gg.makeRequest(scriptURL)
-
-      if scriptRes.code ~= 200 then
-        gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes.code)
-      else
-        local tempFile = "/sdcard/temp_script.lua"
-        local file = io.open(tempFile, "w")
-        file:write(scriptRes.content)
-        file:close()
-
-        local status, err = pcall(loadfile(tempFile))
-        if not status then
-          if tostring(err):find("called os.exit") then
-            gg.toast("👋 Script cerrado correctamente")
-          else
-            gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
-          end
-        else
-          gg.toast("✅ Script VIP (1) ejecutado")
-        end
-      end
-
-    elseif eleccion == 2 then
-      gg.toast("📥 Descargando script VIP (2)...")
-      local scriptURL2 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/option2.lua"
-      local scriptRes2 = gg.makeRequest(scriptURL2)
-
-      if scriptRes2.code ~= 200 then
-        gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes2.code)
-      else
-        local tempFile2 = "/sdcard/temp_script2.lua"
-        local file2 = io.open(tempFile2, "w")
-        file2:write(scriptRes2.content)
-        file2:close()
-
-        local status, err = pcall(loadfile(tempFile2))
-        if not status then
-          if tostring(err):find("called os.exit") then
-            gg.toast("👋 Script cerrado correctamente")
-          else
-            gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
-          end
-        else
-          gg.toast("✅ Script VIP (2) ejecutado")
-        end
-      end
-
-    elseif eleccion == 3 then
-      gg.toast("📥 Descargando datos (3)...")
-      local scriptURL3 = "https://raw.githubusercontent.com/iiSebastxX/SERVER/refs/heads/main/evocalculator.lua"
-      local scriptRes3 = gg.makeRequest(scriptURL3)
-
-      if scriptRes3.code ~= 200 then
-        gg.alert("❌ Error al descargar el script:\nCódigo HTTP: " .. scriptRes3.code)
-      else
-        local tempFile3 = "/sdcard/temp_evocalculator.lua"
-        local file3 = io.open(tempFile3, "w")
-        file3:write(scriptRes3.content)
-        file3:close()
-
-        local status, err = pcall(loadfile(tempFile3))
-        if not status then
-          if tostring(err):find("called os.exit") then
-            gg.toast("👋 Script cerrado correctamente")
-          else
-            gg.alert("❌ Error al ejecutar el script:\n" .. tostring(err))
-          end
-        else
-          gg.toast("✅ EvoCalculator (3) ejecutado")
-        end
-      end
-
-    elseif eleccion == 4 then
-      local firma = "\n\n━━━━━━━━━━━━━━━━━━━━\n🎉 Creado por: Andrew FC\n📲 Contacto: +57 3006975005\n🔧 Script en Línea...\n━━━━━━━━━━━━━━━━━━━━\n"
-      gg.alert("🔎 Info:\n\n- Usuario: " .. usuario .. "\n- IP: " .. ip .. "\n- Versión: " .. version .. firma)
-
-    elseif eleccion == 5 then
-      gg.toast("🔄 Verifica si hay una nueva versión.")
-    elseif eleccion == nil then
-      gg.toast("👋 Cerrando script...")
-      break
-    end
+    if op == nil or op == 5 then break end
+    gg.toast("🔧 Función en desarrollo")
   end
 end
 
--- Ejecutar menú
 mostrarMenu()
 os.exit()
