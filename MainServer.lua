@@ -77,7 +77,7 @@ local respuesta = res.content
 if respuesta == "autorizado" then
   gg.toast("✅ Acceso concedido")
 elseif respuesta == "ip_diferente" then
-  gg.alert("⚠️ Acceso denegado\nEsta cuenta ya está registrada con otra IP.")
+  gg.alert("⚠️ Acceso restringido\nEsta cuenta no puede iniciar sesión desde este entorno.")
   os.exit()
 elseif respuesta == "denegado" then
   gg.alert("❌ Usuario o contraseña incorrectos")
