@@ -1,4 +1,4 @@
-local version = "1.1.2"
+local version = "v2.0"
 
 -- =========================
 -- 📱 DEVICE ID ÚNICO
