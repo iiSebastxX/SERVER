@@ -97,7 +97,7 @@ end
 local ip = ipRes.content
 
 -- 🌐 URL BACKEND
-local url = "https://script.google.com/macros/s/AKfycbza4vFZPAdlBw0FnfB2kl_THfP73cKYsugk3K_J9K0VLgpo2Wmp0QBL1HzKk-RWAPfE5A/exec"
+local url = "https://script.google.com/macros/s/AKfycbxBQQs4kxmU3WJH4yj3thiioTa2qaByC-knB43hrpXJ0GUktxXcA6XYzBdBjvl2XmgBDg/exec"
 url = url
   .. "?accion=" .. accion
   .. "&usuario=" .. usuario
