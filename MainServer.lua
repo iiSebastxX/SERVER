@@ -45,17 +45,14 @@ local ip = ipRes.content
 -- =========================
 local BASE_URL = "https://script.google.com/macros/s/AKfycbz8wCxSMpdWfCkNv4XKaRwKYURYLLJMK7AXYYTOAX73PMdrq1XaZM72VWvbH0wIa9lXKQ/exec"
 
-local function esc(v)
-  return gg.urlEncode(v)
-end
-
 local function enviar(accion, usuario, clave)
   local url = BASE_URL
-    .. "?accion=" .. esc(accion)
-    .. "&usuario=" .. esc(usuario)
-    .. "&clave=" .. esc(clave)
-    .. "&ip=" .. esc(ip)
-    .. "&dispositivo=" .. esc(deviceID)
+    .. "?accion=" .. accion
+    .. "&usuario=" .. usuario
+    .. "&clave=" .. clave
+    .. "&ip=" .. ip
+    .. "&dispositivo=" .. deviceID
+
 
   local res = gg.makeRequest(url)
   if res.code ~= 200 then
