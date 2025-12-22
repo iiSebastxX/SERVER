@@ -2336,7 +2336,7 @@ gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.
 gg.clearResults()
 gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_E_03",gg.TYPE_BYTE)
 gg.clearResults()
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CC_13",gg.TYPE_BYTE)
+gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CC_14",gg.TYPE_BYTE)
 gg.clearResults()
 end
 
