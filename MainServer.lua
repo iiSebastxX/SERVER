@@ -241,7 +241,7 @@ function mostrarMenu()
       end
 
     elseif eleccion == 4 then
-      local firma = "\n\n━━━━━━━━━━━━━━━━━━━━\n🎉 Creado por: Andrew FC\n📲 Contacto: +57 3006975005\n🔧 Script en Línea...\n━━━━━━━━━━━━━━━━━━━━\n"
+      local firma = "\n\n━━━━━━━━━━━━━━━━━━━━\n🎉 Creado por: Andrew FC\n📲 Contacto: +66 3000000000\n🔧 Script en Línea...\n━━━━━━━━━━━━━━━━━━━━\n"
       gg.alert(
         "🔎 Info:\n\n- Usuario: " .. usuario ..
         "\n- IP: " .. ip ..
