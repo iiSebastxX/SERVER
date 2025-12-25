@@ -43,7 +43,7 @@ local ip = ipRes.content
 -- =========================
 -- 🌐 BACKEND
 -- =========================
-local BASE_URL = "https://script.google.com/macros/s/AKfycbyqAcptyRZ_O4_hcUZPyZy4a0ukTWOJB-gkGWAEXO6ZAnFgPyZT9x4ySZh8GexQsUcbuQ/exec"
+local BASE_URL = "https://script.google.com/macros/s/AKfycbzyYhxBRa3H72Sob-RPj5AB3-xWae35NP6Mm7fE-Hlak31bfkPgfykZn90-wRc0P2NzJQ/exec"
 
 local function enviar(accion, usuario, clave)
   local url = BASE_URL
@@ -115,6 +115,10 @@ if opcionInicio == 1 then
   elseif respuesta == "denegado" then
     gg.alert("❌ Usuario o contraseña incorrectos")
     os.exit()
+  elseif respuesta == "usuario_ya_existe" then
+  gg.alert("❌ Registro cancelado\n\nEse nombre de usuario ya está en uso.\nPor favor elige otro.")
+  os.exit()
+
   else
     gg.alert("🚫 " .. respuesta)
     os.exit()
