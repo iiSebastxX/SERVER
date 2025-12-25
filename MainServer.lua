@@ -115,10 +115,6 @@ if opcionInicio == 1 then
   elseif respuesta == "denegado" then
     gg.alert("❌ Usuario o contraseña incorrectos")
     os.exit()
-  elseif respuesta == "usuario_ya_existe" then
-  gg.alert("❌ Registro cancelado\n\nEse nombre de usuario ya está en uso.\nPor favor elige otro.")
-  os.exit()
-
   else
     gg.alert("🚫 " .. respuesta)
     os.exit()
@@ -137,6 +133,15 @@ if opcionInicio == 2 then
   elseif respuesta == "dispositivo_ya_registrado" then
     gg.alert("🚫 Este dispositivo ya tiene una cuenta registrada")
     os.exit()
+  elseif respuesta == "usuario_ya_existe" then
+  gg.alert(
+  "🚫 Nombre no disponible\n\n" ..
+  "El usuario:\n" ..
+  usuario .. "\n\n" ..
+  "ya está registrado.\n\n" ..
+  "Intenta con otro nombre."
+)
+  os.exit()  
   else
     gg.alert("🚫 " .. respuesta)
     os.exit()
