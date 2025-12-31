@@ -1,36 +1,10 @@
 activa = 1
-
--- Variable global para guardar los valores originales
-
-local savedValues = nil
--- Guardar los valores originales
-function saveOriginalValues()
-    savedValues = {}
-    gg.clearResults()
-
-
-    gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)
-    savedValues[1] = gg.getResults(100000)
-    gg.clearResults()
-    gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)
-    savedValues[2] = gg.getResults(100000)
-    gg.clearResults()
-    gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)
-    savedValues[3] = gg.getResults(100000)
-    gg.clearResults()
-    gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)
-    savedValues[4] = gg.getResults(100000)
-    gg.clearResults()
-    gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)
-    savedValues[5] = gg.getResults(100000)
-    gg.clearResults()
-    gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)
-    savedValues[6] = gg.getResults(100000)
-    gg.clearResults()
-    gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)
-    savedValues[7] = gg.getResults(100000)
-    gg.clearResults()
-end
+-- REACTOR VALORES
+originalHex = nil
+newHex = nil
+originalSpecimens = nil
+newSpecimens = nil
+reactorReady = false
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function MENU()
@@ -1600,745 +1574,214 @@ if subMenu2 == 1 then SubOpcion2_1() end  -- Reactores
 
 end
 
-function SubOpcion2_1() -- REACTORES
+-- 2. Función del Menú
+function SubOpcion2_1() -- REACTORES NUEVO
+    local mainmenu = gg.choice({
+        '[🛠️] ➣ PREPARAR REACTOR (Elegir)',
+        '[🚀] ➣ HACKEAR REACTOR (Aplicar)',
+        '⬅️ Regresar'
+    }, nil, 'GESTIÓN DE REACTOR')
 
-
-mainmenu = gg.choice({'                              ♻️RESTAURACIÓN♻️                                 ','[☀️] ➣Tropical','[👩] ➣Girl Power','[🌩] ➣️Mutants Super-Heroes','[🗡️] ➣Gothic','[🎌] ➣Japan','[🚀] ➣Space War','[⚠️] ➣Mutants-Super-Villains','[💀] ➣Big Boss','[🌱] ➣Photosynthesis','[🌩️] ➣God Of The Arena','[😈] ➣Elements Squad','[🧟] ➣Time Soldiers','[💪] ➣Lucha Libre','[🌑] ➣Dark Fantasy','[🎙] ➣️Music','[🧟‍♂️] ➣Western','[💪] ➣Movies','[🤖] ➣The Steampunk','[🕺] ➣Bloody Games','[👑] ➣CheckMate','⬅️ Regresar'},   nil, 'SCRIPT VIP🌟')
-
-if mainmenu== 1 then Restaurar() end
-if mainmenu== 2 then Beach() end
-if mainmenu== 3 then Girl() end
-if mainmenu== 4 then Hero() end
-if mainmenu== 5 then Gothic() end
-if mainmenu== 6 then Japan() end
-if mainmenu== 7 then War() end
-if mainmenu== 8 then Villains() end
-if mainmenu== 9 then BigBoss() end
-if mainmenu== 10 then Photo() end
-if mainmenu== 11 then Area() end
-if mainmenu== 12 then Elements() end
-if mainmenu== 13 then Time() end
-if mainmenu== 14 then Lucha() end
-if mainmenu== 15 then Dark() end
-if mainmenu== 16 then Music() end
-if mainmenu== 17 then West() end
-if mainmenu== 18 then Movies() end
-if mainmenu== 19 then Punk() end
-if mainmenu== 20 then Break() end
-if mainmenu== 21 then Checkmate() end
-if mainmenu == 22 then Mutantes() end    -- Regresa
+    if mainmenu == 1 then ChangeReactor() end    
+    if mainmenu == 2 then MutantReactor() end    
+    if mainmenu == 3 then Mutantes() end         
 end
-function Restaurar()
 
-    if savedValues == nil then
+-- 3. Función para Aplicar el Hack
+function MutantReactor()
+    gg.setVisible(false)
+    gg.clearResults()
 
-        gg.alert("⚠️No se pudo restaurar, falta de datos, por favor reinicia el juego.")
-
+    if not reactorReady then
+        gg.alert("Primero usa la opción: [🛠️] PREPARAR REACTOR")
         return
-
     end
 
+    -- Cambio de Hexadecimal
+    gg.searchNumber(originalHex, gg.TYPE_BYTE)
+    gg.getResults(100000)
+    gg.editAll(newHex, gg.TYPE_BYTE)
+    gg.clearResults()
 
-
-    for i, result in ipairs(savedValues) do
-
-        gg.setValues(result)
-
+    -- Cambio de Especímenes
+    for i = 1, #originalSpecimens do
+        gg.searchNumber(":" .. originalSpecimens[i], gg.TYPE_BYTE)
+        gg.getResults(100000)
+        gg.editAll(":" .. newSpecimens[i], gg.TYPE_BYTE)
         gg.clearResults()
-
     end
 
-
-
-    gg.toast("Restaurados.")
-
+    gg.toast("Reactor cambiado con éxito.")
+    reactorReady = false
 end
 
-function Beach()
+-- 4. Función para Preparar (Con los códigos adentro)
+function ChangeReactor()
+    local names = {
+        "Steampunk", "Girl Power", "Superheroes", "Gothic", "Japan", "Star Wars",
+        "Villains", "Big Boss", "Movies", "Gods of the Arena", "Elements",
+        "Time Soldiers", "Music", "Lucha Libre", "Dark Fantasy", "Western", "Beach",
+        "Photosynthesis", "Bloody Games", "Checkmate"
+    }
+
+    local newMenu = gg.choice(names, nil, "Paso 1: ¿Qué reactor DESEAS obtener?")
+    if newMenu == nil then return end
+
+    local originalMenu = gg.choice(names, nil, "Paso 2: ¿Qué reactor TIENES actualmente?")
+    if originalMenu == nil then return end
+
+    -- --- CÓDIGOS DEL REACTOR ORIGINAL ---
+    if originalMenu == 1 then
+        originalHex = "h12737465616D70756E6B0000000000000000000000000000010000007E0400002867616368615F7061636B5F737465616D70756E6B000000"
+        originalSpecimens = { "Specimen_BF_02", "Specimen_EC_01", "Specimen_AB_01", "Specimen_C_01", "Specimen_AC_02", "Specimen_AD_01" }
+    elseif originalMenu == 2 then
+        originalHex = "h086769726C0000000000000000000000000000000000000001000000650400001E67616368615F7061636B5F6769726C0000000000000000"
+        originalSpecimens = { "Specimen_AA_01", "Specimen_CB_01", "Specimen_CD_01", "Specimen_F_01", "Specimen_FB_01", "Specimen_CF_01" }
+    elseif originalMenu == 3 then
+        originalHex = "h0C6865726F65730000000000000000000000000000000000020000003A0700002267616368615F7061636B5F6865726F6573000000000000"
+        originalSpecimens = { "Specimen_FC_02", "Specimen_AE_01", "Specimen_BB_01", "Specimen_CA_01", "Specimen_FA_01", "Specimen_EF_02" }
+    elseif originalMenu == 4 then
+        originalHex = "h0C676F746869630000000000000000000000000000000000010000007E0400002267616368615F7061636B5F6769726C0000000000000000"
+        originalSpecimens = { "Specimen_CE_01", "Specimen_BF_01", "Specimen_DC_01", "Specimen_E_01", "Specimen_FD_01", "Specimen_DC_03" }
+    elseif originalMenu == 5 then
+        originalHex = "h0A6A6170616E00000000000000000000000000000000000003000000FC0800002067616368615F7061636B5F6A6170616E00000000000000"
+        originalSpecimens = { "Specimen_CC_01", "Specimen_A_01", "Specimen_DF_01", "Specimen_BA_02", "Specimen_CB_02", "Specimen_FD_03" }
+    elseif originalMenu == 6 then
+        originalHex = "h10737461727761727300000000000000000000000000000003000000FC0800002667616368615F7061636B5F737461727761727300000000"
+        originalSpecimens = { "Specimen_AF_04", "Specimen_CC_03", "Specimen_CD_01", "Specimen_EC_01", "Specimen_BC_01", "Specimen_BF_04" }
+    elseif originalMenu == 7 then
+        originalHex = "h1076696C6C61696E7300000000000000000000000000000003000000FC0800002667616368615F7061636B5F76696C6C61696E7300000000"
+        originalSpecimens = { "Specimen_DA_01", "Specimen_B_01", "Specimen_AB_02", "Specimen_EC_03", "Specimen_BA_03", "Specimen_CE_05" }
+    elseif originalMenu == 8 then
+        originalHex = "h126761636861626F7373000000000000000000000000000003000000FC0800002867616368615F7061636B5F6761636861626F7373000000"
+        originalSpecimens = { "Specimen_FF_01", "Specimen_D_01", "Specimen_FB_03", "Specimen_DB_01", "Specimen_EA_01", "Specimen_AB_05" }
+    elseif originalMenu == 9 then
+        originalHex = "h0C6D6F76696573000000000000000000000000000000000003000000FC0800002267616368615F7061636B5F6D6F76696573000000000000"
+        originalSpecimens = { "Specimen_ED_03", "Specimen_EB_04", "Specimen_CB_03", "Specimen_BD_03", "Specimen_CC_02", "Specimen_FA_06" }
+    elseif originalMenu == 10 then
+        originalHex = "h126F6C796D7069616E73000000000000000000000000000003000000FC0800002867616368615F7061636B5F6F6C796D7069616E73000000"
+        originalSpecimens = { "Specimen_CC_04", "Specimen_AC_01", "Specimen_BC_02", "Specimen_BB_03", "Specimen_CE_03", "Specimen_EC_06" }
+    elseif originalMenu == 11 then
+        originalHex = "h10656C656D656E747300000000000000000000000000000003000000FC0800002667616368615F7061636B5F656C656D656E747300000000"
+        originalSpecimens = { "Specimen_EF_01", "Specimen_EB_02", "Specimen_BD_04", "Specimen_EB_05", "Specimen_DF_04", "Specimen_EB_06" }
+    elseif originalMenu == 12 then
+        originalHex = "h10736F6C646965727300000000000000000000000000000003000000FC0800002667616368615F7061636B5F736F6C646965727300000000"
+        originalSpecimens = { "Specimen_AB_04", "Specimen_CF_02", "Specimen_BC_04", "Specimen_AD_05", "Specimen_CD_06", "Specimen_BD_07" }
+    elseif originalMenu == 13 then
+        originalHex = "h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000"
+        originalSpecimens = { "Specimen_AA_03", "Specimen_BF_06", "Specimen_EE_04", "Specimen_FB_05", "Specimen_DE_05", "Specimen_DA_09" }
+    elseif originalMenu == 14 then
+        originalHex = "h0A6C7563686100000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6C7563686100000000000000"
+        originalSpecimens = { "Specimen_CF_03", "Specimen_DE_04", "Specimen_DC_05", "Specimen_FE_04", "Specimen_BE_05", "Specimen_AC_07" }
+    elseif originalMenu == 15 then
+        originalHex = "h0E66616E746173790000000000000000000000000000000004000000C40900002467616368615F7061636B5F66616E746173790000000000"
+        originalSpecimens = { "Specimen_FC_04", "Specimen_FC_05", "Specimen_DB_06", "Specimen_AC_03", "Specimen_BD_05", "Specimen_FC_09" }
+    elseif originalMenu == 16 then
+        originalHex = "h0E7765737465726E0000000000000000000000000000000004000000C40900002467616368615F7061636B5F7765737465726E0000000000"
+        originalSpecimens = { "Specimen_FF_06", "Specimen_FC_07", "Specimen_AA_06", "Specimen_DB_04", "Specimen_CF_06", "Specimen_BF_10" }
+    elseif originalMenu == 17 then
+        originalHex = "h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000"
+        originalSpecimens = { "Specimen_FE_08", "Specimen_EE_07", "Specimen_BB_08", "Specimen_AB_07", "Specimen_AF_08", "Specimen_CA_11" }
+    elseif originalMenu == 18 then
+        originalHex = "h0E7665676574616C0000000000000000000000000000000005000000C40900002467616368615F7061636B5F7665676574616C0000000000"
+        originalSpecimens = { "Specimen_BB_02", "Specimen_DC_08", "Specimen_AF_01", "Specimen_DE_09", "Specimen_CA_06", "Specimen_DF_12" }
+    elseif originalMenu == 19 then
+        originalHex = "h106F6C796D7069637300000000000000000000000000000005000000C40900002667616368615F7061636B5F6F6C796D7069637300000000"
+        originalSpecimens = { "Specimen_FA_08", "Specimen_CA_02", "Specimen_FD_06", "Specimen_CA_07", "Specimen_CA_08", "Specimen_CA_14" }
+    end
+	 elseif originalMenu == 20 then
+        originalHex = "h0A636865737300000000000000000000000000000000000005000000C40900002267616368615F7061636B5F636865737331000000000000"
+        originalSpecimens = { "Specimen_CF_04", "Specimen_FE_06", "Specimen_BA_06", "Specimen_AC_04", "Specimen_E_03", "Specimen_CC_14" }
+    end
+
+    -- --- CÓDIGOS DEL NUEVO REACTOR ---
+    if newMenu == 1 then
+        newHex = "h12737465616D70756E6B0000000000000000000000000000010000007E0400002867616368615F7061636B5F737465616D70756E6B000000"
+        newSpecimens = { "Specimen_BF_02", "Specimen_EC_01", "Specimen_AB_01", "Specimen_AB_01", "Specimen_AC_02", "Specimen_AD_01" }
+    elseif newMenu == 2 then
+        newHex = "h086769726C0000000000000000000000000000000000000001000000650400001E67616368615F7061636B5F6769726C0000000000000000"
+        newSpecimens = { "Specimen_AA_01", "Specimen_CB_01", "Specimen_CD_01", "Specimen_CD_01", "Specimen_FB_01", "Specimen_CF_01" }
+    elseif newMenu == 3 then
+        newHex = "h0C6865726F65730000000000000000000000000000000000020000003A0700002267616368615F7061636B5F6865726F6573000000000000"
+        newSpecimens = { "Specimen_FC_02", "Specimen_AE_01", "Specimen_BB_01", "Specimen_CA_01", "Specimen_FA_01", "Specimen_EF_02" }
+    elseif newMenu == 4 then
+        newHex = "h0C676F746869630000000000000000000000000000000000010000007E0400002267616368615F7061636B5F676F74686963000000000000"
+        newSpecimens = { "Specimen_CE_01", "Specimen_BF_01", "Specimen_DC_01", "Specimen_DC_01", "Specimen_FD_01", "Specimen_DC_03" }
+    elseif newMenu == 5 then
+        newHex = "h0A6A6170616E00000000000000000000000000000000000003000000FC0800002067616368615F7061636B5F6A6170616E00000000000000"
+        newSpecimens = { "Specimen_CC_01", "Specimen_CC_02", "Specimen_DF_01", "Specimen_BA_02", "Specimen_CB_02", "Specimen_FD_03" }
+    elseif newMenu == 6 then
+        newHex = "h10737461727761727300000000000000000000000000000003000000FC0800002667616368615F7061636B5F737461727761727300000000"
+        newSpecimens = { "Specimen_AF_04", "Specimen_CC_03", "Specimen_CD_01", "Specimen_EC_01", "Specimen_BC_01", "Specimen_BF_04" }
+    elseif newMenu == 7 then
+        newHex = "h1076696C6C61696E7300000000000000000000000000000003000000FC0800002667616368615F7061636B5F76696C6C61696E7300000000"
+        newSpecimens = { "Specimen_DA_01", "Specimen_DA_01", "Specimen_AB_02", "Specimen_EC_03", "Specimen_BA_03", "Specimen_CE_05" }
+    elseif newMenu == 8 then
+        newHex = "h126761636861626F7373000000000000000000000000000003000000FC0800002867616368615F7061636B5F6761636861626F7373000000"
+        newSpecimens = { "Specimen_FF_01", "Specimen_FF_01", "Specimen_FB_03", "Specimen_DB_01", "Specimen_EA_01", "Specimen_AB_05" }
+    elseif newMenu == 9 then
+        newHex = "h0C6D6F76696573000000000000000000000000000000000003000000FC0800002267616368615F7061636B5F6D6F76696573000000000000"
+        newSpecimens = { "Specimen_ED_03", "Specimen_EB_04", "Specimen_CB_03", "Specimen_BD_03", "Specimen_CC_02", "Specimen_FA_06" }
+    elseif newMenu == 10 then
+        newHex = "h126F6C796D7069616E73000000000000000000000000000003000000FC0800002867616368615F7061636B5F6F6C796D7069637300000000"
+        newSpecimens = { "Specimen_CC_04", "Specimen_AC_01", "Specimen_BC_02", "Specimen_BB_03", "Specimen_CE_03", "Specimen_EC_06" }
+    elseif newMenu == 11 then
+        newHex = "h10656C656D656E747300000000000000000000000000000003000000FC0800002667616368615F7061636B5F656C656D656E747300000000"
+        newSpecimens = { "Specimen_EF_01", "Specimen_EB_02", "Specimen_BD_04", "Specimen_EB_05", "Specimen_DF_04", "Specimen_EB_06" }
+    elseif newMenu == 12 then
+        newHex = "h10736F6C646965727300000000000000000000000000000003000000FC0800002667616368615F7061636B5F736F6C646965727300000000"
+        newSpecimens = { "Specimen_AB_04", "Specimen_CF_02", "Specimen_BC_04", "Specimen_AD_05", "Specimen_CD_06", "Specimen_BD_07" }
+    elseif newMenu == 13 then
+        newHex = "h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000"
+        newSpecimens = { "Specimen_AA_03", "Specimen_BF_06", "Specimen_EE_04", "Specimen_FB_05", "Specimen_DE_05", "Specimen_DA_09" }
+    elseif newMenu == 14 then
+        newHex = "h0A6C7563686100000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6C7563686100000000000000"
+        newSpecimens = { "Specimen_CF_03", "Specimen_DE_04", "Specimen_DC_05", "Specimen_FE_04", "Specimen_BE_05", "Specimen_AC_07" }
+    elseif newMenu == 15 then
+        newHex = "h0E66616E746173790000000000000000000000000000000004000000C40900002467616368615F7061636B5F66616E746173790000000000"
+        newSpecimens = { "Specimen_FC_04", "Specimen_FC_05", "Specimen_DB_06", "Specimen_AC_03", "Specimen_BD_05", "Specimen_FC_09" }
+    elseif newMenu == 16 then
+        newHex = "h0E7765737465726E0000000000000000000000000000000004000000C40900002467616368615F7061636B5F7765737465726E0000000000"
+        newSpecimens = { "Specimen_FF_06", "Specimen_FC_07", "Specimen_AA_06", "Specimen_DB_04", "Specimen_CF_06", "Specimen_BF_10" }
+    elseif newMenu == 17 then
+        newHex = "h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000"
+        newSpecimens = { "Specimen_FE_08", "Specimen_EE_07", "Specimen_BB_08", "Specimen_AB_07", "Specimen_AF_08", "Specimen_CA_11" }
+    elseif newMenu == 18 then
+        newHex = "h0E7665676574616C0000000000000000000000000000000005000000C40900002467616368615F7061636B5F7665676574616C0000000000"
+        newSpecimens = { "Specimen_BB_02", "Specimen_DC_08", "Specimen_AF_01", "Specimen_DE_09", "Specimen_CA_06", "Specimen_DF_12" }
+    elseif newMenu == 19 then
+        newHex = "h106F6C796D7069637300000000000000000000000000000005000000C40900002667616368615F7061636B5F6F6C796D7069637300000000"
+        newSpecimens = { "Specimen_FA_08", "Specimen_CA_02", "Specimen_FD_06", "Specimen_CA_07", "Specimen_CA_08", "Specimen_CA_14" }
+    elseif newMenu == 20 then
+        newHex = "h0A636865737300000000000000000000000000000000000005000000C40900002267616368615F7061636B5F636865737331000000000000"
+        newSpecimens = { "Specimen_CF_04", "Specimen_FE_06", "Specimen_BA_06", "Specimen_AC_04", "Specimen_E_03", "Specimen_CC_14" }
+    end
+
+    reactorReady = true
+    gg.alert("Listo. Ahora selecciona 'HACKEAR REACTOR' en el menú.")
 end
 
-function Girl() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll("h086769726C0000000000000000000000000000000000000001000000650400001E67616368615F7061636B5F6769726C0000000000000000",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_AA_01",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CB_01",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE) r = gg.getResults(100000)  gg.editAll(":Specimen_CD_01",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_FB_01",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_FB_01",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CF_01",gg.TYPE_BYTE)
-gg.clearResults()
-end
 
-function Hero()
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll("h0C6865726F65730000000000000000000000000000000000020000003A0700002267616368615F7061636B5F6865726F6573000000000000", gg.TYPE_BYTE)
-gg.clearResults()
-gg.search(":Specimen_FE_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_FC_02", gg.TYPE_BYTE)
-gg.clearResults()
 
-gg.search(":Specimen_EE_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_AE_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.search(":Specimen_BB_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_BB_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.search(":Specimen_AB_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CA_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.search(":Specimen_AF_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_FA_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.search(":Specimen_CA_11", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_EF_02", gg.TYPE_BYTE)
-gg.clearResults()
-end
-
-function Gothic() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll("h0C676F746869630000000000000000000000000000000000010000007E0400002267616368615F7061636B5F676F74686963000000000000", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CE_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_BF_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_DC_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_FD_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_FD_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_DC_03", gg.TYPE_BYTE)
-gg.clearResults()
-end
-
-function Japan() 
-if savedValues == nil then saveOriginalValues() end
-gg.setVisible(false)
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h0A6A6170616E00000000000000000000000000000000000003000000FC0800002067616368615F7061636B5F6A6170616E00000000000000", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_DF_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_CC_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_CB_02", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_FD_03", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_CC_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_BA_02", gg.TYPE_BYTE)
-gg.clearResults()
-end
-
-function War() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h10737461727761727300000000000000000000000000000003000000FC0800002667616368615F7061636B5F737461727761727300000000", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_AF_04", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_CC_03", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_CD_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_EC_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_BC_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_BF_04", gg.TYPE_BYTE)
-gg.clearResults()
-end
-
-function Villains() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h1076696C6C61696E7300000000000000000000000000000003000000FC0800002667616368615F7061636B5F76696C6C61696E7300000000", gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_DA_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_B_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_AB_02", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_EC_03", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_BA_03", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_CE_05", gg.TYPE_BYTE)
-gg.clearResults()
-end
-
-function BigBoss() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h126761636861626F7373000000000000000000000000000003000000FC0800002867616368615F7061636B5F6761636861626F7373000000", gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_FF_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_D_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_FB_03", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_DB_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_EA_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_AB_05", gg.TYPE_BYTE)
-gg.clearResults()
-
-end
-
-function Photo() 
-gg.setVisible(false)
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll("h0E7665676574616C0000000000000000000000000000000005000000C40900002467616368615F7061636B5F7665676574616C0000000000 ",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_BB_02", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_DC_08", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_AF_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_DE_09", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CA_06", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_DF_12", gg.TYPE_BYTE)
-gg.clearResults()
-end
-
-function Area() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll("h126F6C796D7069616E73000000000000000000000000000003000000FC0800002867616368615F7061636B5F6F6C796D7069616E73000000",gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CC_04", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_AC_01", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_BC_02", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_BB_03", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CE_03", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_EC_06", gg.TYPE_BYTE)
-
-gg.clearResults()
-end
-
-function Elements() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll("h10656C656D656E747300000000000000000000000000000003000000FC0800002667616368615F7061636B5F656C656D656E747300000000",gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_EF_01", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_EB_02", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_BD_04", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_EB_05", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_DF_04", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_EB_06", gg.TYPE_BYTE)
-
-gg.clearResults()
-end
-
-function Time() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll("h10736F6C646965727300000000000000000000000000000003000000FC0800002667616368615F7061636B5F736F6C646965727300000000",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_AB_04", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CF_02", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_BC_04", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_AD_05", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CD_06", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_BD_07", gg.TYPE_BYTE)
-gg.clearResults()
-
-end
-
-function Lucha() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll("h0A6C7563686100000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6C7563686100000000000000",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CF_03", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_DE_04", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_DC_05", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_FE_04", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_BE_05", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_AC_07", gg.TYPE_BYTE)
-gg.clearResults()
-end
-
-function Dark() 
-if savedValues == nil then saveOriginalValues() end
-gg.setVisible(false)
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll("h0E66616E746173790000000000000000000000000000000004000000C40900002467616368615F7061636B5F66616E746173790000000000", gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_FC_04", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_FC_05", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_DB_06", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_AC_03", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_BD_05", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)
-r = gg.getResults(100000)
-gg.editAll(":Specimen_FC_09", gg.TYPE_BYTE)
-gg.clearResults()
-end
-
-function West() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll("h0E7765737465726E0000000000000000000000000000000004000000C40900002467616368615F7061635F7765737465726E0000000000", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_FF_06", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_FC_07", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_AA_06", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_DB_04", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CF_06", gg.TYPE_BYTE)
-
-gg.clearResults()
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_BF_10", gg.TYPE_BYTE)
-
-gg.clearResults()
-end
-
-function Music() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll("h0A6D7573696300000000000000000000000000000000000004000000C40900002067616368615F7061636B5F6D7573696300000000000000",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_AA_03",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_BF_06",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_EE_04",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_FB_05",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_DE_05",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_DA_09",gg.TYPE_BYTE)
-gg.clearResults()
-end
-
-function Movies() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll("h0C6D6F76696573000000000000000000000000000000000003000000FC0800002267616368615F7061636B5F6D6F76696573000000000000 ",gg.TYPE_BYTE)  
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_ED_03", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_EB_04", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CB_03", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_BD_03", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CC_02", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_FA_06", gg.TYPE_BYTE)
-gg.clearResults()
-end
-function Punk()
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  r = gg.getResults(100000)   gg.editAll("h12737465616D70756E6B0000000000000000000000000000010000007E0400002867616368615F7061636B5F737465616D70756E6B000000",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_BF_02", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_EC_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_AB_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_AB_01", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_AC_02", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_AD_01", gg.TYPE_BYTE)
-gg.clearResults()
-end
-
-function Break() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll("h106F6C796D7069637300000000000000000000000000000005000000C40900002667616368615F7061636B5F6F6C796D7069637300000000 ",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_FA_08", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CA_02", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_FD_06", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CA_07", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CA_08", gg.TYPE_BYTE)
-gg.clearResults()
-
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  
-r = gg.getResults(100000)  
-gg.editAll(":Specimen_CA_14", gg.TYPE_BYTE)
-gg.clearResults()
-end
-
-function Checkmate() 
-gg.setVisible(false)
-if savedValues == nil then saveOriginalValues() end
-gg.clearResults()
-gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE) r = gg.getResults(100000) gg.editAll("h0A636865737300000000000000000000000000000000000005000000C40900002267616368615F7061636B5F636865737331000000000000", gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CF_04",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_FE_06",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE) r = gg.getResults(100000)  gg.editAll(":Specimen_BA_06",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_AC_04",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_E_03",gg.TYPE_BYTE)
-gg.clearResults()
-gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CC_14",gg.TYPE_BYTE)
-gg.clearResults()
-end
+--function Checkmate() 
+--gg.setVisible(false)
+--if savedValues == nil then saveOriginalValues() end
+--gg.clearResults()
+--gg.searchNumber("h0A626561636800000000000000000000000000000000000004000000C40900002067616368615F7061636B5F626561636800000000000000", gg.TYPE_BYTE) r = gg.getResults(100000) gg.editAll("h0A636865737300000000000000000000000000000000000005000000C40900002267616368615F7061636B5F636865737331000000000000", gg.TYPE_BYTE)
+--gg.clearResults()
+--gg.searchNumber(":Specimen_FE_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CF_04",gg.TYPE_BYTE)
+--gg.clearResults()
+--gg.searchNumber(":Specimen_EE_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_FE_06",gg.TYPE_BYTE)
+--gg.clearResults()
+--gg.searchNumber(":Specimen_BB_08", gg.TYPE_BYTE) r = gg.getResults(100000)  gg.editAll(":Specimen_BA_06",gg.TYPE_BYTE)
+--gg.clearResults()
+--gg.searchNumber(":Specimen_AB_07", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_AC_04",gg.TYPE_BYTE)
+--gg.clearResults()
+--gg.searchNumber(":Specimen_AF_08", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_E_03",gg.TYPE_BYTE)
+--gg.clearResults()
+--gg.searchNumber(":Specimen_CA_11", gg.TYPE_BYTE)  r = gg.getResults(100000)  gg.editAll(":Specimen_CC_14",gg.TYPE_BYTE)
+--gg.clearResults()
+--end
 
 
 
