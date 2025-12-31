@@ -1594,8 +1594,6 @@ if subMenu2 == 1 then SubOpcion2_1() end  -- Reactores
 
 end
 
--- 2. Función del Menú
-function SubOpcion2_1() -- REACTORES NUEVO
  -- 2. FUNCIÓN PARA ELEGIR (Genera el menú solo con los nombres)
 function ChangeReactor()
     local names = {}
@@ -1632,7 +1630,7 @@ function MutantReactor()
         gg.clearResults()
     end
 
-    gg.toast("⚡ Reactor Hackeado!")
+    gg.alert("⚡ Reactor Hackeado!")
     reactorReady = false
 end
 
