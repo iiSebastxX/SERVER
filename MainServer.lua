@@ -1,4 +1,4 @@
-local version = "1.1.3"
+local version = "1.1.2"
 
 -- =========================
 -- 📱 DEVICE ID ÚNICO
@@ -48,7 +48,7 @@ local ip = ipRes.content
 -- =========================
 -- 🌐 BACKEND
 -- =========================
-local BASE_URL = "https://script.google.com/macros/s/AKfycbzyYhxBRa3H72Sob-RPj5AB3-xWae35NP6Mm7fE-Hlak31bfkPgfykZn90-wRc0P2NzJQ/exec"
+local BASE_URL = "https://script.google.com/macros/s/AKfycbxAAvlMvRhs0e_BHWBiPqjbNqxb3bJZGloWkVKjRwZiOIk8JToRGSPgg4I5_gIi6Mpabg/exec"
 
 local function enviar(accion, usuario, clave)
   local url = BASE_URL
