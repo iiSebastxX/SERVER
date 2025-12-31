@@ -1,7 +1,7 @@
 activa = 1
 
 
--- REACTOR VALORES
+-- REACTOR VALORES......................
 originalHex = nil
 newHex = nil
 originalSpecimens = nil
