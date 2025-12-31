@@ -10,20 +10,25 @@ local function obtenerDeviceID()
   if f then
     local id = f:read("*l")
     f:close()
-    return id
+    if id and id ~= "" then
+      return id
+    end
   end
 
   math.randomseed(os.time())
   local chars = "abcdefghijklmnopqrstuvwxyz0123456789"
   local id = ""
+
   for i = 1, 32 do
     local r = math.random(#chars)
     id = id .. chars:sub(r, r)
   end
 
   f = io.open(deviceFile, "w")
-  f:write(id)
-  f:close()
+  if f then
+    f:write(id)
+    f:close()
+  end
 
   return id
 end
