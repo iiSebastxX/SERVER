@@ -1,4 +1,6 @@
 activa = 1
+
+
 -- REACTOR VALORES
 originalHex = nil
 newHex = nil
@@ -1688,7 +1690,6 @@ function ChangeReactor()
     elseif originalMenu == 19 then
         originalHex = "h106F6C796D7069637300000000000000000000000000000005000000C40900002667616368615F7061636B5F6F6C796D7069637300000000"
         originalSpecimens = { "Specimen_FA_08", "Specimen_CA_02", "Specimen_FD_06", "Specimen_CA_07", "Specimen_CA_08", "Specimen_CA_14" }
-    end
 	 elseif originalMenu == 20 then
         originalHex = "h0A636865737300000000000000000000000000000000000005000000C40900002267616368615F7061636B5F636865737331000000000000"
         originalSpecimens = { "Specimen_CF_04", "Specimen_FE_06", "Specimen_BA_06", "Specimen_AC_04", "Specimen_E_03", "Specimen_CC_14" }
