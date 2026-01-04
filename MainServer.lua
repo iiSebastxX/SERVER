@@ -48,7 +48,7 @@ local ip = ipRes.content
 -- =========================
 -- 🌐 BACKEND
 -- =========================
-local BASE_URL = "https://script.google.com/macros/s/AKfycbynIpBdegJlPi4qHFe5NZ2oWWknGwIQWpRbcgd51v-SjBbOLg9s7ttKwXqOC9KuVHutDA/exec"
+local BASE_URL = "https://script.google.com/macros/s/AKfycbzkL7Sj3FtN-O5-fm_SWjt3c0lKuJ1una7v7CCRs8qs0eOnMKmYvG-tWF9ysazw0TswXQ/exec"
 
 local function enviar(accion, usuario, clave)
   local url = BASE_URL
