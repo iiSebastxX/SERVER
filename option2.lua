@@ -218,7 +218,7 @@ local function replaceAll(nuevoCodigo)
     table.insert(revertValues, r)
     gg.editAll(":"..nuevoCodigo, gg.TYPE_BYTE)
     gg.toast("✅ Inyectado: " .. nuevoCodigo)
-    gg.alert("🔴 AHORA: Ve al juego y paga el Oro para cambiar el mutante.")
+    gg.alert("🔴 AHORA: Presiona a cambiar por ORO.")
   else
     gg.alert("❌ Error: No se encontraron mutantes base. ¿Estás en la pantalla correcta?")
   end
