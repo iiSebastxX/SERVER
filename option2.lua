@@ -200,7 +200,11 @@ local mutantesData = {
     {name="Altísimo Candelabro", code="FB_13"}, {name="El Arquitecto", code="AB_13"}, {name="Medinosaurio", code="ED_13"},
     {name="Lapin Zombie", code="BD_14"}, {name="B.U.N Genio", code="DA_14"}, {name="Gladiador", code="C_14"},
     {name="Hidrira", code="ED_14"}, {name="Infinito Supérmasivo", code="DE_14"}, {name="Nexo Orbital", code="EE_13"},
-    {name="Máscara Emocional", code="FF_99"}, {name="Profeta del Crepúsculo (Extra)", code="FF_14"}
+    {name="Máscara Emocional", code="FF_99"}, {name="Mago", code="F_14"}, {name="Zagam, Gran Rey De La Avaricia", code="FB_14"},
+    {name="Sangresquito", code="BD_13"}, {name="Don Gamberetti", code="CD_14"}, {name="Rey Azul", code="CC_14"},
+    {name="Espectroplasma", code="B_14"}, {name="El Presentador", code="AB_14"}, {name="Viajero de Vortice", code="BE_13"},
+    {name="D.A.B.", code="EA_14"}, {name="Mecargola", code="BA_14"}, {name="Hielo Patinadora Yria", code="CF_14"},
+    {name="¿Pastor Estelar?", code="DE_15"}
   }
 }
 
