@@ -1,1804 +1,266 @@
-gg.alert("⚠️Asegurate de solo usar el ROBOT y el ZOMBIE en este tipo de hibridaciones.⚠️")
+-- SCRIPT COMPLETO: MUTODEX MGG (TODOS LOS MUTANTES)
+-- Basado en tu archivo option2 (1).lua y optimizado para GameGuardian
+
+gg.alert("⚠️ Asegurate de solo usar el ROBOT y el ZOMBIE en este tipo de hibridaciones. ⚠️")
+
 local mutantesOriginales = {
-
-  -- CIBERS
-
-  "AA_01", "AA_03", "AB_01", "AB_03",
-
-  -- NECROS
-
-  "BA_01", "BA_02", "BA_03",
-
+  "AA_01", "AA_03", "AB_01", "AB_03", -- CIBERS
+  "BA_01", "BA_02", "BA_03"           -- NECROS
 }
-
-
--- 1) Lista de nombres por página (solo muestro 2 páginas de ejemplo)
-
-local pages = {
-	
- [1] = {
-"Robot",
-    "Robot Debil",
-    "Androide",
-    "Goliat",
-    "Necrobot",
-    "Hypnos",
-    "Xenarach",
-    "Humanoide Perfido",
-    "Capitan Mecano",
-    "Dezinger",
-    "Escarabot",
-    "Monocerus",
-    "Coloso",
-    "Libraro",
-    "Deus Machina",
-    "Virgon",
-    "Zombi",
-    "Zombi Debil",
-    "Jack O'Lantern",
-    "Zomborg",
-    "Muñeca Diabolica",
-    "Lord Blood",
-    "Espectro de la Cripta",
-    "Despota Negro",
-    "Capitan Osamenta",
-    "Necrodragon",
-    "Cancernia",
-    "Fantasmonauta",
-    "Caprika",
-    "Quebrantacuellos",
-    "Baron Lundi",
-    "Mago Tetrico",
-    "Guerrero",
-    "Guerrero Debil",
-    "Ejecutor",
-    "Interceptrix",
-    "General Caos",
-    "Banshee Guerrera",
-    "Bushi",
-    "Caballero Nordico",
-    "Buck Maurice",
-    "Honey Bunny",
-    "Sagitauro",
-    "Haggis",
-    "Marciano Errante",
-    "Guardian Galactico",
-    "Valkiria",
-    "Thor",
-    "Bestia",
-    "Reptoide",
-    "Aracno",
-    "Cerbero",
-    "Zombat",
-    "Cobrakai",
-    "Rakshasa",
-    "Leohart",
-    "Gargantus",
-    "Kaiju Kitty",
-    "Maestro Splitter",
-    "Reina Parasita",
-    "Cosmo Kong",
-    "Dracus Nobilis",
-    "Satiro Hechicero",
-    "Extraterrestre",
-    "Aniquilador",
-    "Sentry",
-    "Exopez",
-    "Tutti Viscosi",
-    "Sirenia",
-    "Devorador",
-    "Sundance Bug",
-    "Behemoth",
-    "Xenos",
-    "Rocageno",
-    "Astrosurfista",
-    "Supernovus",
-    "Maestro Oida",
-    "Nebulon",
-    "Mr Marvelous",
-    "Aquapunzel",
-    "Diablesa",
-    "Mago de las Nieves",
-    "Tecno Tao",
-    "Mekali",
-    "La Parca",
-    "Principe Escorpion",
-    "Anubis",
-    "Gandolphus",
-    "Capitan Paz",
-    "Medusa",
-    "Horus",
-    "Ivory Hanzo",
-    "C'thlig",
-    "Azuria",
-    "Señor del Abismo",
-    "Castigo",
-    "Oriax",
-    "Ragnar",
-    "Triple-B", 
-},
-  [2] = {
- "Mandragora",
-    "Motero Maldito",
-    "Armadizo",
-    "Mantidroide",
-    "Carnero Vengador",
-    "Battle Toad",
-    "Cezanne",
-    "H.U.M.A.N.",
-    "Rambit",
-    "Star Trooper",
-    "Micky Krueger",
-    "Tauridus",
-    "Autonoraptor",
-    "Invadron",
-    "Bruja Malvada",
-    "Oso Espantoso",
-    "Azog",
-    "Geminium",
-    "Psicojabali",
-    "Zena",
-    "Absolem",
-    "Wampara",
-    "Barbaroca",
-    "George Washington",
-    "Louis XVI",
-    "Bazzinger",
-    "Space Princess",
-    "Astromago",
-    "Garuda",
-    "Hada Machete",
-    "Genshiryoku",
-    "El Experimento",
-    "Leonidas",
-    "Buranka",
-    "Mexihcatl",
-    "Banker",
-    "Emperador Galactico",
-    "Nebulus",
-    "Project X27",
-    "Miroku",
-    "Mapach Wik",
-    "El Fontanero",
-    "Matafantasmas",
-    "Exo Cookie",
-    "Britany",
-    "Frostmass",
-    "Santactopus",
-    "Mephisto",
-    "Monolith",
-    "Malvatron",
-    "Lara",
-    "Commander Ender",
-    "Zortrex",
-    "Tengu",
-    "Sacamantecas",
-    "Oculus",
-    "Supraman X",
-    "Cupido",
-    "Abraham Lincoln",
-    "Escuadron Rhino",
-    "Dama Harpia",
-    "Yelda",
-    "Flying Jordson",
-    "Cernunnos",
-    "Capitan Perla Negra",
-    "Brick McGole",
-    "Kraken",
-    "Genimal",
-    "Hardcorius",
-    "Marine Muerto",
-    "Challengeer",
-    "Ciberpunk",
-    "Neo Urban XIII",
-    "Tecnoforzer",
-    "Chaman Sombra",
-    "Ingeniero",
-    "Sun-Duke",
-    "Ceres",
-    "Shin Hakuho",
-    "Fenec Plus Ultra",
-    "Madre de los Dragones",
-    "Brawler",
-    "Loco de la Motosierra",
-    "Rey Mono",
-    "Acarius",
-    "Cazador Espacial",
-    "Artista Siniestro",
-    "Zeus",
-    "Glubber",
-    "Nyrlatoth",
-    "Cibercroc",
-    "Bulldozer",
-    "Pejelagarto",
-    "Triceratanque",
-    "Monje Akuso",
-    "Caronte",
-    "Tio Sam",
-    "Hog the Ripper",
-    "Rey Steven",
- },
-
-  -- Página 3: del 33 al 48
-  [3] = {
-    "Duplicado de Eva",
-    "Ciberbabosa",
-    "Jhingal",
-    "Doctor Blaw",
-    "Tomahawk",
-    "Hechicera",
-    "Dandi oscar",
-    "Kung Chow",
-    "Comeabuelas",
-    "Mau-Jack",
-    "Lily",
-    "El Rey de Mimphys",
-    "Bioerizo",
-    "Gladiadog",
-    "Casto",
-    "Viper",
-    "Dollbyte",
-    "Garlog",
-    "Krunk",
-    "Apofis",
-    "Cuervo",
-    "Drusella",
-    "Mandor",
-    "Borrasca",
-    "Sable",
-    "Artemisa",
-    "Mama Kangu",
-    "Darwin",
-    "ERR-ADI-K-Bot",
-    "Namaste",
-    "Tyrtiduron",
-    "Bounda",
-    "Mega Claus",
-    "Marv",
-    "Z-0",
-    "Falcon",
-    "Paramic",
-    "El Original",
-    "Señor Dragon",
-    "Carlingger",
-    "Rey de los Insectos",
-    "Aplastador",
-    "Quimera",
-    "Champicorteza",
-    "Reina Rakkti",
-    "Hercules",
-    "Aran",
-    "El Gringo",
-    "Spartac",
-    "Amarok",
-    "Pikabu",
-    "Leprechaun",
-    "Fenix",
-    "Kal Wayne",
-    "Avispa Diesel",
-    "Robofuerte",
-    "Rocky Botboa",
-    "Las Moiras",
-    "Dr. Frost",
-    "Capitan Gluglu",
-    "Rey Esqueleto",
-    "Turbacieno",
-    "Juan Hielo",
-    "Capitan Patriota",
-    "Astro Gummy",
-    "Nezarim",
-    "Globomono",
-    "Starminator",
-    "Espectra",
-    "Wynn",
-    "Thran",
-    "Blender",
-    "Rinotauro",
-    "Cosmopandas",
-    "Kudamono",
-    "Alfie",
-    "Tiranozomb",
-    "H0ud1n1",
-    "FootBot",
-    "Geomega",
-    "Gloton",
-    "Seiyatsu",
-    "Asaylan",
-    "Wrath",
-    "Lady Libertad",
-    "Gozer",
-    "Van Helsing",
-    "Kitty Ranger",
-    "Gorthaur el Cruel",
-    "El Rey sin Nombre",
-    "Naraxis",
-    "Andromeda",
-    "Enano y Cerebro",
-    "Arcangel",
-    "Diablo",
-    "Drall",
-    "Noren",
-    "Sgt. Pandamonium",
-    "Omikami",
-  },
-
-  -- Página 4: del 49 al 64
-  [4] = {
-    "Makino",
-    "Chantecler",
-    "Dr. Nucleus",
-    "Amo de las Llaves",
-    "Carcinus Gigas",
-    "Sanik",
-    "Necroparasito",
-    "Proyecto 3V3",
-    "Optimus Zord",
-    "Faucesnegras",
-    "Tormenta de Fuego",
-    "Golemagnus",
-    "Dug Dario",
-    "Centinela R0B-H4N",
-    "Big Bo$$",
-    "Reina Sylvidra",
-    "Quetzalcoatl",
-    "Majin Zam",
-    "Bruja de la Peste",
-    "Excaliduro",
-    "Zigmo",
-    "Gran Señor de las Tumbas",
-    "Pirotropo",
-    "Altaris",
-    "Capitan Gorn",
-    "Yokozuna",
-    "Calaca",
-    "Lancelot",
-    "Centaurus",
-    "Mon-Key Crew",
-    "Sound Killah",
-    "Dracomago",
-    "Caudillo Steam",
-    "Cazarrecompensas",
-    "Surfista del Espacio",
-    "Mister T-Ger",
-    "Master Paw",
-    "Grumpy Claus",
-    "Sargento Dusk",
-    "Gwenn",
-    "El Coleccionista",
-    "El Veneno",
-    "Frankenhuahua",
-    "Mad Mike",
-    "Jane Saw",
-    "Horax",
-    "Maestro Shinzo",
-    "Xeleroth",
-    "Excavalipsis",
-    "El Enterrador",
-    "Zenguru",
-    "H.U.N.T.3.R",
-    "Arelvam",
-    "Zar Bomba",
-    "Mago Ryzafredd",
-    "Hawkeye",
-    "Megastral",
-    "Liquidador",
-    "Yggdrasil",
-    "Rox McRain",
-    "Hadeath",
-    "Divastator",
-    "Angry Pork",
-    "Frankendwarf",
-    "Akai-Bot",
-    "Krampus",
-    "Waryena",
-    "Bahamut",
-    "Mimi Cronocurva",
-    "Guardia Men'ki",
-    "Hipopotanque",
-    "Hefesto",
-    "T-3rr0r",
-    "A027441",
-    "King Lulu",
-    "Kameo",
-    "Kolossus",
-    "ED-404",
-    "Hellsaw",
-    "Urgan",
-    "Buffalor",
-    "Gamallia",
-    "Gakarian",
-    "S-K-Venger",
-    "Overkill",
-    "Capitan Achabe",
-    "Aubraea Mutantula",
-    "Bregbeam",
-    "Piwisher",
-    "Nimrod",
-    "E.T.-Liot",
-    "Spin Fury",
-    "Cooktouille",
-    "Orion",
-    "Heimdall",
-    "Chun-Lei",
-    "The Reef",
-    "Sir Bannog",
-    "Pesadilla Viviente",
-  },
-
-  -- Página 5: del 65 al 80
-  [5] = {
-    "An0malie",
-    "Owlock",
-    "TriAD",
-    "La Olvidada",
-    "Mago de la Singularidad",
-    "Ishi no Ōkami",
-    "Disension",
-    "Aqueronte",
-    "Drei, Space Corgi",
-    "Mix0-Logo",
-    "Veren Kaeesu",
-    "Spada",
-    "Roadmaster",
-    "Gerard Steelgarden",
-    "Chocolem",
-    "Drudge Zombie",
-    "Animus de Irrealidad",
-    "Midas",
-    "Caliburn EX",
-    "Santagonista",
-    "Barbaro",
-    "Dama del Crepusculo",
-    "Mecaovoide Aracneo",
-    "Terror Abisal",
-    "Oculys",
-    "Pierrot",
-    "Phileas Derocas",
-    "Dreadnought",
-    "Missy Despierta",
-    "Enviro 3.0",
-    "Asteroide Gestalt",
-    "X'astuth",
-    "Colmillo Rabioso",
-    "Doctor del Farol",
-    "Leviatan",
-    "Explorador Sideral",
-    "Aullosaurio",
-    "Protector de los Sueños",
-    "Basilisco y Esdragon",
-    "Heredero de los 5 anillos",
-    "Ballesto",
-    "Cibermantico Etereo",
-    "Lampyrion Solar",
-    "Dimentio",
-    "Generalisimo Chocoleon IV",
-    "Archivista Eterno",
-    "Ammonia Atlantica",
-    "General Terracota",
-    "Gran Gusano de los Tuneles",
-    "Litominero Stellariano",
-    "Capitan aguila",
-    "Octopia",
-    "Medico Astral",
-    "Simurgh",
-    "Väinämöinen",
-    "Disfuncidroide",
-    "Caronte (Halloween)",
-    "Cabloide",
-    "Exoceleste algido",
-    "Clerigo Oscuro",
-    "D'Arathomis",
-    "Tenacity",
-    "Regulo&Juzya",
-    "Gelatina Purulenta",
-    "Vivaldi",
-    "Tecnocaracol",
-    "Zapador de Madrigueras",
-    "Invocador",
-    "Lepidoptech",
-    "Huesamblaje",
-    "Sasquatch",
-    "Thanaconda",
-    "A00-C0R3-C0NTR0L",
-    "Hijo de la Tormenta",
-    "Bricodron LLK-215",
-    "GAR, Zombi Soberano",
-    "Amalgalmas",
-    "Llama Sensei",
-    "Polaris",
-    "Myrmidus.exe",
-    "Helicoide Boreal",
-    "Antropobot Soñador",
-    "Anteros",
-    "Doctor Desollador",
-    "Oryctolagus Exobioicus",
-    "Cr€$u$",
-    "Asimov",
-    "Achernar",
-    "El Motin",
-    "Xinomas",
-    "Simulacro de Combate",
-    "Helidron KxT-271",
-    "Reed, El Verdadero Heroe",
-    "El Fosforescente",
-    "Tezcatlipoca",
-    "Scaramouche",
-    "Traiciobaza",
-    "Astrobservador",
-    "Sierrametrodon",
-  },
-
-  -- Página 6: del 81 al 96
-  [6] = {
-    "Capsuladora MTZ-004",
-    "Núcleo seráfico",
-    "Rey De Avalon",
-    "K'yu T'ypaï",
-    "Amistad Sin Limites",
-    "Sakuraboshi",
-    "Giganto-Moai",
-    "TCB-8566 Trafficroid",
-    "Bearsikk Sikleast",
-    "Capitan Barbanegra",
-    "La Anárquica",
-    "Terror Jurasico",
-    "Emperador Helado",
-    "Breakmaster",
-    "El Descolorido",
-    "Azaronimo",
-    "Professor Cronomantico",
-    "Golem de Epocas",
-    "La Locura Reptante",
-    "Hekantocheiros",
-    "Atlas",
-    "Peregrino Espacial",
-    "Termodroide Celsius",
-    "Black I.C.E.",
-    "Profeta del Crepúsculo",
-    "Señor Bestial",
-    "Freyja, Reina de los Vanir",
-    "Altísimo Candelabro",
-    "El Arquitecto",
-    "Medinosaurio",
-    "Lapin Zombie",
-    "B.U.N Genio",
-    "Gladiador",
-   "Hidrira",
-   "Infinito Supérmasivo",
-    "Nexo Orbital",
-	"Máscara Emocional",
-	"Profeta del Crepúsculo",
-  },
-
-  -- (y podrías añadir una página 7 con los restantes si tuvieras)
-}
-
--- 2) Códigos por página (deben tener el mismo orden que los nombres)
-  local codes = {
-
-  [1] = {
-"AA_01",
-
-"AA_02",
-
-"AB_01",
-
-"AB_02",
-
-"AB_03",
-
-"AC_01",
-
-"AC_02",
-
-"AC_03",
-
-"AD_01",
-
-"AD_02",
-
-"AE_01",
-
-"AE_02",
-
-"AF_01",
-
-"AF_02",
-
-"B_01",
-
-"B_02",
-
-"B_03",
-
-"BA_01",
-
-"BA_02",
-
-"BB_01",
-
-"BB_02",
-
-"BC_01",
-
-"BC_02",
-
-"BD_01",
-
-"BD_02",
-
-"BE_01",
-
-"BE_02",
-
-"BE_03",
-
-"BF_01",
-
-"BF_02",
-
-"C_01",
-
-"C_02",
-
-"CA_01",
-
-"CA_02",
-
-"CA_03",
-
-"CB_01",
-
-"CB_02",
-
-"CC_01",
-
-"CC_02",
-
-"CD_01",
-
-"CD_02",
-
-"CD_03",
-
-"CE_01",
-
-"CE_03",
-
-"CF_01",
-
-"CF_02",
-
-"D_01",
-
-"DA_01",
-
-"DA_02",
-
-"DB_01",
-
-"DB_02",
-
-"DB_03",
-
-"DC_01",
-
-"DC_02",
-
-"DC_03",
-
-"DD_01",
-
-"DD_02",
-
-"DE_01",
-
-"DE_02",
-
-"DF_01",
-
-"DF_02",
-
-"E_01",
-
-"EA_01",
-
-"EA_02",
-
-"EA_03",
-
-"EB_01",
-
-"EB_02",
-
-"EB_03",
-
-"EC_01",
-
-"EC_02",
-
-"ED_01",
-
-"ED_02",
-
-"EE_01",
-
-"EE_02",
-
-"EE_03",
-
-"EF_01",
-
-"EF_02",
-
-"EF_03",
-
-"F_01",
-
-"F_03",
-
-"FA_01",
-
-"FA_02",
-
-"FB_01",
-
-"FB_02",
-
-"FB_03",
-
-"FC_01",
-
-"FC_02",
-
-"FD_01",
-
-"FD_02",
-
-"FD_03",
-
-"FE_01",
-
-"FE_02",
-
-"FF_01",
-
-"FF_02",
-
-"FC_03",
-
-"CB_03",
-
-"BA_03",
-  },
-
-  [2] = {
-"FF_03",
-
-"BB_03",
-
-"DE_03",
-
-"DA_03",
-
-"BF_03",
-
-"CD_04",
-
-"DC_04",
-
-"AA_03",
-
-"D_03",
-
-"EC_03",
-
-"BC_03",
-
-"AD_03",
-
-"AF_04",
-
-"AE_03",
-
-"FB_04",
-
-"BD_03",
-
-"CF_04",
-
-"CE_02",
-
-"DD_03",
-
-"CC_03",
-
-"DF_03",
-
-"ED_03",
-
-"AF_03",
-
-"BC_04",
-
-"DB_04",
-
-"FA_03",
-
-"FE_04",
-
-"FE_03",
-
-"A_03",
-
-"CF_03",
-
-"DE_04",
-
-"BA_04",
-
-"CB_04",
-
-"FD_04",
-
-"FC_04",
-
-"FA_04",
-
-"BF_04",
-
-"FE_05",
-
-"CA_04",
-
-"DF_04",
-
-"ED_04",
-
-"AC_04",
-
-"EB_04",
-
-"DE_05",
-
-"BF_05",
-
-"C_03",
-
-"EC_04",
-
-"EF_04",
-
-"FF_04",
-
-"AD_04",
-
-"CC_04",
-
-"AB_04",
-
-"CE_04",
-
-"BD_99",
-
-"BB_04",
-
-"AA_04",
-
-"AE_04",
-
-"CB_05",
-
-"AF_05",
-
-"DA_04",
-
-"BD_04",
-
-"FC_05",
-
-"EE_04",
-
-"DD_04",
-
-"BE_04",
-
-"EA_04",
-
-"EF_05",
-
-"DF_99",
-
-"FB_05",
-
-"EB_05",
-
-"CA_05",
-
-"AC_05",
-
-"AB_05",
-
-"AA_05",
-
-"FA_05",
-
-"FE_99",
-
-"CE_05",
-
-"E_03",
-
-"CC_05",
-
-"DA_05",
-
-"DF_05",
-
-"DB_05",
-
-"BC_05",
-
-"DC_05",
-
-"ED_05",
-
-"EC_05",
-
-"FD_05",
-
-"EC_06",
-
-"FF_05",
-
-"BE_05",
-
-"AD_05",
-
-"BD_05",
-
-"DD_05",
-
-"DA_06",
-
-"CF_05",
-
-"BB_05",
-
-"CF_06",
-
-"CD_05",
-
-"EA_05",
-  },
-
-  [3] = {
-"AF_06",
-
-"AE_05",
-
-"EE_05",
-
-"BA_05",
-
-"CE_06",
-
-"FB_06",
-
-"BC_06",
-
-"FD_06",
-
-"DC_06",
-
-"ED_06",
-
-"FA_06",
-
-"BF_06",
-
-"AD_06",
-
-"CD_06",
-
-"DB_06",
-
-"AC_06",
-
-"FE_06",
-
-"EB_06",
-
-"EA_06",
-
-"BE_06",
-
-"B_04",
-
-"AB_06",
-
-"EF_06",
-
-"FC_06",
-
-"DF_06",
-
-"CB_06",
-
-"DD_06",
-
-"DE_06",
-
-"CA_06",
-
-"FF_06",
-
-"BD_06",
-
-"AF_07",
-
-"CF_07",
-
-"AE_06",
-
-"BA_06",
-
-"EC_07",
-
-"ED_07",
-
-"BD_07",
-
-"DB_07",
-
-"DA_07",
-
-"FE_07",
-
-"AB_07",
-
-"DF_07",
-
-"BF_07",
-
-"EE_06",
-
-"AA_06",
-
-"CE_07",
-
-"CC_06",
-
-"CC_07",
-
-"FC_07",
-
-"BA_07",
-
-"F_04",
-
-"FD_07",
-
-"EF_07",
-
-"AD_07",
-
-"AC_07",
-
-"CA_07",
-
-"FB_07",
-
-"FA_07",
-
-"DE_07",
-
-"CB_07",
-
-"BC_07",
-
-"CD_07",
-
-"EA_07",
-
-"EE_07",
-
-"BE_07",
-
-"DD_07",
-
-"EB_07",
-
-"EC_08",
-
-"CF_08",
-
-"BC_08",
-
-"AC_08",
-
-"DD_08",
-
-"DE_08",
-
-"FC_08",
-
-"AE_07",
-
-"DB_08",
-
-"AF_08",
-
-"FA_08",
-
-"FF_07",
-
-"BB_06",
-
-"EF_08",
-
-"DA_08",
-
-"CB_08",
-
-"EA_08",
-
-"FB_08",
-
-"BF_08",
-
-"AD_08",
-
-"FC_09",
-
-"CE_08",
-
-"BA_08",
-
-"AE_08",
-
-"BD_08",
-
-"FA_99",
-
-"EB_99",
-
-"CD_08",
-
-"DC_07",
-
-"ED_08",
-
-"FD_08",
-  },
-
-  [4] = {
-"CA_08",
-
-"DF_08",
-
-"EB_08",
-
-"CF_09",
-
-"AD_09",
-
-"DC_08",
-
-"BB_07",
-
-"AA_07",
-
-"AC_09",
-
-"BD_09",
-
-"FF_08",
-
-"EE_08",
-
-"BE_08",
-
-"AA_08",
-
-"CA_09",
-
-"EB_09",
-
-"DF_09",
-
-"FE_08",
-
-"BB_08",
-
-"EC_09",
-
-"DE_09",
-
-"AB_08",
-
-"BE_09",
-
-"CA_10",
-
-"EA_09",
-
-"CC_08",
-
-"BF_09",
-
-"CC_09",
-
-"AE_09",
-
-"CD_09",
-
-"DA_09",
-
-"FD_09",
-
-"AF_09",
-
-"A_05",
-
-"EA_10",
-
-"DD_09",
-
-"FD_10",
-
-"AB_09",
-
-"AC_10",
-
-"DF_10",
-
-"BC_09",
-
-"AF_10",
-
-"BB_09",
-
-"DE_10",
-
-"CB_09",
-
-"DB_09",
-
-"DC_09",
-
-"FE_09",
-
-"BA_09",
-
-"BF_10",
-
-"FA_09",
-
-"AA_09",
-
-"CF_10",
-
-"CE_09",
-
-"EF_09",
-
-"DA_10",
-
-"EE_09",
-
-"FF_09",
-
-"FB_10",
-
-"ED_09",
-
-"FB_09",
-
-"EF_10",
-
-"ED_10",
-
-"CB_10",
-
-"AE_10",
-
-"DC_10",
-
-"BD_10",
-
-"FE_10",
-
-"FA_10",
-
-"CD_10",
-
-"AD_10",
-
-"FC_10",
-
-"BB_10",
-
-"AF_99",
-
-"BC_10",
-
-"DD_10",
-
-"CE_99",
-
-"AA_10",
-
-"BA_10",
-
-"CC_10",
-
-"DB_10",
-
-"EC_10",
-
-"EB_10",
-
-"AB_10",
-
-"BE_10",
-
-"CE_10",
-
-"EB_11",
-
-"FF_10",
-
-"DB_11",
-
-"FC_99",
-
-"EE_10",
-
-"AC_11",
-
-"BD_11",
-
-"FA_11",
-
-"AF_11",
-
-"CE_11",
-
-"CA_11",
-
-"CD_11",
-
-"FB_11",
-  },
-
-  [5] = {
-"DA_11",
-
-"ED_11",
-
-"AA_11",
-
-"BB_11",
-
-"EF_99",
-
-"FD_11",
-
-"CB_11",
-
-"BF_11",
-
-"DE_11",
-
-"AE_11",
-
-"EC_11",
-
-"DC_11",
-
-"BA_11",
-
-"FF_11",
-
-"DF_11",
-
-"B_05",
-
-"EE_99",
-
-"FC_11",
-
-"CF_11",
-
-"CC_11",
-
-"C_05",
-
-"FB_12",
-
-"AD_11",
-
-"DD_11",
-
-"BE_11",
-
-"FE_11",
-
-"AC_12",
-
-"EA_11",
-
-"CA_99",
-
-"AB_11",
-
-"EE_11",
-
-"EF_12",
-
-"BC_11",
-
-"BB_12",
-
-"DE_12",
-
-"E_12",
-
-"D_12",
-
-"AF_12",
-
-"DF_12",
-
-"CF_12",
-
-"CB_12",
-
-"FA_12",
-
-"DD_12",
-
-"EF_11",
-
-"FC_12",
-
-"FF_12",
-
-"ED_12",
-
-"CA_12",
-
-"DB_12",
-
-"EC_12",
-
-"CD_12",
-
-"ED_99",
-
-"EB_12",
-
-"FD_12",
-
-"F_13",
-
-"AB_12",
-
-"BC_12",
-
-"AA_12",
-
-"FE_12",
-
-"BF_12",
-
-"C_13",
-
-"AE_12",
-
-"CE_12",
-
-"BE_12",
-
-"FE_13",
-
-"DA_12",
-
-"DC_12",
-
-"F_12",
-
-"AD_12",
-
-"B_12",
-
-"D_13",
-
-"BD_12",
-
-"AA_99",
-
-"CF_13",
-
-"EA_12",
-
-"B_13",
-
-"BF_13",
-
-"DD_13",
-
-"EE_12",
-
-"AD_13",
-
-"FA_13",
-
-"DA_13",
-
-"CA_13",
-
-"BC_13",
-
-"DE_13",
-
-"BA_12",
-
-"A_13",
-
-"EF_13",
-
-"CB_13",
-
-"EB_13",
-
-"AB_99",
-
-"AE_13",
-
-"CF_99",
-
-"BB_13",
-
-"FD_13",
-
-"CC_12",
-
-"BC_14",
-
-"E_13",
-
-"DC_13",
-},
-[6] = {
-"AC_13",
-
-"FE_14",
-
-"FC_13",
-
-"EF_14",
-
-"CC_13",
-
-"FF_13",
-
-"AE_14",
-
-"AA_13",
-
-"CD_13",
-
-"CB_14",
-
-"BA_13",
-
-"DC_14",
-
-"DF_13",
-
-"CA_14",
-
-"DB_13",
-
-"AE_99",
-
-"AC_14",
-
-"AF_13",
-
-"DB_14",
-
-"EC_13",
-
-"CE_13",
-
-"EA_13",
-
-"EA_99",
-
-"AF_14",
-
-"FF_14",
-
-"DD_14",
-
-"FD_14",
-
-"FB_13",
-
-"AB_13",
-
-"ED_13",
-
-"BD_14",
-
-"DA_14",
-
-"C_14",
-"ED_14",
-"DE_14",
-"EE_13",
-"FF_99",
-"FF_14",
-  },
-}
-
--- 2) Inicialización de revertValues
 
 local revertValues = {}
 
+-- Base de datos unificada de las 6 páginas (520+ mutantes)
+local mutantesData = {
+  [1] = {
+    {name="Robot", code="AA_01"}, {name="Robot Debil", code="AA_02"}, {name="Androide", code="AB_01"},
+    {name="Goliat", code="AB_02"}, {name="Necrobot", code="AB_03"}, {name="Hypnos", code="AC_01"},
+    {name="Xenarach", code="AC_02"}, {name="Humanoide Perfido", code="AC_03"}, {name="Capitan Mecano", code="AD_01"},
+    {name="Dezinger", code="AD_02"}, {name="Escarabot", code="AE_01"}, {name="Monocerus", code="AE_02"},
+    {name="Coloso", code="AF_01"}, {name="Libraro", code="AF_02"}, {name="Deus Machina", code="B_01"},
+    {name="Virgon", code="B_02"}, {name="Zombi", code="B_03"}, {name="Zombi Debil", code="BA_01"},
+    {name="Jack O'Lantern", code="BA_02"}, {name="Zomborg", code="BB_01"}, {name="Muñeca Diabolica", code="BB_02"},
+    {name="Lord Blood", code="BC_01"}, {name="Espectro de la Cripta", code="BC_02"}, {name="Despota Negro", code="BD_01"},
+    {name="Capitan Osamenta", code="BD_02"}, {name="Necrodragon", code="BE_01"}, {name="Cancernia", code="BE_02"},
+    {name="Fantasmonauta", code="BE_03"}, {name="Caprika", code="BF_01"}, {name="Quebrantacuellos", code="BF_02"},
+    {name="Baron Lundi", code="C_01"}, {name="Mago Tetrico", code="C_02"}, {name="Guerrero", code="CA_01"},
+    {name="Guerrero Debil", code="CA_02"}, {name="Ejecutor", code="CA_03"}, {name="Interceptrix", code="CB_01"},
+    {name="General Caos", code="CB_02"}, {name="Banshee Guerrera", code="CC_01"}, {name="Bushi", code="CC_02"},
+    {name="Caballero Nordico", code="CD_01"}, {name="Buck Maurice", code="CD_02"}, {name="Honey Bunny", code="CD_03"},
+    {name="Sagitauro", code="CE_01"}, {name="Haggis", code="CE_03"}, {name="Marciano Errante", code="CF_01"},
+    {name="Guardian Galactico", code="CF_02"}, {name="Valkiria", code="D_01"}, {name="Thor", code="DA_01"},
+    {name="Bestia", code="DA_02"}, {name="Reptoide", code="DB_01"}, {name="Aracno", code="DB_02"},
+    {name="Cerbero", code="DB_03"}, {name="Zombat", code="DC_01"}, {name="Cobrakai", code="DC_02"},
+    {name="Rakshasa", code="DC_03"}, {name="Leohart", code="DD_01"}, {name="Gargantus", code="DD_02"},
+    {name="Kaiju Kitty", code="DE_01"}, {name="Maestro Splitter", code="DE_02"}, {name="Reina Parasita", code="DF_01"},
+    {name="Cosmo Kong", code="DF_02"}, {name="Dracus Nobilis", code="E_01"}, {name="Satiro Hechicero", code="EA_01"},
+    {name="Extraterrestre", code="EA_02"}, {name="Aniquilador", code="EA_03"}, {name="Sentry", code="EB_01"},
+    {name="Exopez", code="EB_02"}, {name="Tutti Viscosi", code="EB_03"}, {name="Sirenia", code="EC_01"},
+    {name="Devorador", code="EC_02"}, {name="Sundance Bug", code="ED_01"}, {name="Behemoth", code="ED_02"},
+    {name="Xenos", code="EE_01"}, {name="Rocageno", code="EE_02"}, {name="Astrosurfista", code="EE_03"},
+    {name="Supernovus", code="EF_01"}, {name="Maestro Oida", code="EF_02"}, {name="Nebulon", code="EF_03"},
+    {name="Mr Marvelous", code="F_01"}, {name="Aquapunzel", code="F_03"}, {name="Diablesa", code="FA_01"},
+    {name="Mago de las Nieves", code="FA_02"}, {name="Tecno Tao", code="FB_01"}, {name="Mekali", code="FB_02"},
+    {name="La Parca", code="FB_03"}, {name="Principe Escorpion", code="FC_01"}, {name="Anubis", code="FC_02"},
+    {name="Gandolphus", code="FD_01"}, {name="Capitan Paz", code="FD_02"}, {name="Medusa", code="FD_03"},
+    {name="Horus", code="FE_01"}, {name="Ivory Hanzo", code="FE_02"}, {name="C'thlig", code="FF_01"},
+    {name="Azuria", code="FF_02"}, {name="Señor del Abismo", code="FC_03"}, {name="Castigo", code="CB_03"},
+    {name="Oriax", code="BA_03"}, {name="Ragnar", code="AF_06"}, {name="Triple-B", code="AE_05"}
+  },
+  [2] = {
+    {name="Mandragora", code="FF_03"}, {name="Motero Maldito", code="BB_03"}, {name="Armadizo", code="DE_03"},
+    {name="Mantidroide", code="DA_03"}, {name="Carnero Vengador", code="BF_03"}, {name="Battle Toad", code="CD_04"},
+    {name="Cezanne", code="DC_04"}, {name="H.U.M.A.N.", code="AA_03"}, {name="Rambit", code="D_03"},
+    {name="Star Trooper", code="EC_03"}, {name="Micky Krueger", code="BC_03"}, {name="Tauridus", code="AD_03"},
+    {name="Autonoraptor", code="AF_04"}, {name="Invadron", code="AE_03"}, {name="Bruja Malvada", code="FB_04"},
+    {name="Oso Espantoso", code="BD_03"}, {name="Azog", code="CF_04"}, {name="Geminium", code="CE_02"},
+    {name="Psicojabali", code="DD_03"}, {name="Zena", code="CC_03"}, {name="Absolem", code="DF_03"},
+    {name="Wampara", code="ED_03"}, {name="Barbaroca", code="AF_03"}, {name="George Washington", code="BC_04"},
+    {name="Louis XVI", code="DB_04"}, {name="Bazzinger", code="FA_03"}, {name="Space Princess", code="FE_04"},
+    {name="Astromago", code="FE_03"}, {name="Garuda", code="A_03"}, {name="Hada Machete", code="CF_03"},
+    {name="Genshiryoku", code="DE_04"}, {name="El Experimento", code="BA_04"}, {name="Leonidas", code="CB_04"},
+    {name="Buranka", code="FD_04"}, {name="Mexihcatl", code="FC_04"}, {name="Banker", code="FA_04"},
+    {name="Emperador Galactico", code="BF_04"}, {name="Nebulus", code="FE_05"}, {name="Project X27", code="CA_04"},
+    {name="Miroku", code="DF_04"}, {name="Mapach Wik", code="ED_04"}, {name="El Fontanero", code="AC_04"},
+    {name="Matafantasmas", code="EB_04"}, {name="Exo Cookie", code="DE_05"}, {name="Britany", code="BF_05"},
+    {name="Frostmass", code="C_03"}, {name="Santactopus", code="EC_04"}, {name="Mephisto", code="EF_04"},
+    {name="Monolith", code="FF_04"}, {name="Malvatron", code="AD_04"}, {name="Lara", code="CC_04"},
+    {name="Commander Ender", code="AB_04"}, {name="Zortrex", code="CE_04"}, {name="Tengu", code="BD_99"},
+    {name="Sacamantecas", code="BB_04"}, {name="Oculus", code="AA_04"}, {name="Supraman X", code="AE_04"},
+    {name="Cupido", code="CB_05"}, {name="Abraham Lincoln", code="AF_05"}, {name="Escuadron Rhino", code="DA_04"},
+    {name="Dama Harpia", code="BD_04"}, {name="Yelda", code="FC_05"}, {name="Flying Jordson", code="EE_04"},
+    {name="Cernunnos", code="DD_04"}, {name="Capitan Perla Negra", code="BE_04"}, {name="Brick McGole", code="EA_04"},
+    {name="Kraken", code="EF_05"}, {name="Genimal", code="DF_99"}, {name="Hardcorius", code="FB_05"},
+    {name="Marine Muerto", code="EB_05"}, {name="Challengeer", code="CA_05"}, {name="Ciberpunk", code="AC_05"},
+    {name="Neo Urban XIII", code="AB_05"}, {name="Tecnoforzer", code="AA_05"}, {name="Chaman Sombra", code="FA_05"},
+    {name="Ingeniero", code="FE_99"}, {name="Sun-Duke", code="CE_05"}, {name="Ceres", code="E_03"},
+    {name="Shin Hakuho", code="CC_05"}, {name="Fenec Plus Ultra", code="DA_05"}, {name="Madre de los Dragones", code="DF_05"},
+    {name="Brawler", code="DB_05"}, {name="Loco de la Motosierra", code="BC_05"}, {name="Rey Mono", code="DC_05"},
+    {name="Acarius", code="ED_05"}, {name="Cazador Espacial", code="EC_05"}, {name="Artista Siniestro", code="FD_05"},
+    {name="Zeus", code="EC_06"}, {name="Glubber", code="FF_05"}, {name="Nyrlatoth", code="BE_05"},
+    {name="Cibercroc", code="AD_05"}, {name="Bulldozer", code="BD_05"}, {name="Pejelagarto", code="DD_05"},
+    {name="Triceratanque", code="DA_06"}, {name="Monje Akuso", code="CF_05"}, {name="Caronte", code="BB_05"},
+    {name="Tio Sam", code="CF_06"}, {name="Hog the Ripper", code="CD_05"}, {name="Rey Steven", code="EA_05"}
+  },
+  [3] = {
+    {name="Duplicado de Eva", code="AF_06"}, {name="Ciberbabosa", code="AE_05"}, {name="Jhingal", code="EE_05"},
+    {name="Doctor Blaw", code="BA_05"}, {name="Tomahawk", code="CE_06"}, {name="Hechicera", code="FB_06"},
+    {name="Dandi oscar", code="BC_06"}, {name="Kung Chow", code="FD_06"}, {name="Comeabuelas", code="DC_06"},
+    {name="Mau-Jack", code="ED_06"}, {name="Lily", code="FA_06"}, {name="El Rey de Mimphys", code="BF_06"},
+    {name="Bioerizo", code="AD_06"}, {name="Gladiadog", code="CD_06"}, {name="Casto", code="DB_06"},
+    {name="Viper", code="AC_06"}, {name="Dollbyte", code="FE_06"}, {name="Garlog", code="EB_06"},
+    {name="Krunk", code="EA_06"}, {name="Apofis", code="BE_06"}, {name="Cuervo", code="B_04"},
+    {name="Drusella", code="AB_06"}, {name="Mandor", code="EF_06"}, {name="Borrasca", code="FC_06"},
+    {name="Sable", code="DF_06"}, {name="Artemisa", code="CB_06"}, {name="Mama Kangu", code="DD_06"},
+    {name="Darwin", code="DE_06"}, {name="ERR-ADI-K-Bot", code="CA_06"}, {name="Namaste", code="FF_06"},
+    {name="Tyrtiduron", code="BD_06"}, {name="Bounda", code="AF_07"}, {name="Mega Claus", code="CF_07"},
+    {name="Marv", code="AE_06"}, {name="Z-0", code="BA_06"}, {name="Falcon", code="EC_07"},
+    {name="Paramic", code="ED_07"}, {name="El Original", code="BD_07"}, {name="Señor Dragon", code="DB_07"},
+    {name="Carlingger", code="DA_07"}, {name="Rey de los Insectos", code="FE_07"}, {name="Aplastador", code="AB_07"},
+    {name="Quimera", code="DF_07"}, {name="Champicorteza", code="BF_07"}, {name="Reina Rakkti", code="EE_06"},
+    {name="Hercules", code="AA_06"}, {name="Aran", code="CE_07"}, {name="El Gringo", code="CC_06"},
+    {name="Spartac", code="CC_07"}, {name="Amarok", code="FC_07"}, {name="Pikabu", code="BA_07"},
+    {name="Leprechaun", code="F_04"}, {name="Fenix", code="FD_07"}, {name="Kal Wayne", code="EF_07"},
+    {name="Avispa Diesel", code="AD_07"}, {name="Robofuerte", code="AC_07"}, {name="Rocky Botboa", code="CA_07"},
+    {name="Las Moiras", code="FB_07"}, {name="Dr. Frost", code="FA_07"}, {name="Capitan Gluglu", code="DE_07"},
+    {name="Rey Esqueleto", code="CB_07"}, {name="Turbacieno", code="BC_07"}, {name="Juan Hielo", code="CD_07"},
+    {name="Capitan Patriota", code="EA_07"}, {name="Astro Gummy", code="EE_07"}, {name="Nezarim", code="BE_07"},
+    {name="Globomono", code="DD_07"}, {name="Starminator", code="EB_07"}, {name="Espectra", code="EC_08"},
+    {name="Wynn", code="CF_08"}, {name="Thran", code="BC_08"}, {name="Blender", code="AC_08"},
+    {name="Rinotauro", code="DD_08"}, {name="Cosmopandas", code="DE_08"}, {name="Kudamono", code="FC_08"},
+    {name="Alfie", code="AE_07"}, {name="Tiranozomb", code="DB_08"}, {name="H0ud1n1", code="AF_08"},
+    {name="FootBot", code="FA_08"}, {name="Geomega", code="FF_07"}, {name="Gloton", code="BB_06"},
+    {name="Seiyatsu", code="EF_08"}, {name="Asaylan", code="DA_08"}, {name="Wrath", code="CB_08"},
+    {name="Lady Libertad", code="EA_08"}, {name="Gozer", code="FB_08"}, {name="Van Helsing", code="BF_08"},
+    {name="Kitty Ranger", code="AD_08"}, {name="Gorthaur el Cruel", code="FC_09"}, {name="El Rey sin Nombre", code="CE_08"},
+    {name="Naraxis", code="BA_08"}, {name="Andromeda", code="AE_08"}, {name="Enano y Cerebro", code="BD_08"},
+    {name="Arcangel", code="FA_99"}, {name="Diablo", code="EB_99"}, {name="Drall", code="CD_08"},
+    {name="Noren", code="DC_07"}, {name="Sgt. Pandamonium", code="ED_08"}, {name="Omikami", code="FD_08"}
+  },
+  [4] = {
+    {name="Makino", code="CA_08"}, {name="Chantecler", code="DF_08"}, {name="Dr. Nucleus", code="EB_08"},
+    {name="Amo de las Llaves", code="CF_09"}, {name="Carcinus Gigas", code="AD_09"}, {name="Sanik", code="DC_08"},
+    {name="Necroparasito", code="BB_07"}, {name="Proyecto 3V3", code="AA_07"}, {name="Optimus Zord", code="AC_09"},
+    {name="Faucesnegras", code="BD_09"}, {name="Tormenta de Fuego", code="FF_08"}, {name="Golemagnus", code="EE_08"},
+    {name="Dug Dario", code="BE_08"}, {name="Centinela R0B-H4N", code="AA_08"}, {name="Big Bo$$", code="CA_09"},
+    {name="Reina Sylvidra", code="EB_09"}, {name="Quetzalcoatl", code="DF_09"}, {name="Majin Zam", code="FE_08"},
+    {name="Bruja de la Peste", code="BB_08"}, {name="Excaliduro", code="EC_09"}, {name="Zigmo", code="DE_09"},
+    {name="Gran Señor de las Tumbas", code="AB_08"}, {name="Pirotropo", code="BE_09"}, {name="Altaris", code="CA_10"},
+    {name="Capitan Gorn", code="EA_09"}, {name="Yokozuna", code="CC_08"}, {name="Calaca", code="BF_09"},
+    {name="Lancelot", code="CC_09"}, {name="Centaurus", code="AE_09"}, {name="Mon-Key Crew", code="CD_09"},
+    {name="Sound Killah", code="DA_09"}, {name="Dracomago", code="FD_09"}, {name="Caudillo Steam", code="AF_09"},
+    {name="Cazarrecompensas", code="A_05"}, {name="Surfista del Espacio", code="EA_10"}, {name="Mister T-Ger", code="DD_09"},
+    {name="Master Paw", code="FD_10"}, {name="Grumpy Claus", code="AB_09"}, {name="Sargento Dusk", code="AC_10"},
+    {name="Gwenn", code="DF_10"}, {name="El Coleccionista", code="BC_09"}, {name="El Veneno", code="AF_10"},
+    {name="Frankenhuahua", code="BB_09"}, {name="Mad Mike", code="DE_10"}, {name="Jane Saw", code="CB_09"},
+    {name="Horax", code="DB_09"}, {name="Maestro Shinzo", code="DC_09"}, {name="Xeleroth", code="FE_09"},
+    {name="Excavalipsis", code="BA_09"}, {name="El Enterrador", code="BF_10"}, {name="Zenguru", code="FA_09"},
+    {name="H.U.N.T.3.R", code="AA_09"}, {name="Arelvam", code="CF_10"}, {name="Zar Bomba", code="CE_09"},
+    {name="Mago Ryzafredd", code="EF_09"}, {name="Hawkeye", code="DA_10"}, {name="Megastral", code="EE_09"},
+    {name="Liquidador", code="FF_09"}, {name="Yggdrasil", code="FB_10"}, {name="Rox McRain", code="ED_09"},
+    {name="Hadeath", code="FB_09"}, {name="Divastator", code="EF_10"}, {name="Angry Pork", code="ED_10"},
+    {name="Frankendwarf", code="CB_10"}, {name="Akai-Bot", code="AE_10"}, {name="Krampus", code="DC_10"},
+    {name="Waryena", code="BD_10"}, {name="Bahamut", code="FE_10"}, {name="Mimi Cronocurva", code="FA_10"},
+    {name="Guardia Men'ki", code="CD_10"}, {name="Hipopotanque", code="AD_10"}, {name="Hefesto", code="FC_10"},
+    {name="T-3rr0r", code="BB_10"}, {name="A027441", code="AF_99"}, {name="King Lulu", code="BC_10"},
+    {name="Kameo", code="DD_10"}, {name="Kolossus", code="CE_99"}, {name="ED-404", code="AA_10"},
+    {name="Hellsaw", code="BA_10"}, {name="Urgan", code="CC_10"}, {name="Buffalor", code="DB_10"},
+    {name="Gamallia", code="EC_10"}, {name="Gakarian", code="EB_10"}, {name="S-K-Venger", code="AB_10"},
+    {name="Overkill", code="BE_10"}, {name="Capitan Achabe", code="CE_10"}, {name="Aubraea Mutantula", code="EB_11"},
+    {name="Bregbeam", code="FF_10"}, {name="Piwisher", code="DB_11"}, {name="Nimrod", code="FC_99"},
+    {name="E.T.-Liot", code="EE_10"}, {name="Spin Fury", code="AC_11"}, {name="Cooktouille", code="BD_11"},
+    {name="Orion", code="FA_11"}, {name="Heimdall", code="AF_11"}, {name="Chun-Lei", code="CE_11"},
+    {name="The Reef", code="CA_11"}, {name="Sir Bannog", code="CD_11"}, {name="Pesadilla Viviente", code="FB_11"}
+  },
+  [5] = {
+    {name="An0malie", code="DA_11"}, {name="Owlock", code="ED_11"}, {name="TriAD", code="AA_11"},
+    {name="La Olvidada", code="BB_11"}, {name="Mago de la Singularidad", code="EF_99"}, {name="Ishi no Ōkami", code="FD_11"},
+    {name="Disension", code="CB_11"}, {name="Aqueronte", code="BF_11"}, {name="Drei, Space Corgi", code="DE_11"},
+    {name="Mix0-Logo", code="AE_11"}, {name="Veren Kaeesu", code="EC_11"}, {name="Spada", code="DC_11"},
+    {name="Roadmaster", code="BA_11"}, {name="Gerard Steelgarden", code="FF_11"}, {name="Chocolem", code="DF_11"},
+    {name="Drudge Zombie", code="B_05"}, {name="Animus de Irrealidad", code="EE_99"}, {name="Midas", code="FC_11"},
+    {name="Caliburn EX", code="CF_11"}, {name="Santagonista", code="CC_11"}, {name="Barbaro", code="C_05"},
+    {name="Dama del Crepusculo", code="FB_12"}, {name="Mecaovoide Aracneo", code="AD_11"}, {name="Terror Abisal", code="DD_11"},
+    {name="Oculys", code="BE_11"}, {name="Pierrot", code="FE_11"}, {name="Phileas Derocas", code="AC_12"},
+    {name="Dreadnought", code="EA_11"}, {name="Missy Despierta", code="CA_99"}, {name="Enviro 3.0", code="AB_11"},
+    {name="Asteroide Gestalt", code="EE_11"}, {name="X'astuth", code="EF_12"}, {name="Colmillo Rabioso", code="BC_11"},
+    {name="Doctor del Farol", code="BB_12"}, {name="Leviatan", code="DE_12"}, {name="Explorador Sideral", code="E_12"},
+    {name="Aullosaurio", code="D_12"}, {name="Protector de los Sueños", code="AF_12"}, {name="Basilisco y Esdragon", code="DF_12"},
+    {name="Heredero de los 5 anillos", code="CF_12"}, {name="Ballesto", code="CB_12"}, {name="Cibermantico Etereo", code="FA_12"},
+    {name="Lampyrion Solar", code="DD_12"}, {name="Dimentio", code="EF_11"}, {name="Generalisimo Chocoleon IV", code="FC_12"},
+    {name="Archivista Eterno", code="FF_12"}, {name="Ammonia Atlantica", code="ED_12"}, {name="General Terracota", code="CA_12"},
+    {name="Gran Gusano de los Tuneles", code="DB_12"}, {name="Litominero Stellariano", code="EC_12"}, {name="Capitan aguila", code="CD_12"},
+    {name="Octopia", code="ED_99"}, {name="Medico Astral", code="EB_12"}, {name="Simurgh", code="FD_12"},
+    {name="Väinämöinen", code="F_13"}, {name="Disfuncidroide", code="AB_12"}, {name="Caronte (Halloween)", code="BC_12"},
+    {name="Cabloide", code="AA_12"}, {name="Exoceleste algido", code="FE_12"}, {name="Clerigo Oscuro", code="BF_12"},
+    {name="D'Arathomis", code="C_13"}, {name="Tenacity", code="AE_12"}, {name="Regulo&Juzya", code="CE_12"},
+    {name="Gelatina Purulenta", code="BE_12"}, {name="Vivaldi", code="FE_13"}, {name="Tecnocaracol", code="DA_12"},
+    {name="Zapador de Madrigueras", code="DC_12"}, {name="Invocador", code="F_12"}, {name="Lepidoptech", code="AD_12"},
+    {name="Huesamblaje", code="B_12"}, {name="Sasquatch", code="D_13"}, {name="Thanaconda", code="BD_12"},
+    {name="A00-C0R3-C0NTR0L", code="AA_99"}, {name="Hijo de la Tormenta", code="CF_13"}, {name="Bricodron LLK-215", code="EA_12"},
+    {name="GAR, Zombi Soberano", code="B_13"}, {name="Amalgalmas", code="BF_13"}, {name="Llama Sensei", code="DD_13"},
+    {name="Polaris", code="EE_12"}, {name="Myrmidus.exe", code="AD_13"}, {name="Helicoide Boreal", code="FA_13"},
+    {name="Antropobot Soñador", code="DA_13"}, {name="Anteros", code="CA_13"}, {name="Doctor Desollador", code="BC_13"},
+    {name="Oryctolagus Exobioicus", code="DE_13"}, {name="Cr€$u$", code="BA_12"}, {name="Asimov", code="A_13"},
+    {name="Achernar", code="EF_13"}, {name="El Motin", code="CB_13"}, {name="Xinomas", code="EB_13"},
+    {name="Simulacro de Combate", code="AB_99"}, {name="Helidron KxT-271", code="AE_13"}, {name="Reed, El Verdadero Heroe", code="CF_99"},
+    {name="El Fosforescente", code="BB_13"}, {name="Tezcatlipoca", code="FD_13"}, {name="Scaramouche", code="CC_12"},
+    {name="Traiciobaza", code="BC_14"}, {name="Astrobservador", code="E_13"}, {name="Sierrametrodon", code="DC_13"}
+  },
+  [6] = {
+    {name="Capsuladora MTZ-004", code="AC_13"}, {name="Núcleo seráfico", code="FE_14"}, {name="Rey De Avalon", code="FC_13"},
+    {name="K'yu T'ypaï", code="EF_14"}, {name="Amistad Sin Limites", code="CC_13"}, {name="Sakuraboshi", code="FF_13"},
+    {name="Giganto-Moai", code="AE_14"}, {name="TCB-8566 Trafficroid", code="AA_13"}, {name="Bearsikk Sikleast", code="CD_13"},
+    {name="Capitan Barbanegra", code="CB_14"}, {name="La Anárquica", code="BA_13"}, {name="Terror Jurasico", code="DC_14"},
+    {name="Emperador Helado", code="DF_13"}, {name="Breakmaster", code="CA_14"}, {name="El Descolorido", code="DB_13"},
+    {name="Azaronimo", code="AE_99"}, {name="Professor Cronomantico", code="AC_14"}, {name="Golem de Epocas", code="AF_13"},
+    {name="La Locura Reptante", code="DB_14"}, {name="Hekantocheiros", code="EC_13"}, {name="Atlas", code="CE_13"},
+    {name="Peregrino Espacial", code="EA_13"}, {name="Termodroide Celsius", code="EA_99"}, {name="Black I.C.E.", code="AF_14"},
+    {name="Profeta del Crepúsculo", code="FF_14"}, {name="Señor Bestial", code="DD_14"}, {name="Freyja, Reina de los Vanir", code="FD_14"},
+    {name="Altísimo Candelabro", code="FB_13"}, {name="El Arquitecto", code="AB_13"}, {name="Medinosaurio", code="ED_13"},
+    {name="Lapin Zombie", code="BD_14"}, {name="B.U.N Genio", code="DA_14"}, {name="Gladiador", code="C_14"},
+    {name="Hidrira", code="ED_14"}, {name="Infinito Supérmasivo", code="DE_14"}, {name="Nexo Orbital", code="EE_13"},
+    {name="Máscara Emocional", code="FF_99"}, {name="Profeta del Crepúsculo (Extra)", code="FF_14"}
+  }
+}
 
-
--- 3) Función que busca y edita un solo código
-
-local function editCode(code, nuevo)
-
-  -- busca
-
-  gg.searchNumber(":" .. code, gg.TYPE_BYTE, false, gg.SIGN_EQUAL, 0, -1)
-
-  local r = gg.getResults(100000)
-
-  if #r > 0 then
-
-    -- guarda para revertir
-
-    table.insert(revertValues, r)
-
-    -- edita
-
-    gg.editAll(":" .. nuevo, gg.TYPE_BYTE)
-
-    gg.clearResults()
-
-    gg.toast("Reemplazado: " .. code)
-
-  else
-
-    gg.clearResults()
-
-    gg.toast("No encontrado: " .. code)
-
-  end
-
-end
-
-
-
--- 4) Función para reemplazar todos los mutantes originales con el nuevo código
-
-local function replaceAllMutantesOriginales(nuevo)
-
-  for _, code in ipairs(mutantesOriginales) do
-
-    editCode(code, nuevo)  -- Llamada a la función editCode
-
-  end
-
-  gg.alert("🔴Dale a cambiar MUTANTE por oro.")
-end
-
-
-
--- 5) Función para restaurar todos los cambios
-
-local function restore()
-gg.setVisible(false)
-  for _, results in ipairs(revertValues) do
-
-    gg.setValues(results)
-
-  end
-
+-- FUNCION DE REEMPLAZO OPTIMIZADA (Busca todos los base a la vez)
+local function replaceAll(nuevoCodigo)
   gg.clearResults()
-
-  gg.alert("♻️VALORES RESTAURADOS. Puedes seguir hibridando👑")
-
-end
-
-
-
--- 6) Menú de mutantes de una página concreta
-
-local function pageMenu(pageNum)
-
-  local sel = gg.choice(pages[pageNum], nil, "Página " .. pageNum)
-
-  if sel then
-
-    local codigo = codes[pageNum][sel]
-
-    replaceAllMutantesOriginales(codigo)  -- Reemplaza todos los mutantes
+  local searchList = {}
+  for _, c in ipairs(mutantesOriginales) do table.insert(searchList, ":"..c) end
+  
+  gg.toast("🔍 Escaneando bases (Robot/Zombi)...")
+  gg.searchNumber(table.concat(searchList, ";"), gg.TYPE_BYTE)
+  local r = gg.getResults(100000)
+  
+  if #r > 0 then
+    table.insert(revertValues, r)
+    gg.editAll(":"..nuevoCodigo, gg.TYPE_BYTE)
+    gg.toast("✅ Inyectado: " .. nuevoCodigo)
+    gg.alert("🔴 AHORA: Ve al juego y paga el Oro para cambiar el mutante.")
+  else
+    gg.alert("❌ Error: No se encontraron mutantes base. ¿Estás en la pantalla correcta?")
   end
-
+  gg.clearResults()
 end
 
+-- FUNCION PARA RESTAURAR VALORES
+local function restore()
+  if #revertValues == 0 then return gg.toast("No hay cambios que revertir") end
+  for _, res in ipairs(revertValues) do gg.setValues(res) end
+  revertValues = {}
+  gg.alert("♻️ VALORES ORIGINALES RESTAURADOS")
+end
 
+-- MENU DE CADA PAGINA
+local function showPage(n)
+  local p = mutantesData[n]
+  local names = {}
+  for _, m in ipairs(p) do table.insert(names, m.name) end
+  local sel = gg.choice(names, nil, "MUTODEX - PÁGINA " .. n)
+  if sel then replaceAll(p[sel].code) end
+end
 
--- 7) Menú principal
-
-
-
+-- MENU PRINCIPAL (Bucle)
 while true do
-
   if gg.isVisible(true) then
-
     gg.setVisible(false)
-
-
-
-    local menu = {
-
-      "🌐 Página 1",
-
-      "🌐 Página 2",
-
-      "🌐 Página 3",
-
-      "🌐 Página 4",
-
-      "🌐 Página 5",
-
-      "🌐 Página 6",
-
-      "♻️ Restablecer valores ♻️",
-
-      "❌ Salir ❌"
-
-    }
-
-
-
-    local choice = gg.choice(menu, nil, "🔴𝕋𝕆𝔻𝕆𝕊 𝕃𝕆𝕊 𝕄𝕌𝕋𝔸ℕ𝕋𝔼𝕊🔵")
-
-
-
-    if choice == nil then
-
-      -- No hacer nada si el usuario toca fuera
-
-    elseif choice == 8 then
-
-      gg.toast("Saliendo...")
-
-      os.exit()
-
-    elseif choice == 7 then
-
-      restore()
-
-      gg.toast("Script by SebasTEAM👑")
-
-    else
-
-      pageMenu(choice)
-
+    local main = gg.choice({
+      "🌐 Página 1", "🌐 Página 2", "🌐 Página 3", 
+      "🌐 Página 4", "🌐 Página 5", "🌐 Página 6", 
+      "♻️ Restaurar Todo", "❌ Salir"
+    }, nil, "🔴 𝕋𝕆𝔻𝕆𝕊 𝕃𝕆𝕊 𝕄𝕌𝕋𝔸ℕ𝕋𝔼𝕊 🔵")
+    
+    if main == nil then 
+      -- Evitar cierre accidental
+    elseif main == 8 then 
+      os.exit() 
+    elseif main == 7 then 
+      restore() 
+    else 
+      showPage(main) 
     end
-
   end
-
-  gg.sleep(100) -- 💤 Evita consumir CPU en exceso
-
+  gg.sleep(150)
 end
