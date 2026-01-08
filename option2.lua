@@ -1,7 +1,7 @@
--- SCRIPT COMPLETO: MUTODEX MGG (TODOS LOS MUTANTES)
--- Basado en tu archivo option2 (1).lua y optimizado para GameGuardian
+-- SCRIPT COMPLETO: MUTODEX MGG (MÉTODO DE BÚSQUEDA INDIVIDUAL)
+-- Optimizado para evitar errores de desincronización entre nombres y códigos.
 
-gg.alert("⚠️ Asegurate de solo usar el ROBOT y el ZOMBIE en este tipo de hibridaciones. ⚠️")
+gg.alert("⚠️ Asegúrate de solo usar el ROBOT y el ZOMBIE en este tipo de hibridaciones. ⚠️")
 
 local mutantesOriginales = {
   "AA_01", "AA_03", "AB_01", "AB_03", -- CIBERS
@@ -10,7 +10,7 @@ local mutantesOriginales = {
 
 local revertValues = {}
 
--- Base de datos unificada de las 6 páginas (520+ mutantes)
+-- Base de datos unificada (Páginas 1 a 6)
 local mutantesData = {
   [1] = {
     {name="Robot", code="AA_01"}, {name="Robot Debil", code="AA_02"}, {name="Androide", code="AB_01"},
@@ -134,7 +134,7 @@ local mutantesData = {
     {name="Gwenn", code="DF_10"}, {name="El Coleccionista", code="BC_09"}, {name="El Veneno", code="AF_10"},
     {name="Frankenhuahua", code="BB_09"}, {name="Mad Mike", code="DE_10"}, {name="Jane Saw", code="CB_09"},
     {name="Horax", code="DB_09"}, {name="Maestro Shinzo", code="DC_09"}, {name="Xeleroth", code="FE_09"},
-    {name="Excavalipsis", code="BA_09"}, {name="El Enterrador", code="BF_10"}, {name="Zenguru", code="FA_09"},
+    {name="Excavalipsis", code="BA_09"}, {name="El Enterador", code="BF_10"}, {name="Zenguru", code="FA_09"},
     {name="H.U.N.T.3.R", code="AA_09"}, {name="Arelvam", code="CF_10"}, {name="Zar Bomba", code="CE_09"},
     {name="Mago Ryzafredd", code="EF_09"}, {name="Hawkeye", code="DA_10"}, {name="Megastral", code="EE_09"},
     {name="Liquidador", code="FF_09"}, {name="Yggdrasil", code="FB_10"}, {name="Rox McRain", code="ED_09"},
@@ -204,63 +204,65 @@ local mutantesData = {
   }
 }
 
--- FUNCION DE REEMPLAZO OPTIMIZADA (Busca todos los base a la vez)
-local function replaceAll(nuevoCodigo)
-  gg.clearResults()
-  local searchList = {}
-  for _, c in ipairs(mutantesOriginales) do table.insert(searchList, ":"..c) end
-  
-  gg.toast("🔍 Escaneando bases (Robot/Zombi)...")
-  gg.searchNumber(table.concat(searchList, ";"), gg.TYPE_BYTE)
+-- FUNCIÓN DE BÚSQUEDA INDIVIDUAL (VOLVIENDO AL MÉTODO ANTERIOR)
+local function editCode(code, nuevo)
+  gg.searchNumber(":" .. code, gg.TYPE_BYTE, false, gg.SIGN_EQUAL, 0, -1)
   local r = gg.getResults(100000)
-  
   if #r > 0 then
     table.insert(revertValues, r)
-    gg.editAll(":"..nuevoCodigo, gg.TYPE_BYTE)
-    gg.toast("✅ Inyectado: " .. nuevoCodigo)
-    gg.alert("🔴 AHORA: Presiona a cambiar por ORO.")
+    gg.editAll(":" .. nuevo, gg.TYPE_BYTE)
+    gg.toast("Reemplazado: " .. code)
   else
-    gg.alert("❌ Error: No se encontraron mutantes base. ¿Estás en la pantalla correcta?")
+    gg.toast("No encontrado: " .. code)
   end
   gg.clearResults()
 end
 
--- FUNCION PARA RESTAURAR VALORES
-local function restore()
-  if #revertValues == 0 then return gg.toast("No hay cambios que revertir") end
-  for _, res in ipairs(revertValues) do gg.setValues(res) end
-  revertValues = {}
-  gg.alert("♻️ VALORES ORIGINALES RESTAURADOS")
+-- Reemplazar todos los base uno por uno
+local function replaceAllMutantesOriginales(nuevo)
+  for _, code in ipairs(mutantesOriginales) do
+    editCode(code, nuevo)
+  end
+  gg.alert("🔴 Dale a cambiar MUTANTE por oro.")
 end
 
--- MENU DE CADA PAGINA
+-- Restaurar valores
+local function restore()
+  gg.setVisible(false)
+  for _, results in ipairs(revertValues) do
+    gg.setValues(results)
+  end
+  revertValues = {}
+  gg.clearResults()
+  gg.alert("♻️ VALORES RESTAURADOS.")
+end
+
+-- Menú por página
 local function showPage(n)
   local p = mutantesData[n]
   local names = {}
   for _, m in ipairs(p) do table.insert(names, m.name) end
-  local sel = gg.choice(names, nil, "MUTODEX - PÁGINA " .. n)
-  if sel then replaceAll(p[sel].code) end
+  local sel = gg.choice(names, nil, "PÁGINA " .. n)
+  if sel then
+    replaceAllMutantesOriginales(p[sel].code)
+  end
 end
 
--- MENU PRINCIPAL (Bucle)
+-- Bucle principal
 while true do
   if gg.isVisible(true) then
     gg.setVisible(false)
     local main = gg.choice({
       "🌐 Página 1", "🌐 Página 2", "🌐 Página 3", 
       "🌐 Página 4", "🌐 Página 5", "🌐 Página 6", 
-      "♻️ Restaurar Todo", "❌ Salir"
+      "♻️ Restablecer valores", "❌ Salir"
     }, nil, "🔴 𝕋𝕆𝔻𝕆𝕊 𝕃𝕆𝕊 𝕄𝕌𝕋𝔸ℕ𝕋𝔼𝕊 🔵")
     
-    if main == nil then 
-      -- Evitar cierre accidental
-    elseif main == 8 then 
-      os.exit() 
-    elseif main == 7 then 
-      restore() 
-    else 
-      showPage(main) 
+    if main == nil then
+    elseif main == 8 then os.exit()
+    elseif main == 7 then restore()
+    else showPage(main)
     end
   end
-  gg.sleep(150)
+  gg.sleep(100)
 end
