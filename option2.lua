@@ -204,7 +204,7 @@ local mutantesData = {
     {name="Sangresquito", code="BD_13"}, {name="Don Gamberetti", code="CD_14"}, {name="Rey Azul", code="CC_14"},
     {name="Espectroplasma", code="B_14"}, {name="El Presentador", code="AB_14"}, {name="Viajero de Vortice", code="BE_13"},
     {name="D.A.B.", code="EA_14"}, {name="Mecargola", code="BA_14"}, {name="Hielo Patinadora Yria", code="CF_14"},
-    {name="¿Pastor Estelar?", code="DE_15"}
+    {name="¿Pastor Estelar?", code="DE_15"}, {name="Origamix", code="AD_14"}
   }
 }
 
